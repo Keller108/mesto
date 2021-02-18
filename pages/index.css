@@ -1,0 +1,32 @@
+/*Общие стили*/
+
+@import url("../vendor/normalize.css");
+@import url("../vendor/fonts/inter/inter.css");
+@import url("../blocks/body/body.css");
+@import url("../blocks/page/page.css");
+
+/*Стили Header*/
+
+@import url("../blocks/header/header.css");
+@import url("../blocks/logo/logo.css");
+@import url("../blocks/logo/_clr/logo_clr_white.css");
+@import url("../blocks/logo/_clr/logo_clr_black.css");
+
+/*Стили Profile*/
+
+@import url("../blocks/profile/profile.css");
+@import url("../blocks/profile/__content-wrapper/profile__content-wrapper.css");
+@import url("../blocks/profile/__avatar/profile__avatar.css");
+@import url("../blocks/profile/__info/profile__info.css");
+@import url("../blocks/profile/__info-top-container/profile__info-top-container.css");
+@import url("../blocks/profile/__name/profile__name.css");
+@import url("../blocks/profile/__edit-button/profile__edit-button.css");
+@import url("../blocks/profile/__desription/pofile__description.css");
+@import url("../blocks/profile/__add-button/profile__add-button.css");
+
+/*Стили Elements*/
+
+
+/*Стили Footer*/
+
+@import url("../blocks/");

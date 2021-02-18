@@ -1,0 +1,6 @@
+.logo_clr_black {
+    background-image: url("../../../assets/logo_clr_black.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
