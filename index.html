@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='./pages/index.css'>
+    <link rel="stylesheet" href="./pages/index.css">
     <title>Mesto</title>
 </head>
 
 <body class="body">
+    <div class="popup">
+    </div>
     <div class="page">
         <header class="header">
             <a href="#" class="logo logo_clr_white" target="_blank"></a>
@@ -17,66 +19,65 @@
         <main>
             <div class="profile">
                 <div class="profile__content-wrapper">
+                    <img src="./assets/person-image.jpg" alt="На фото – Жак-Ив Кусто" class="profile__avatar">
                     <div class="profile__info">
-                        <img src="./assets/person-image.jpg" alt="На фото – Жак-Ив Кусто" class="profile__avatar">
                         <div class="profile__info-top-container">
                             <h2 class="profile__name">Жак-Ив Кусто</h2>
-                            <button class="profile__edit-button"></button>
+                            <button class="profile__edit-button hover-transparency"></button>
                         </div>
-                        <p class="pofile__description">Исследователь океана</p>
+                        <p class="profile__description">Исследователь океана</p>
                     </div>
                 </div>
-                <button class="profile__add-button"></button>
+                <button class="profile__add-button hover-transparency"></button>
             </div>
-    </div>
-    <ul class="element">
-        <li class="element">
-            <img src="" alt="фото горы Архыз" class="element__image">
-            <div class="element__place-name-wrapper">
-                <h3 class="element__place-name">Архыз</h3>
-                <button class="like-button"></button>
-            </div>
-        </li>
-        <li class="element">
-            <img src="" alt="Фото - Домбай" class="element__image">
-            <div class="element__place-name-wrapper">
-                <h3 class="element__place-name">Домбай</h3>
-                <button class="like-button"></button>
-            </div>
-        </li>
-        <li class="element">
-            <img src="" alt="Фото - Кавказ" class="element__image">
-            <div class="element__place-name-wrapper">
-                <h3 class="element__place-name">Кавказ</h3>
-                <button class="like-button"></button>
-            </div>
-        </li>
-        <li class="element">
-            <img src="" alt="Фото горы Арарат" class="element__image">
-            <div class="element__place-name-wrapper">
-                <h3 class="element__place-name">Гора Арарат</h3>
-                <button class="like-button"></button>
-            </div>
-        </li>
-        <li class="element">
-            <img src="" alt="Фото горы Неройка" class="element__image">
-            <div class="element__place-name-wrapper">
-                <h3 class="element__place-name">Гора Неройка</h3>
-                <button class="like-button"></button>
-            </div>
-        </li>
-        <li class="element">
-            <img src="" alt="Фото - Алтай" class="element__image">
-            <div class="element__place-name-wrapper">
-                <h3 class="element__place-name">Алтай</h3>
-                <button class="like-button"></button>
-            </div>
-        </li>
-    </ul>
-    </main>
-    <footer class="footer">
-        <p class="footer__copyright">&COPY; 2020 Mesto Russia</p>
-    </footer>
+            <ul class="elements">
+                <li class="elements__card">
+                    <img src="./assets/arhyz.jpg" alt="фото горы Архыз" class="elements__image">
+                    <div class="elements__place-name-wrapper">
+                        <h3 class="elements__place-name">Архыз</h3>
+                        <button class="elements__like-button"></button>
+                    </div>
+                </li>
+                <li class="elements__card">
+                    <img src="./assets/dombay.jpg" alt="Фото - Домбай" class="elements__image">
+                    <div class="elements__place-name-wrapper">
+                        <h3 class="elements__place-name">Домбай</h3>
+                        <button class="elements__like-button"></button>
+                    </div>
+                </li>
+                <li class="elements__card">
+                    <img src="./assets/caucas.jpg" alt="Фото - Кавказ" class="elements__image">
+                    <div class="elements__place-name-wrapper">
+                        <h3 class="elements__place-name">Кавказ</h3>
+                        <button class="elements__like-button"></button>
+                    </div>
+                </li>
+                <li class="elements__card">
+                    <img src="./assets/ararat-mount.jpg" alt="Фото горы Арарат" class="elements__image">
+                    <div class="elements__place-name-wrapper">
+                        <h3 class="elements__place-name">Гора Арарат</h3>
+                        <button class="elements__like-button"></button>
+                    </div>
+                </li>
+                <li class="elements__card">
+                    <img src="./assets/neroyka-mount.jpg" alt="Фото горы Неройка" class="elements__image">
+                    <div class="elements__place-name-wrapper">
+                        <h3 class="elements__place-name">Гора Неройка</h3>
+                        <button class="elements__like-button"></button>
+                    </div>
+                </li>
+                <li class="elements__card">
+                    <img src="./assets/altay.jpg" alt="Фото - Алтай" class="elements__image">
+                    <div class="elements__place-name-wrapper">
+                        <h3 class="elements__place-name">Алтай</h3>
+                        <button class="elements__like-button"></button>
+                    </div>
+                </li>
+            </ul>
+        </main>
+        <footer class="footer">
+            <p class="footer__copyright">&COPY; 2020 Mesto Russia</p>
+        </footer>
     </div>
 </body>
 

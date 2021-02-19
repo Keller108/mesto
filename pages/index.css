@@ -4,6 +4,7 @@
 @import url("../vendor/fonts/inter/inter.css");
 @import url("../blocks/body/body.css");
 @import url("../blocks/page/page.css");
+@import url("../blocks/hover-transparency/hover-transparency.css");
 
 /*Стили Header*/
 
@@ -21,12 +22,24 @@
 @import url("../blocks/profile/__info-top-container/profile__info-top-container.css");
 @import url("../blocks/profile/__name/profile__name.css");
 @import url("../blocks/profile/__edit-button/profile__edit-button.css");
-@import url("../blocks/profile/__desription/pofile__description.css");
+@import url("../blocks/profile/__description/profile__description.css");
 @import url("../blocks/profile/__add-button/profile__add-button.css");
 
 /*Стили Elements*/
 
+@import url("../blocks/elements/elements.css");
+@import url("../blocks/elements/__card/elements__card.css");
+@import url("../blocks/elements/__image/elements__image.css");
+@import url("../blocks/elements/__place-name-wrapper/elements__place-name-wrapper.css");
+@import url("../blocks/elements/__place-name/elements__place-name.css");
+@import url("../blocks/elements/__like-button/elements__like-button.css");
 
 /*Стили Footer*/
 
+@import url("../blocks/footer/footer.css");
+@import url("../blocks/footer/__copyright/footer__copyright.css");
+
+/*Стили Popup*/
+
+@import url("../blocks/popup/popup.css");
 @import url("../blocks/");
