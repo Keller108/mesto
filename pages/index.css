@@ -6,6 +6,17 @@
 @import url("../blocks/page/page.css");
 @import url("../blocks/hover-transparency/hover-transparency.css");
 
+/*Стили Popup*/
+
+@import url("../blocks/popup/popup.css");
+@import url("../blocks/popup/_status/popup_status_opened.css");
+@import url("../blocks/popup/__container/popup__container.css");
+@import url("../blocks/popup/__close-btn/popup__close-btn.css");
+@import url("../blocks/popup/__title/popup__title.css");
+@import url("../blocks/form/form.css");
+@import url("../blocks/form/__input/form__input.css");
+@import url("../blocks/submit-btn/submit-btn.css");
+
 /*Стили Header*/
 
 @import url("../blocks/header/header.css");
@@ -38,8 +49,3 @@
 
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/footer/__copyright/footer__copyright.css");
-
-/*Стили Popup*/
-
-@import url("../blocks/popup/popup.css");
-@import url("../blocks/");

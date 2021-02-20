@@ -5,4 +5,7 @@
     margin: 0;
     margin-right: 18px;
     padding: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
