@@ -16,6 +16,10 @@
     transition: all .2s;
 }
 
+.elements__like-btn:hover {
+    opacity: .5;
+}
+
 .elements__like-btn:active {
     opacity: 1;
     background-image: url("../../../images/like-filled-icon.svg");
