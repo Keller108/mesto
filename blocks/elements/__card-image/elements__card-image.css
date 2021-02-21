@@ -1,4 +1,4 @@
-.elements__image {
+.elements__card-image {
     width: 282px;
     height: 282px;
     object-fit: cover;
@@ -7,7 +7,7 @@
 }
 
 @media (max-width: 860px) {
-    .elements__image {
+    .elements__card-image {
         width: 100%;
         height: auto;
     }

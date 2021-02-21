@@ -21,8 +21,6 @@
 
 @import url("../blocks/header/header.css");
 @import url("../blocks/logo/logo.css");
-@import url("../blocks/logo/_clr/logo_clr_white.css");
-@import url("../blocks/logo/_clr/logo_clr_black.css");
 
 /*Стили Profile*/
 
@@ -36,14 +34,14 @@
 @import url("../blocks/profile/__description/profile__description.css");
 @import url("../blocks/profile/__add-button/profile__add-button.css");
 
-/*Стили Elements*/
+/*Стили Elements-section*/
 
 @import url("../blocks/elements/elements.css");
 @import url("../blocks/elements/__card/elements__card.css");
-@import url("../blocks/elements/__image/elements__image.css");
+@import url("../blocks/elements/__card-image/elements__card-image.css");
 @import url("../blocks/elements/__place-name-wrapper/elements__place-name-wrapper.css");
 @import url("../blocks/elements/__place-name/elements__place-name.css");
-@import url("../blocks/elements/__like-button/elements__like-button.css");
+@import url("../blocks/elements/__like-btn/elements__like-btn.css");
 
 /*Стили Footer*/
 
