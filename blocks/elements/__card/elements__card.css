@@ -16,9 +16,3 @@
     overflow: -moz-hidden-unscrollable;
     box-sizing: border-box;
 }
-
-@media (max-width: 860px) {
-    .elements__card {
-        width: calc(50% - 8px);
-    }
-}

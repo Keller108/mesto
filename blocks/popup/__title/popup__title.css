@@ -3,5 +3,14 @@
     font-weight: 900;
     line-height: 28.7px;
     margin: 0;
+    margin-bottom: 54px;
     padding: 0;
+}
+
+@media (max-width: 600px) {
+    .popup__title {
+        font-size: 18px;
+        line-height: 22px;
+        margin-bottom: 75px;
+    }
 }

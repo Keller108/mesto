@@ -10,7 +10,12 @@
 @media (max-width: 930px) {
     .page {
         width: 100%;
-        padding-left: 15px;
-        padding-right: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .page {
+        padding-top: 28px;
+        padding-bottom: 36px;
     }
 }

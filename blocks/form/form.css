@@ -7,4 +7,12 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    width: 358px;
+}
+
+@media (max-width: 600px) {
+    .form {
+        width: 100%;
+        margin-bottom: 15px;
+    }
 }

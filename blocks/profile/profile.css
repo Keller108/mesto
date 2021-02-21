@@ -7,3 +7,17 @@
     justify-content: space-between;
     padding: 40px 0 50px 0;
 }
+
+@media (max-width: 910px) {
+    .profile {
+        padding-left: 19px;
+        padding-right: 19px;
+    }
+}
+
+@media (max-width: 600px) {
+    .profile {
+        padding-top: 42px;
+        flex-direction: column;
+    }
+}

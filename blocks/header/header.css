@@ -8,3 +8,10 @@
     padding-bottom: 40px;
     border-bottom: 1px solid #3b3b3b;
 }
+
+@media (max-width: 910px) {
+    .header {
+        padding-bottom: 32px;
+        padding-left: 27px;
+    }
+}

@@ -15,4 +15,5 @@
 
 .form__input::placeholder {
     color: #000;
+    margin-bottom: 30px;
 }

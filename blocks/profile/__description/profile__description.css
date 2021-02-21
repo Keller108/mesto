@@ -9,3 +9,11 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+@media (max-width: 600px) {
+    .profile__description {
+        width: 100%;
+        text-align: center;
+        margin-top: 14px;
+    }
+}

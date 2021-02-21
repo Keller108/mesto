@@ -12,3 +12,10 @@
     background-position: center;
     cursor: pointer;
 }
+
+@media (max-width: 600px) {
+    .popup__close-btn {
+        top: -56px;
+        right: 0;
+    }
+}

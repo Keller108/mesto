@@ -2,3 +2,16 @@
     padding-top: 50px;
     box-sizing: border-box;
 }
+
+@media (max-width: 910px) {
+    .footer {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer {
+        padding-top: 30px;
+    }
+}
