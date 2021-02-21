@@ -12,12 +12,14 @@
     padding: 0;
     margin: 0;
     margin-bottom: 9px;
+    margin-right: 10px;
     font-size: 0;
     outline: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 720px) {
     .profile__edit-button {
         margin-bottom: 6px;
+        margin-right: 0;
     }
 }

@@ -10,7 +10,7 @@
     margin: 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 720px) {
     .profile__content-wrapper {
         width: calc(100% - 20px);
         flex-direction: column;
