@@ -15,3 +15,9 @@
     font-size: 0;
     outline: none;
 }
+
+@media (max-width: 600px) {
+    .profile__edit-button {
+        margin-bottom: 6px;
+    }
+}

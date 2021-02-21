@@ -12,6 +12,8 @@
 
 @media (max-width: 600px) {
     .profile__description {
+        font-size: 14px;
+        line-height: 17px;
         width: 100%;
         text-align: center;
         margin-top: 14px;
