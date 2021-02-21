@@ -1,11 +1,11 @@
 let popup = document.querySelector('.popup'),
-    openBtn = document.getElementById('openBtn'),
-    closeBtn = document.getElementById('closeBtn'),
+    openBtn = document.querySelector('.profile__edit-button'),
+    closeBtn = document.querySelector('.popup__close-btn'),
     profileName = document.getElementById('name'),
     profileDescription = document.getElementById('description'),
     fieldName = document.getElementById('fieldName'),
     fieldDescr = document.getElementById('fieldDescription'),
-    submitBtn = document.getElementById('submit');
+    submitBtn = document.querySelector('.submit-btn');
 
 function openPopup() {
     popup.classList.add('popup_status_opened');
