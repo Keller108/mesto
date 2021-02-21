@@ -2,7 +2,7 @@
     width: 22px;
     height: 19px;
     box-sizing: border-box;
-    background-image: url("../../../assets/like-stroke-icon.svg");
+    background-image: url("../../../images/like-stroke-icon.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -18,5 +18,5 @@
 
 .elements__like-btn:active {
     opacity: 1;
-    background-image: url("../../../assets/like-filled-icon.svg");
+    background-image: url("../../../images/like-filled-icon.svg");
 }
