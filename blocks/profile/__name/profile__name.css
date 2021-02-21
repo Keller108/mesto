@@ -11,6 +11,12 @@
     overflow: hidden;
 }
 
+@media (max-width: 770px) {
+    .profile__name {
+        max-width: 280px;
+    }
+}
+
 @media (max-width: 720px) {
     .profile__name {
         max-width: 220px;
