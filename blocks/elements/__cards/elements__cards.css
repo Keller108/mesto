@@ -1,0 +1,11 @@
+.elements__cards {
+    display: -ms-grid;
+    display: grid;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    grid-template-columns: repeat(auto-fit, 282px);
+    justify-content: center;
+    gap: 17px;
+}

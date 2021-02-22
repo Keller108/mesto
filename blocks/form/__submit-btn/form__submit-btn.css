@@ -1,4 +1,4 @@
-.submit-btn {
+.form__submit-btn {
     font-size: 18px;
     line-height: 21.78px;
     font-weight: 400;
@@ -15,12 +15,12 @@
     transition: all .2s;
 }
 
-.submit-btn:hover {
+.form__submit-btn:hover {
     background-color: rgba(0, 0, 0, .8);
 }
 
 @media (max-width: 600px) {
-    .submit-btn {
+    .form__submit-btn {
         font-size: 14px;
         line-height: 17px;
     }

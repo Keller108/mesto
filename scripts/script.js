@@ -1,37 +1,29 @@
 let popup = document.querySelector('.popup'),
     openBtn = document.querySelector('.profile__edit-button'),
     closeBtn = document.querySelector('.popup__close-btn'),
-    profileName = document.getElementById('name'),
-    profileDescription = document.getElementById('description'),
-    fieldName = document.getElementById('fieldName'),
-    fieldDescr = document.getElementById('fieldDescription'),
-    submitBtn = document.querySelector('.submit-btn');
+    profileName = document.querySelector('.profile__name'),
+    profileDescription = document.querySelector('.profile__description'),
+    fieldName = document.querySelector('.form__input_el_name'),
+    fieldDescr = document.querySelector('.form__input_el_descr'),
+    submit = document.querySelector('.form');
 
 function openPopup() {
-    popup.classList.add('popup_status_opened');
-}
-
-function closePopup() {
-    popup.classList.remove('popup_status_opened');
-}
-
-function fieldValInsert() {
-    let fieldNameVal = profileName.textContent,
-        fieldDescrVal = profileDescription.textContent;
-    fieldName.value = fieldNameVal;
-    fieldDescr.value = fieldDescrVal;
-}
-
-submitBtn.onclick = function() {
-
-    let nameVal = fieldName.value,
-        descrVal = fieldDescr.value;
-
-    profileName.innerText = nameVal;
-    profileDescription.innerText = descrVal;
+    popup.classList.add('popup_opened');
+    fieldName.value = profileName.textContent;
+    fieldDescr.value = profileDescription.textContent;
 };
 
-openBtn.addEventListener('click', fieldValInsert);
+function formSubmit(evt) {
+    evt.preventDefault();
+    profileName.textContent = fieldName.value;
+    profileDescription.textContent = fieldDescr.value;
+    closePopup();
+};
+
+function closePopup() {
+    popup.classList.remove('popup_opened');
+};
+
 openBtn.addEventListener('click', openPopup);
+submit.addEventListener('submit', formSubmit);
 closeBtn.addEventListener('click', closePopup);
-submitBtn.addEventListener('click', closePopup);

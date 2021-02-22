@@ -1,8 +1,0 @@
-.popup_status_opened {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
