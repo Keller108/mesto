@@ -6,16 +6,21 @@
 @import url("../blocks/page/page.css");
 @import url("../blocks/hover-transparency/hover-transparency.css");
 
-/*Стили Popup*/
+/*Стили Popup-edit*/
 
-@import url("../blocks/popup/popup.css");
-@import url("../blocks/popup/_opened/popup_opened.css");
-@import url("../blocks/popup/__container/popup__container.css");
-@import url("../blocks/popup/__close-btn/popup__close-btn.css");
-@import url("../blocks/popup/__title/popup__title.css");
+@import url("../blocks/popup-edit/popup-edit.css");
+@import url("../blocks/popup-edit/_opened/popup-edit_opened.css");
+@import url("../blocks/popup-edit/__container/popup-edit__container.css");
+@import url("../blocks/popup-edit/__close-btn/popup-edit__close-btn.css");
+@import url("../blocks/popup-edit/__title/popup-edit__title.css");
 @import url("../blocks/form/form.css");
 @import url("../blocks/form/__input/form__input.css");
 @import url("../blocks/form/__submit-btn/form__submit-btn.css");
+
+/*Стили Popup-add*/
+
+@import url("../blocks/popup-add/popup-add.css");
+@import url("../blocks/popup-add/_opened/popup-add_opened.css");
 
 /*Стили Header*/
 
@@ -39,6 +44,7 @@
 @import url("../blocks/elements/elements.css");
 @import url("../blocks/elements/__cards/elements__cards.css");
 @import url("../blocks/elements/__card/elements__card.css");
+@import url("../blocks/elements/__delete-btn/elements__delete-btn.css");
 @import url("../blocks/elements/__card-image/elements__card-image.css");
 @import url("../blocks/elements/__place-name-wrapper/elements__place-name-wrapper.css");
 @import url("../blocks/elements/__place-name/elements__place-name.css");

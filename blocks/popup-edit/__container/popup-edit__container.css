@@ -1,4 +1,4 @@
-.popup__container {
+.popup-edit__container {
     position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -16,7 +16,7 @@
 }
 
 @media (max-width: 600px) {
-    .popup__container {
+    .popup-edit__container {
         padding-top: 30px;
         padding-left: 22px;
         padding-right: 22px;
