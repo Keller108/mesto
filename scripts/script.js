@@ -1,17 +1,24 @@
-let popupEdit = document.querySelector('.popup-edit'),
+const popupEdit = document.querySelector('.popup-edit'),
+    popupAdd = document.querySelector('.popup-add'),
     popupEditOpenBtn = document.querySelector('.profile__edit-button'),
     popupEditCloseBtn = document.querySelector('.popup-edit__close-btn'),
+    popupAddOpenBtn = document.querySelector('.profile__add-button'),
+    popupAddCloseBtn = document.querySelector('.popup-add__close-btn'),
     profileName = document.querySelector('.profile__name'),
     profileDescription = document.querySelector('.profile__description'),
     fieldName = document.querySelector('.form__input_el_name'),
     fieldDescr = document.querySelector('.form__input_el_descr'),
     submitFormEdit = document.querySelector('.edit-form'),
-    submitFormAdd = document.querySlector('.add-form');
+    submitFormAdd = document.querySelector('.add-form');
 
-function openPopup() {
+function openEditPopup() {
     popupEdit.classList.add('popup-edit_opened');
     fieldName.value = profileName.textContent;
     fieldDescr.value = profileDescription.textContent;
+};
+
+function openAddPopup() {
+    popupAdd.classList.add('popup-add_opened');
 };
 
 function formSubmit(evt) {
@@ -23,8 +30,15 @@ function formSubmit(evt) {
 
 function closePopup() {
     popupEdit.classList.remove('popup-edit_opened');
+
+    //Закрываем popupAdd
+    popupAdd.classList.remove('popup-add_opened');
 };
 
-popupEditOpenBtn.addEventListener('click', openPopup);
+popupEditOpenBtn.addEventListener('click', openEditPopup);
+popupAddOpenBtn.addEventListener('click', openAddPopup);
+
 submitFormEdit.addEventListener('submit', formSubmit);
+
 popupEditCloseBtn.addEventListener('click', closePopup);
+popupAddCloseBtn.addEventListener('click', closePopup);
