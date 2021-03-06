@@ -34,7 +34,9 @@ const initialCards = [{
     fieldName = document.querySelector('.form__input_el_name'),
     fieldDescr = document.querySelector('.form__input_el_descr'),
     submitFormEdit = document.querySelector('.edit-form'),
-    submitFormAdd = document.querySelector('.add-form');
+    submitFormAdd = document.querySelector('.add-form'),
+    cardsContainer = document.querySelector('.elements__cards'),
+    templateCard = document.querySelector('.template');
 
 function openEditPopup() {
     popupEdit.classList.add('popup-edit_opened');
@@ -54,11 +56,31 @@ function formSubmit(evt) {
 };
 
 function closePopup() {
+    //Закрываем popupEdit
     popupEdit.classList.remove('popup-edit_opened');
 
     //Закрываем popupAdd
     popupAdd.classList.remove('popup-add_opened');
 };
+
+function createCardDomNode(item) {
+
+    //Объявляем переменные 
+    const newCard = templateCard.content.cloneNode(true),
+        cardImage = newCard.querySelector('.elements__card-image'),
+        cardPlace = newCard.querySelector('elements__place-name');
+
+    cardImage.src = link.value;
+    cardPlace.textContent = item.name;
+
+    return newCard;
+}
+
+function renderCards({
+    const result = initialCards.map(function(item) {
+
+    })
+})
 
 popupEditOpenBtn.addEventListener('click', openEditPopup);
 popupAddOpenBtn.addEventListener('click', openAddPopup);
