@@ -36,8 +36,36 @@ const initialCards = [{
     fieldDescr = document.querySelector('.form__input_el_descr'),
     submitFormEdit = document.querySelector('.edit-form'),
     submitFormAdd = document.querySelector('.add-form'),
+    templateCard = document.querySelector('.template'),
     cardsContainer = document.querySelector('.elements__cards');
 
+
+// Функция создания нового DOM узла и рендер на странице
+function renderClassList(list) {
+
+    const cardsContainer = document.querySelector('.elements__cards'),
+        newItem = document.querySelector('.template').content.querySelector('.elements__card');
+
+    cards = list.map(function(item) {
+        const card = newItem.cloneNode(true);
+        card.querySelector('.elements__place-name').textContent = item.name;
+        card.querySelector('.elements__card-image').src = item.link;
+        return card;
+    });
+
+    //Отрисуем
+    cardsContainer.prepend(...cards);
+};
+
+renderClassList(initialCards);
+
+popupEditOpenBtn.addEventListener('click', openEditPopup);
+popupAddOpenBtn.addEventListener('click', openAddPopup);
+
+submitFormEdit.addEventListener('submit', formSubmit);
+
+popupEditCloseBtn.addEventListener('click', closePopup);
+popupAddCloseBtn.addEventListener('click', closePopup);
 
 // Функция открытия попапа Edit
 function openEditPopup() {
@@ -70,42 +98,3 @@ function closePopup() {
     //Закрываем popupAdd
     popupAdd.classList.remove('popup-add_opened');
 };
-
-
-// Функция создания нового DOM узла
-function createCardDomNode(item) {
-
-    //Выбираем фрагмент и его содержимое карточку
-    const templateCard = document.querySelector('.template'),
-        newItem = templateCard.content.querySelector('.elememts__card').cloneNode(true),
-
-        cardImage = newCard.querySelector('.elements__card-image'),
-        cardPlace = newCard.querySelector('elements__place-name');
-
-    cardImage.src = link.value;
-    cardPlace.textContent = item.name;
-
-    return newCard;
-}
-
-
-// Функция рендера карточек на странице
-function renderList() {
-    const result = initialCards.map(function(item) {
-        const newCard = createCardDomNode(item);
-
-        return newCard;
-    })
-
-    cardsContainer.append(...result);
-};
-
-renderList();
-
-popupEditOpenBtn.addEventListener('click', openEditPopup);
-popupAddOpenBtn.addEventListener('click', openAddPopup);
-
-submitFormEdit.addEventListener('submit', formSubmit);
-
-popupEditCloseBtn.addEventListener('click', closePopup);
-popupAddCloseBtn.addEventListener('click', closePopup);
