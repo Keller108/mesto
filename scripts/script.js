@@ -1,3 +1,4 @@
+// Массив для карточек
 const initialCards = [{
             name: 'Архыз',
             link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -35,19 +36,24 @@ const initialCards = [{
     fieldDescr = document.querySelector('.form__input_el_descr'),
     submitFormEdit = document.querySelector('.edit-form'),
     submitFormAdd = document.querySelector('.add-form'),
-    cardsContainer = document.querySelector('.elements__cards'),
-    templateCard = document.querySelector('.template');
+    cardsContainer = document.querySelector('.elements__cards');
 
+
+// Функция открытия попапа Edit
 function openEditPopup() {
     popupEdit.classList.add('popup-edit_opened');
     fieldName.value = profileName.textContent;
     fieldDescr.value = profileDescription.textContent;
 };
 
+
+// Функция открытия попапа Add
 function openAddPopup() {
     popupAdd.classList.add('popup-add_opened');
 };
 
+
+// Функция добавления данных из полей edit-profile в профиль
 function formSubmit(evt) {
     evt.preventDefault();
     profileName.textContent = fieldName.value;
@@ -55,6 +61,8 @@ function formSubmit(evt) {
     closePopup();
 };
 
+
+// Функция закрытия попапов
 function closePopup() {
     //Закрываем popupEdit
     popupEdit.classList.remove('popup-edit_opened');
@@ -63,10 +71,14 @@ function closePopup() {
     popupAdd.classList.remove('popup-add_opened');
 };
 
+
+// Функция создания нового DOM узла
 function createCardDomNode(item) {
 
-    //Объявляем переменные 
-    const newCard = templateCard.content.cloneNode(true),
+    //Выбираем фрагмент и его содержимое карточку
+    const templateCard = document.querySelector('.template'),
+        newItem = templateCard.content.querySelector('.elememts__card').cloneNode(true),
+
         cardImage = newCard.querySelector('.elements__card-image'),
         cardPlace = newCard.querySelector('elements__place-name');
 
@@ -76,11 +88,19 @@ function createCardDomNode(item) {
     return newCard;
 }
 
-function renderCards({
-    const result = initialCards.map(function(item) {
 
+// Функция рендера карточек на странице
+function renderList() {
+    const result = initialCards.map(function(item) {
+        const newCard = createCardDomNode(item);
+
+        return newCard;
     })
-})
+
+    cardsContainer.append(...result);
+};
+
+renderList();
 
 popupEditOpenBtn.addEventListener('click', openEditPopup);
 popupAddOpenBtn.addEventListener('click', openAddPopup);
