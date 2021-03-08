@@ -1,0 +1,12 @@
+.lightbox__image-wrapper {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;
+    font-size: 0;
+    box-sizing: border-box;
+}

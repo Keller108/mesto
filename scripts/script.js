@@ -37,14 +37,19 @@ const initialCards = [{
     submitEditForm = document.querySelector('.edit-form'),
     submitAddForm = document.querySelector('.add-form'),
     templateCard = document.querySelector('.template'),
-    cardsContainer = document.querySelector('.elements__cards');
+    cardsContainer = document.querySelector('.elements__cards'),
+    openLightboxBtn = document.querySelector('.profile__avatar'),
+    lightBox = document.querySelector('.lightbox'),
+    lightBoxCloseBtn = document.querySelector('.lightbox__close-btn');
 
+
+function openLightbox() {
+    lightBox.classList.add('lightbox_opened');
+};
 
 // Функция создания нового DOM узла
 function createCardDomNode(card) {
     const newItem = templateCard.content.cloneNode(true);
-    // const place = newItem.querySelector('.elements__place-name');
-    // const placeImage = newItem.querySelector('.elements__card-image');
 
     newItem.querySelector('.elements__place-name').textContent = card.name;
     newItem.querySelector('.elements__card-image').src = card.link;
@@ -65,6 +70,8 @@ function renderClassList() {
     cardsContainer.prepend(...result);
 };
 
+// function openImagePopup(item) {};
+
 function addCardFormListeners(evt) {
     evt.preventDefault();
     const inputName = document.querySelector('.form__input_el_place'),
@@ -78,20 +85,19 @@ function addCardFormListeners(evt) {
     addCardsListeners(addNewCard);
 
     cardsContainer.prepend(addNewCard);
-}
+    closePopup();
+};
 
 function deleteCardHandler(evt) {
     const target = evt.target;
     const currentCard = target.closest('.elements__card');
     currentCard.remove();
-}
+};
 
 function likeCardHandler(evt) {
     const target = evt.target;
-    const likedCard = target.querySelector('.elements__like-btn');
-
     target.classList.add('elements__like-btn_is_active');
-}
+};
 
 renderClassList(initialCards);
 
@@ -101,7 +107,7 @@ function addCardsListeners(cards) {
 
     const likeBtn = cards.querySelector('.elements__like-btn');
     likeBtn.addEventListener('click', likeCardHandler);
-}
+};
 
 // Функция открытия попапа Edit
 function openEditPopup() {
@@ -115,7 +121,6 @@ function openEditPopup() {
 function openAddPopup() {
     popupAdd.classList.add('popup-add_opened');
 };
-
 
 // Функция добавления данных из полей edit-profile в профиль
 function formSubmit(evt) {
@@ -132,10 +137,13 @@ function closePopup() {
 
     //Закрываем popupAdd
     popupAdd.classList.remove('popup-add_opened');
+
+    lightBox.classList.remove('lightbox_opened');
 };
 
 popupEditOpenBtn.addEventListener('click', openEditPopup);
 popupAddOpenBtn.addEventListener('click', openAddPopup);
+openLightboxBtn.addEventListener('click', openLightbox);
 
 submitEditForm.addEventListener('submit', formSubmit);
 submitAddForm.addEventListener('submit', addCardFormListeners);
@@ -143,3 +151,4 @@ submitAddForm.addEventListener('submit', addCardFormListeners);
 
 popupEditCloseBtn.addEventListener('click', closePopup);
 popupAddCloseBtn.addEventListener('click', closePopup);
+lightBoxCloseBtn.addEventListener('click', closePopup);

@@ -1,0 +1,13 @@
+.lightbox__image {
+    max-width: 75vw;
+    max-height: 75vh;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+    margin: 0;
+    margin-bottom: 10px;
+    padding: 0;
+    font-size: 0;
+    box-sizing: border-box;
+}

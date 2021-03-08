@@ -26,6 +26,15 @@
 @import url("../blocks/popup-add/__title/popup-add__title.css");
 @import url("../blocks/form/__create-btn/form__create-btn.css");
 
+/* Стили Lightbox*/
+
+@import url("../blocks/lightbox/lightbox.css");
+@import url("../blocks/lightbox/_opened/lightbox_opened.css");
+@import url("../blocks/lightbox/__image-wrapper/lightbox__image-wrapper.css");
+@import url("../blocks/lightbox/__close-btn/lightbox__close-btn.css");
+@import url("../blocks/lightbox/__image/lightbox__image.css");
+@import url("../blocks/lightbox/__caption/lightbox__caption.css");
+
 /*Стили Header*/
 
 @import url("../blocks/header/header.css");
