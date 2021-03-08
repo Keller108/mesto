@@ -38,7 +38,6 @@ const initialCards = [{
     submitAddForm = document.querySelector('.add-form'),
     templateCard = document.querySelector('.template'),
     cardsContainer = document.querySelector('.elements__cards'),
-    openLightboxBtn = document.querySelector('.profile__avatar'),
     lightBox = document.querySelector('.lightbox'),
     lightBoxCloseBtn = document.querySelector('.lightbox__close-btn');
 
@@ -49,11 +48,18 @@ function openLightbox() {
 
 // Функция создания нового DOM узла
 function createCardDomNode(card) {
-    const newItem = templateCard.content.cloneNode(true);
+    const newItem = templateCard.content.querySelector('.elements__card').cloneNode(true);
 
     newItem.querySelector('.elements__place-name').textContent = card.name;
     newItem.querySelector('.elements__card-image').src = card.link;
     newItem.querySelector('.elements__card-image').alt = card.name;
+
+    newItem.addEventListener('click', function() {
+        lightBox.classList.add('lightbox_opened');
+
+        document.querySelector('.lightbox__image').src = newItem.src;
+        document.querySelector('.lightbox__title').textContent = newItem.textContent;
+    });
 
     return newItem;
 };
@@ -143,7 +149,6 @@ function closePopup() {
 
 popupEditOpenBtn.addEventListener('click', openEditPopup);
 popupAddOpenBtn.addEventListener('click', openAddPopup);
-openLightboxBtn.addEventListener('click', openLightbox);
 
 submitEditForm.addEventListener('submit', formSubmit);
 submitAddForm.addEventListener('submit', addCardFormListeners);
