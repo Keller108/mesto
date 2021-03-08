@@ -53,6 +53,7 @@
 @import url("../blocks/elements/__place-name-wrapper/elements__place-name-wrapper.css");
 @import url("../blocks/elements/__place-name/elements__place-name.css");
 @import url("../blocks/elements/__like-btn/elements__like-btn.css");
+@import url("../blocks/elements/__like-btn/_is_active/elements__like-btn_is_active.css");
 
 /*Стили Footer*/
 

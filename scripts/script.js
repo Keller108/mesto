@@ -65,11 +65,21 @@ function deleteCardHandler(evt) {
     currentCard.remove();
 }
 
+function likeCardHandler(evt) {
+    const target = evt.target;
+    const likedCard = target.querySelector('.elements__like-btn');
+
+    target.classList.add('elements__like-btn_is_active');
+}
+
 renderClassList(initialCards);
 
 function addCardsListeners(cards) {
     const deleteBtn = cards.querySelector('.elements__delete-btn');
     deleteBtn.addEventListener('click', deleteCardHandler);
+
+    const likeBtn = cards.querySelector('.elements__like-btn');
+    likeBtn.addEventListener('click', likeCardHandler);
 }
 
 // Функция открытия попапа Edit
