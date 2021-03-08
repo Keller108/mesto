@@ -43,8 +43,8 @@ const initialCards = [{
 // Функция создания нового DOM узла
 function createCardDomNode(card) {
     const newItem = templateCard.content.cloneNode(true);
-    const place = newItem.querySelector('.elements__place-name');
-    const placeImage = newItem.querySelector('.elements__card-image');
+    // const place = newItem.querySelector('.elements__place-name');
+    // const placeImage = newItem.querySelector('.elements__card-image');
 
     newItem.querySelector('.elements__place-name').textContent = card.name;
     newItem.querySelector('.elements__card-image').src = card.link;
@@ -73,7 +73,7 @@ function addCardFormListeners(evt) {
     const cardName = inputName.value;
     const cardImage = inputPictureLink.value;
 
-    const addNewCard = cards({ name: cardName });
+    const addNewCard = createCardDomNode({ name: cardName, link: cardImage });
 
     addCardsListeners(addNewCard);
 
