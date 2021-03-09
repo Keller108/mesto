@@ -39,12 +39,8 @@ const initialCards = [{
     templateCard = document.querySelector('.template'),
     cardsContainer = document.querySelector('.elements__cards'),
     lightBox = document.querySelector('.lightbox'),
-    lightBoxCloseBtn = document.querySelector('.lightbox__close-btn');
-
-
-function openLightbox() {
-    lightBox.classList.add('lightbox_opened');
-};
+    lightBoxCloseBtn = document.querySelector('.lightbox__close-btn'),
+    openLightBoxBtn = document.querySelector('.elements__card-image');
 
 // Функция создания нового DOM узла
 function createCardDomNode(card) {
@@ -54,12 +50,7 @@ function createCardDomNode(card) {
     newItem.querySelector('.elements__card-image').src = card.link;
     newItem.querySelector('.elements__card-image').alt = card.name;
 
-    newItem.addEventListener('click', function() {
-        lightBox.classList.add('lightbox_opened');
-
-        document.querySelector('.lightbox__image').src = newItem.src;
-        document.querySelector('.lightbox__title').textContent = newItem.textContent;
-    });
+    //const lighboxImg.querySelector('.lightbox__image').src = newItem.src;
 
     return newItem;
 };
@@ -75,8 +66,6 @@ function renderClassList() {
     //Отрисуем
     cardsContainer.prepend(...result);
 };
-
-// function openImagePopup(item) {};
 
 function addCardFormListeners(evt) {
     evt.preventDefault();
@@ -95,14 +84,12 @@ function addCardFormListeners(evt) {
 };
 
 function deleteCardHandler(evt) {
-    const target = evt.target;
-    const currentCard = target.closest('.elements__card');
+    const currentCard = evt.target.closest('.elements__card');
     currentCard.remove();
 };
 
 function likeCardHandler(evt) {
-    const target = evt.target;
-    target.classList.add('elements__like-btn_is_active');
+    evt.target.classList.toggle('elements__like-btn_is_active');
 };
 
 renderClassList(initialCards);
@@ -122,10 +109,13 @@ function openEditPopup() {
     fieldDescr.value = profileDescription.textContent;
 };
 
-
 // Функция открытия попапа Add
 function openAddPopup() {
     popupAdd.classList.add('popup-add_opened');
+};
+
+function openLightbox() {
+    lightBox.classList.add('lightbox_opened');
 };
 
 // Функция добавления данных из полей edit-profile в профиль
