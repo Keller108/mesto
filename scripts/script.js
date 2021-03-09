@@ -38,9 +38,11 @@ const initialCards = [{
     submitAddForm = document.querySelector('.add-form'),
     templateCard = document.querySelector('.template'),
     cardsContainer = document.querySelector('.elements__cards'),
-    lightBox = document.querySelector('.lightbox'),
+    cardImg = document.querySelector('.elements__card-image'),
     lightBoxCloseBtn = document.querySelector('.lightbox__close-btn'),
-    openLightBoxBtn = document.querySelector('.elements__card-image');
+    lightBox = document.querySelector('.lightbox'),
+    lightBoxImg = document.querySelector('.lightbox__image'),
+    lightBoxTitle = document.querySelector('.lightbox__title');
 
 // Функция создания нового DOM узла
 function createCardDomNode(card) {
@@ -49,8 +51,6 @@ function createCardDomNode(card) {
     newItem.querySelector('.elements__place-name').textContent = card.name;
     newItem.querySelector('.elements__card-image').src = card.link;
     newItem.querySelector('.elements__card-image').alt = card.name;
-
-    //const lighboxImg.querySelector('.lightbox__image').src = newItem.src;
 
     return newItem;
 };
@@ -62,7 +62,6 @@ function renderClassList() {
         addCardsListeners(newCard);
         return newCard;
     });
-
     //Отрисуем
     cardsContainer.prepend(...result);
 };
@@ -80,6 +79,7 @@ function addCardFormListeners(evt) {
     addCardsListeners(addNewCard);
 
     cardsContainer.prepend(addNewCard);
+
     closePopup();
 };
 
@@ -100,6 +100,11 @@ function addCardsListeners(cards) {
 
     const likeBtn = cards.querySelector('.elements__like-btn');
     likeBtn.addEventListener('click', likeCardHandler);
+
+    const openLightBoxBtn = cards.querySelector('.elements__card-image');
+
+    openLightBoxBtn.addEventListener('click', openLightbox);
+
 };
 
 // Функция открытия попапа Edit
@@ -117,6 +122,10 @@ function openAddPopup() {
 function openLightbox() {
     lightBox.classList.add('lightbox_opened');
 };
+
+function cardImgToLighboxImg() {
+    lightBoxImg.src = cardImg.src;
+}
 
 // Функция добавления данных из полей edit-profile в профиль
 function formSubmit(evt) {
