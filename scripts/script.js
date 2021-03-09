@@ -103,7 +103,10 @@ function addCardsListeners(cards) {
 
     const openLightBoxBtn = cards.querySelector('.elements__card-image');
 
-    openLightBoxBtn.addEventListener('click', openLightbox);
+    openLightBoxBtn.addEventListener('click', function(evt) {
+        lightBox.classList.add('lightbox_opened');
+        lightBoxImg.src = evt.target.src;
+    });
 
 };
 
@@ -122,10 +125,6 @@ function openAddPopup() {
 function openLightbox() {
     lightBox.classList.add('lightbox_opened');
 };
-
-function cardImgToLighboxImg() {
-    lightBoxImg.src = cardImg.src;
-}
 
 // Функция добавления данных из полей edit-profile в профиль
 function formSubmit(evt) {
