@@ -1,5 +1,6 @@
 .lightbox {
-    display: none;
+    visibility: hidden;
+    display: flex;
     position: fixed;
     align-items: center;
     justify-content: center;
@@ -10,4 +11,6 @@
     left: 0;
     bottom: 0;
     box-sizing: border-box;
+    transition: all .4s;
+    opacity: 0;
 }
