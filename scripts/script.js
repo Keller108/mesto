@@ -107,6 +107,7 @@ function addCardsListeners(cards) {
         lightBox.classList.add('lightbox_opened');
         const target = evt.target;
         lightBoxImg.src = target.src;
+        lightBoxImg.alt = target.closest('.elements__card').querySelector('.elements__place-name').textContent;
         lightBoxTitle.textContent = target.closest('.elements__card').querySelector('.elements__place-name').textContent;
     });
 
