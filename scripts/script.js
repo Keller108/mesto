@@ -38,11 +38,10 @@ const initialCards = [{
     submitAddForm = document.querySelector('.add-form'),
     templateCard = document.querySelector('.template'),
     cardsContainer = document.querySelector('.elements__cards'),
-    cardImg = document.querySelector('.elements__card-image'),
     lightBoxCloseBtn = document.querySelector('.lightbox__close-btn'),
     lightBox = document.querySelector('.lightbox'),
     lightBoxImg = document.querySelector('.lightbox__image'),
-    lightBoxTitle = document.querySelector('.lightbox__title');
+    lightBoxTitle = document.querySelector('.lightbox__caption');
 
 // Функция создания нового DOM узла
 function createCardDomNode(card) {
@@ -68,11 +67,12 @@ function renderClassList() {
 
 function addCardFormListeners(evt) {
     evt.preventDefault();
+
     const inputName = document.querySelector('.form__input_el_place'),
         inputPictureLink = document.querySelector('.form__input_el_pic-link');
 
-    const cardName = inputName.value;
-    const cardImage = inputPictureLink.value;
+    const cardName = inputName.value,
+        cardImage = inputPictureLink.value;
 
     const addNewCard = createCardDomNode({ name: cardName, link: cardImage });
 
@@ -105,7 +105,9 @@ function addCardsListeners(cards) {
 
     openLightBoxBtn.addEventListener('click', function(evt) {
         lightBox.classList.add('lightbox_opened');
-        lightBoxImg.src = evt.target.src;
+        const target = evt.target;
+        lightBoxImg.src = target.src;
+        lightBoxTitle.textContent = target.closest('.elements__card').querySelector('.elements__place-name').textContent;
     });
 
 };
