@@ -1,66 +1,46 @@
-// Массив для карточек
-const initialCards = [{
-            name: 'Архыз',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-        },
-        {
-            name: 'Челябинская область',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-        },
-        {
-            name: 'Иваново',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-        },
-        {
-            name: 'Камчатка',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-        },
-        {
-            name: 'Холмогорский район',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-        },
-        {
-            name: 'Байкал',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-        }
-    ],
-    popupEdit = document.querySelector('.popup-edit'),
-    popupAdd = document.querySelector('.popup-add'),
-    popupEditOpenBtn = document.querySelector('.profile__edit-button'),
-    popupEditCloseBtn = document.querySelector('.popup-edit__close-btn'),
-    popupAddOpenBtn = document.querySelector('.profile__add-button'),
-    popupAddCloseBtn = document.querySelector('.popup-add__close-btn'),
-    profileName = document.querySelector('.profile__name'),
-    profileDescription = document.querySelector('.profile__description'),
-    fieldName = document.querySelector('.form__input_el_name'),
-    fieldDescr = document.querySelector('.form__input_el_descr'),
-    submitEditForm = document.querySelector('.edit-form'),
-    submitAddForm = document.querySelector('.add-form'),
-    templateCard = document.querySelector('.template'),
-    cardsContainer = document.querySelector('.elements__cards'),
-    lightBoxCloseBtn = document.querySelector('.lightbox__close-btn'),
-    lightBox = document.querySelector('.lightbox'),
-    lightBoxImg = document.querySelector('.lightbox__image'),
-    lightBoxTitle = document.querySelector('.lightbox__caption');
+const popupEdit = document.querySelector('.popup-edit');
+const popupAdd = document.querySelector('.popup-add');
+const inputName = document.querySelector('.form__input_el_place');
+const inputPictureLink = document.querySelector('.form__input_el_pic-link');
+const popupEditOpenBtn = document.querySelector('.profile__edit-button');
+const popupEditCloseBtn = document.querySelector('.popup-edit__close-btn');
+const popupAddOpenBtn = document.querySelector('.profile__add-button');
+const popupAddCloseBtn = document.querySelector('.popup-add__close-btn');
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__description');
+const fieldName = document.querySelector('.form__input_el_name');
+const fieldDescr = document.querySelector('.form__input_el_descr');
+const submitEditForm = document.querySelector('.edit-form');
+const submitAddForm = document.querySelector('.add-form');
+const templateCard = document.querySelector('.template');
+const cardsContainer = document.querySelector('.elements__cards');
+const lightBoxCloseBtn = document.querySelector('.lightbox__close-btn');
+const lightBox = document.querySelector('.lightbox');
+const lightBoxImg = document.querySelector('.lightbox__image');
+const lightBoxTitle = document.querySelector('.lightbox__caption');
 
 // Функция создания нового DOM узла
 function createCardDomNode(card) {
+
     const newItem = templateCard.content.querySelector('.elements__card').cloneNode(true);
+    const domCardImg = newItem.querySelector('.elements__place-name');
 
-    newItem.querySelector('.elements__place-name').textContent = card.name;
+    domCardImg.textContent = card.name;
+    domCardImg.alt = card.name;
     newItem.querySelector('.elements__card-image').src = card.link;
-    newItem.querySelector('.elements__card-image').alt = card.name;
 
+    handleAddCardSubmit(newItem);
     return newItem;
+
 };
 
 // Функция рендера карточек на странице
 function renderClassList() {
-    result = initialCards.map(function(item) {
+    const result = initialCards.map(function(item) {
         const newCard = createCardDomNode(item);
-        addCardsListeners(newCard);
         return newCard;
     });
+
     //Отрисуем
     cardsContainer.prepend(...result);
 };
@@ -68,15 +48,12 @@ function renderClassList() {
 function addCardFormListeners(evt) {
     evt.preventDefault();
 
-    const inputName = document.querySelector('.form__input_el_place'),
-        inputPictureLink = document.querySelector('.form__input_el_pic-link');
-
-    const cardName = inputName.value,
-        cardImage = inputPictureLink.value;
+    const cardName = inputName.value;
+    const cardImage = inputPictureLink.value;
 
     const addNewCard = createCardDomNode({ name: cardName, link: cardImage });
 
-    addCardsListeners(addNewCard);
+    submitAddForm.reset();
 
     cardsContainer.prepend(addNewCard);
 
@@ -92,9 +69,9 @@ function likeCardHandler(evt) {
     evt.target.classList.toggle('elements__like-btn_is_active');
 };
 
-renderClassList(initialCards);
+renderClassList();
 
-function addCardsListeners(cards) {
+function handleAddCardSubmit(cards) {
     const deleteBtn = cards.querySelector('.elements__delete-btn');
     deleteBtn.addEventListener('click', deleteCardHandler);
 
