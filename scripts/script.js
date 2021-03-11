@@ -99,7 +99,7 @@ profileFormAdd.addEventListener('submit', evt => {
     const addNewCard = createCardDomNode({ name: cardName, link: cardImage });
     cardsContainer.prepend(addNewCard);
     closePopup(popupAdd);
-    submitAddForm.reset();
+    profileFormAdd.reset();
 });
 
 function deleteCardHandler(evt) {

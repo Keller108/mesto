@@ -6,34 +6,21 @@
 @import url("../blocks/page/page.css");
 @import url("../blocks/hover-transparency/hover-transparency.css");
 
-/*Стили Popup-edit*/
+/*Стили Popup*/
 
-@import url("../blocks/popup-edit/popup-edit.css");
-@import url("../blocks/popup-edit/_opened/popup-edit_opened.css");
-@import url("../blocks/popup-edit/__container/popup-edit__container.css");
-@import url("../blocks/popup-edit/__close-btn/popup-edit__close-btn.css");
-@import url("../blocks/popup-edit/__title/popup-edit__title.css");
+@import url("../blocks/popup/popup.css");
+@import url("../blocks/popup/_opened/popup_opened.css");
+@import url("../blocks/popup/_type/popup_type_lightbox.css");
+@import url("../blocks/popup/__container.css/popup__container.css");
+@import url("../blocks/popup/__close-btn/popup__close-btn.css");
+@import url("../blocks/popup/__title/popup__title.css");
 @import url("../blocks/form/form.css");
 @import url("../blocks/form/__input/form__input.css");
-@import url("../blocks/form/__submit-btn/form__submit-btn.css");
-
-/*Стили Popup-add*/
-
-@import url("../blocks/popup-add/popup-add.css");
-@import url("../blocks/popup-add/_opened/popup-add_opened.css");
-@import url("../blocks/popup-add/__container/popup-add__container.css");
-@import url("../blocks/popup-add/__close-btn/popup-add__close-btn.css");
-@import url("../blocks/popup-add/__title/popup-add__title.css");
 @import url("../blocks/form/__create-btn/form__create-btn.css");
-
-/* Стили Lightbox*/
-
-@import url("../blocks/lightbox/lightbox.css");
-@import url("../blocks/lightbox/_opened/lightbox_opened.css");
-@import url("../blocks/lightbox/__image-wrapper/lightbox__image-wrapper.css");
-@import url("../blocks/lightbox/__close-btn/lightbox__close-btn.css");
-@import url("../blocks/lightbox/__image/lightbox__image.css");
-@import url("../blocks/lightbox/__caption/lightbox__caption.css");
+@import url("../blocks/form/__submit-btn/form__submit-btn.css");
+@import url("../blocks/popup/__image-wrapper/popup__image-wrapper.css");
+@import url("../blocks/popup/__image/popup__image.css");
+@import url("../blocks/popup/__caption/popup__caption.css");
 
 /*Стили Header*/
 
