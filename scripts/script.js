@@ -62,8 +62,6 @@ profileFormEdit.addEventListener('submit', evt => {
 
 popupAddOpenBtn.addEventListener('click', () => {
     openPopup(popupAdd);
-    inputName.value = '';
-    inputPictureLink.value = '';
 });
 
 // Функция создания нового DOM узла
