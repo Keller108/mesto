@@ -1,4 +1,4 @@
-.popup-add {
+.popup {
     visibility: hidden;
     display: flex;
     position: fixed;
@@ -16,7 +16,7 @@
 }
 
 @media (max-width: 600px) {
-    .popup-add {
+    .popup {
         padding: 19px;
     }
 }
