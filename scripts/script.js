@@ -45,6 +45,20 @@ popupCloseBtn.forEach(function(item) {
     });
 });
 
+// Закрытие попапов по клику на overlay 
+const popups = document.querySelectorAll('.popup');
+
+popups.forEach((item) => {
+    item.addEventListener('click', evt => {
+        popupToClose = evt.target;
+        closePopup(popupToClose);
+        if (popupToClose.classList.contains('.popup_opened')) {
+            closePopup(popupToClose);
+        }
+        evt.stopPropagation();
+    });
+})
+
 // Слушатель для открытия попапа Edit
 popupEditOpenBtn.addEventListener('click', () => {
     openPopup(popupEdit);
