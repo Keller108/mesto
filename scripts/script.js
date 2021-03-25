@@ -37,7 +37,7 @@ function closePopup(popup) {
 // Выбираю все кноки "закрыть попап"
 const popupCloseBtn = document.querySelectorAll('.popup__close-btn');
 
-//Добавляю слушателя для закрытия по клику на кнопку
+// Добавляю слушателя для закрытия по клику на крестик
 popupCloseBtn.forEach(function(item) {
     item.addEventListener('click', evt => {
         const popupToClose = evt.target.closest('.popup_opened');
@@ -45,7 +45,7 @@ popupCloseBtn.forEach(function(item) {
     });
 });
 
-// Закрытие попапов по клику на overlay 
+// Закрытие попапов по клику на overlay
 const popups = document.querySelectorAll('.popup');
 
 popups.forEach((item) => {
@@ -57,7 +57,7 @@ popups.forEach((item) => {
         }
         evt.stopPropagation();
     });
-})
+});
 
 // Слушатель для открытия попапа Edit
 popupEditOpenBtn.addEventListener('click', () => {
