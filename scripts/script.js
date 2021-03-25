@@ -59,6 +59,14 @@ popups.forEach((item) => {
     });
 });
 
+// Ф-ция закрытия попапа по нажатию ESC
+const popupCloseByKey = document.addEventListener('keydown', (evt) => {
+    const openedPopup = document.querySelector('.popup_opened');
+    if (evt.key === 'Escape') {
+        closePopup(openedPopup)
+    };
+});
+
 // Слушатель для открытия попапа Edit
 popupEditOpenBtn.addEventListener('click', () => {
     openPopup(popupEdit);
