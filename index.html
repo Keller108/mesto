@@ -44,9 +44,9 @@
             <button class="popup__close-btn hover-transparency" type="button" aria-label="Close"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="form edit-form" name="profile-popup" novalidate>
-                <input class="form__input form__input_el_name" type="text" name="profile-name" required>
-                <input class="form__input form__input_el_descr" type="text" name="profile-job">
-                <button class="form__submit-btn" type="submit">Сохранить</button>
+                <input class="form__input form__input_el_name" type="text" name="profile-name" minlength="2" maxlength="40" required>
+                <input class="form__input form__input_el_descr" type="text" name="profile-job" minlength="2" maxlength="200" required>
+                <button class="form__submit-btn form__submit-btn_disabled" type="submit">Сохранить</button>
             </form>
         </div>
     </div>
@@ -55,9 +55,9 @@
             <button class="popup__close-btn hover-transparency" type="button" aria-label="Close"></button>
             <h2 class="popup__title">Новое место</h2>
             <form class="form add-form" name="places-popup" novalidate>
-                <input class="form__input form__input_el_place" type="text" name="places-name" placeholder="Название" required>
-                <input class="form__input form__input_el_pic-link" type="text" name="places-url" placeholder="Ссылка на картинку" required>
-                <button class="form__create-btn" type="submit">Создать</button>
+                <input class="form__input form__input_el_place" type="text" name="places-name" placeholder="Название" minlength="2" maxlength="30" required>
+                <input class="form__input form__input_el_pic-link" type="url" name="places-url" placeholder="Ссылка на картинку" required>
+                <button class="form__submit-btn form__submit-btn_disabled" type="submit">Создать</button>
             </form>
         </div>
     </div>
