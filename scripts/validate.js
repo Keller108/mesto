@@ -18,13 +18,23 @@ const hasInvalidInput = (inputList) => {
     return inputList.some(inputElement => !inputElement.validity.valid);
 };
 
+// Функция отключения кнопки submit 
+const disableSubmitBtn = (btn, object) => {
+    btn.classList.add(object.inactiveButtonClass);
+}
+
+// Функция включения кнопки submit 
+const enableSubmitBtn = (btn, object) => {
+    btn.classList.remove(object.inactiveButtonClass);
+}
+
 // Ф-йия переключения состояния кнопки
 const toggleButtonState = (inputList, buttonElement, object) => {
-    if (hasInvalidInput(inputList) || allInputsEmpty(inputList)) {
-        buttonElement.classList.add(object.inactiveButtonClass);
+    if (hasInvalidInput(inputList, object) || allInputsEmpty(inputList, object)) {
+        disableSubmitBtn(buttonElement, object);
         buttonElement.setAttribute('disabled', true);
     } else {
-        buttonElement.classList.remove(object.submitButtonSelector);
+        enableSubmitBtn(buttonElement, object);
         buttonElement.removeAttribute('disabled');
     }
 };
