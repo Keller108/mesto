@@ -1,10 +1,16 @@
-const validationObject = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
+// const validationObject = {
+//     formSelector: '.popup__form',
+//     inputSelector: '.popup__input',
+//     submitButtonSelector: '.popup__button',
+//     inactiveButtonClass: 'popup__button_disabled',
+//     inputErrorClass: 'popup__input_type_error',
+//     errorClass: 'popup__error_visible'
+// };
+
+
+// Ф-ция, проверяющая все ли инпуты пустые
+const allInputsEmpty = (inputList) => {
+    return !inputList.some(inputElement => inputElement.value.length > 0);
 };
 
 // Проверка на невалидность хотя бы одного инпута 
@@ -14,7 +20,7 @@ const hasInvalidInput = (inputList) => {
 
 // Ф-йия переключения состояния кнопки
 const toggleButtonState = (inputList, buttonElement) => {
-    if (hasInvalidInput(inputList)) {
+    if (hasInvalidInput(inputList) || allInputsEmpty(inputList)) {
         buttonElement.classList.add('form__submit-btn_disabled');
         buttonElement.setAttribute('disabled', true);
     } else {
@@ -27,6 +33,7 @@ const toggleButtonState = (inputList, buttonElement) => {
 const showInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add('form__input_type_error');
+    errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add('form__input-error_active');
 };
 
@@ -47,7 +54,7 @@ const checkInput = (formElement, inputElement) => {
 
 // Навесим слушалки на все инпуты
 const setInputListeners = (formElement) => {
-    const inputList = Array.from(formElement.querySelecorAll('.form__input'));
+    const inputList = Array.from(formElement.querySelectorAll('.form__input'));
     const buttonElement = formElement.querySelector('.form__submit-btn');
 
     inputList.forEach(inputElement => {
@@ -55,6 +62,7 @@ const setInputListeners = (formElement) => {
             checkInput(formElement, inputElement);
             toggleButtonState(inputList, buttonElement);
         });
+        allInputsEmpty(inputList, buttonElement);
     });
 };
 
@@ -71,4 +79,4 @@ const enableValidation = () => {
 }
 
 // Вызовем функцию
-enableValidation(validationObject);
+enableValidation();
