@@ -1,5 +1,4 @@
 // Переменные popup
-const popup = document.querySelector('.popup');
 const lightBoxImg = document.querySelector('.popup__image');
 const lightBoxTitle = document.querySelector('.popup__caption');
 const lightBox = document.querySelector('.popup_type_lightbox');
@@ -27,45 +26,48 @@ const cardsContainer = document.querySelector('.elements__cards');
 // Открытие попапов
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closeByEscape);
 }
 
 // Закрытие попапов
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
-};
+    document.removeEventListener('keydown', closeByEscape);
+}
 
 // Выбираю все кноки "закрыть попап"
-const popupCloseBtn = document.querySelectorAll('.popup__close-btn');
+const popupCloseButtons = document.querySelectorAll('.popup__close-btn');
 
-// Добавляю слушателя для закрытия по клику на крестик
-popupCloseBtn.forEach(function(item) {
+popupCloseButtons.forEach(function(item) {
     item.addEventListener('click', evt => {
         const popupToClose = evt.target.closest('.popup_opened');
         closePopup(popupToClose);
     });
 });
 
-// Закрытие попапов по клику на overlay
-const popups = document.querySelectorAll('.popup');
+// Закрытие попапов по клику на overlay && крестик
+const popups = document.querySelectorAll('.popup')
 
-popups.forEach((item) => {
-    item.addEventListener('click', evt => {
-        popupToClose = evt.target;
-        closePopup(popupToClose);
-        if (popupToClose.classList.contains('.popup_opened')) {
-            closePopup(popupToClose);
-        }
-        evt.stopPropagation();
+popups.forEach((popup) => {
+
+    popup.addEventListener('click', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup)
+        };
+
+        if (evt.target.classList.contains('popup__close')) {
+            closePopup(popup)
+        };
     });
 });
 
 // Ф-ция закрытия попапа по нажатию ESC
-const popupCloseByKey = document.addEventListener('keydown', (evt) => {
-    const openedPopup = document.querySelector('.popup_opened');
+function closeByEscape(evt) {
     if (evt.key === 'Escape') {
-        closePopup(openedPopup)
-    };
-});
+        const openedPopup = document.querySelector('.popup_opened')
+        closePopup(openedPopup);
+    }
+};
 
 // Слушатель для открытия попапа Edit
 popupEditOpenBtn.addEventListener('click', () => {
@@ -140,7 +142,7 @@ function handleAddCardSubmit(cards) {
 
     const openLightBoxBtn = cards.querySelector('.elements__card-image');
     openLightBoxBtn.addEventListener('click', function(evt) {
-        lightBox.classList.add('popup_opened');
+        openPopup(lightBox);
         const target = evt.target;
         lightBoxImg.src = target.src;
         lightBoxImg.alt = target.closest('.elements__card').querySelector('.elements__place-name').textContent;
