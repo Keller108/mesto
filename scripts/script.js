@@ -1,5 +1,5 @@
 import Card from './Card.js'
-import FormValidator from './FormValidator.js'
+import FormValidator from './FormValidator.аjs'
 
 // Валидация по формам
 const formList = Array.from(document.querySelectorAll(object.formSelector));

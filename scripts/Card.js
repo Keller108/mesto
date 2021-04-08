@@ -1,5 +1,6 @@
 import { openPopup, closePopup } from './script.js';
 
+
 export default class Card {
     constuctor(templateSelector, object) {
         this._templateSelector = templateSelector;
