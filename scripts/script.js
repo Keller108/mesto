@@ -2,7 +2,7 @@ import Card from './Card.js'
 import FormValidator from './FormValidator.аjs'
 
 // Валидация по формам
-const formList = Array.from(document.querySelectorAll(object.formSelector));
+const formList = Array.from(document.querySelectorAll(validationObject.formSelector));
 formList.forEach((formElement) => {
     new FormValidator(selectorsObject, formElement).enavleValidation();
 });
