@@ -1,10 +1,10 @@
 import Card from './Card.js'
-import FormValidator from './FormValidator.аjs'
+import FormValidator from './FormValidator.js'
 
 // Валидация по формам
 const formList = Array.from(forms);
 formList.forEach((formElement) => {
-    new FormValidator(selectorsObject, formElement).enavleValidation();
+    new FormValidator(formElement).enableValidation();
 });
 
 // Карточки "из коробки"
