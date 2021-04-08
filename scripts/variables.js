@@ -54,3 +54,4 @@ const templateCard = document.querySelector('.template');
 const cardsContainer = document.querySelector('.elements__cards');
 const popupCloseButtons = document.querySelectorAll('.popup__close-btn');
 const popups = document.querySelectorAll('.popup');
+const forms = document.querySelectorAll('.form');
