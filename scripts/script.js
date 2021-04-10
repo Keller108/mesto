@@ -2,13 +2,15 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 
 initialCards.forEach((item) => {
-    cardsContainer.prepend(new Card(item.name, item.link).generateCard());
+    cardsContainer.prepend(new Card(item.name, item.link, openPopup).generateCard());
 });
 
 // Открытие попапов
-export function openPopup(popup) {
+function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEscape);
+    addBtn.classList.add(validationObject.inactiveButtonClass);
+    addBtn.setAttribute('disabled', 'disabled');
 }
 
 // Закрытие попапов

@@ -39,6 +39,7 @@ const lightBoxTitle = document.querySelector('.popup__caption');
 const lightBox = document.querySelector('.popup_type_lightbox');
 const popupAdd = document.querySelector('.popup_type_card-add');
 const popupEdit = document.querySelector('.popup_type_profile');
+const addBtn = document.querySelector('.form__submit-btn_type_add').closest('.form__submit-btn');
 
 // Переменные форм
 const profileFormEdit = document.querySelector('.edit-form');

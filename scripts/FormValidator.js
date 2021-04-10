@@ -42,7 +42,7 @@ export default class FormValidator {
                 this.toggleButtonState(inputList, buttonElement, object);
             });
         });
-        // this.toggleButtonState(inputList, buttonElement, object);
+        this.toggleButtonState(inputList, buttonElement, object);
     };
 
     // Ф-йия переключения состояния кнопки
