@@ -8,11 +8,7 @@ export default class Card {
     }
 
     _createCard() {
-        const cardElement = document.querySelector('.template')
-            .content
-            .querySelector('.elements__card')
-            .cloneNode(true);
-
+        const cardElement = this._templateSelector.content.querySelector('.elements__card').cloneNode(true);
         const cardImg = cardElement.querySelector('.elements__place-name');
         cardImg.textContent = this._object.name;
         cardImg.alt = this._object.name;
@@ -23,9 +19,9 @@ export default class Card {
 
     _setListeners() {
         const cardDelBtn = this._element.querySelector('.elements__delete-btn');
-
         cardDelBtn.addEventListener('click', (evt) => {
-            currentCard.parentNode.remove();
+            const currentCard = evt.target.closest('.elements__card');
+            currentCard.remove();
         });
 
         const likeBtn = this._element.querySelector('.elements__like-btn');
@@ -44,7 +40,7 @@ export default class Card {
     }
 
     getCard() {
-        this._element = this._createCard();
+        this._element = this._createCard;
         this._setListeners();
         return this._element;
     }

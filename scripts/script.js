@@ -4,12 +4,12 @@ import FormValidator from './FormValidator.js'
 // Валидация по формам
 const formList = Array.from(forms);
 formList.forEach((formElement) => {
-    new FormValidator(validationObject, formElement).enableValidation();
+    new FormValidator(formElement).enableValidation();
 });
 
 // Карточки "из коробки"
 initialCards.forEach(item => {
-    cardsContainer.prepend(new Card(templateCard, item).getCard());
+    cardsContainer.prepend(new Card(cardsTemplate, item).getCard());
 });
 
 // Открытие попапов
@@ -34,8 +34,13 @@ export function closeByEscape(evt) {
 
 // Закрытие попапов по клику на оверлей
 popups.forEach((popup) => {
+
     popup.addEventListener('click', (evt) => {
         if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup)
+        };
+
+        if (evt.target.classList.contains('popup__close')) {
             closePopup(popup)
         };
     });
