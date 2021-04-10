@@ -1,3 +1,4 @@
+import { openPopup } from './script.js';
 export default class Card {
     constructor(name, link, openPopup) {
         this._name = name;
@@ -31,7 +32,7 @@ export default class Card {
         // Добавление обработчика на картинку
         this._element.querySelector('.elements__card-image')
             .addEventListener('click', () => {
-                this._openPopup(lightBox);
+                openPopup(lightBox);
 
                 lightBoxImg.src = this._link;
                 lightBoxImg.alt = this._element.closest('.elements__card').querySelector('.elements__place-name').textContent;

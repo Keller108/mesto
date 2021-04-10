@@ -6,7 +6,7 @@ initialCards.forEach((item) => {
 });
 
 // Открытие попапов
-function openPopup(popup) {
+export function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEscape);
     addBtn.classList.add(validationObject.inactiveButtonClass);
