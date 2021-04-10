@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
 
@@ -10,12 +11,21 @@ formList.forEach((formElement) => {
 // Карточки "из коробки"
 initialCards.forEach(item => {
     cardsContainer.prepend(new Card(cardsTemplate, item).getCard());
+=======
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
+initialCards.forEach((item) => {
+    cardsContainer.prepend(new Card(item.name, item.link, openPopup).generateCard());
+>>>>>>> refactoring/classes-creating
 });
 
 // Открытие попапов
 export function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEscape);
+    addBtn.classList.add(validationObject.inactiveButtonClass);
+    addBtn.setAttribute('disabled', 'disabled');
 }
 
 // Закрытие попапов
@@ -24,6 +34,7 @@ export function closePopup(popup) {
     document.removeEventListener('keydown', closeByEscape);
 }
 
+<<<<<<< HEAD
 // Закрытие попапов по нажатию ESC
 export function closeByEscape(evt) {
     if (evt.key === 'Escape') {
@@ -33,6 +44,18 @@ export function closeByEscape(evt) {
 };
 
 // Закрытие попапов по клику на оверлей
+=======
+// Выбираю все кноки "закрыть попап"
+const popupCloseButtons = document.querySelectorAll('.popup__close-btn');
+
+popupCloseButtons.forEach(function(item) {
+    item.addEventListener('click', evt => {
+        const popupToClose = evt.target.closest('.popup_opened');
+        closePopup(popupToClose);
+    });
+});
+
+>>>>>>> refactoring/classes-creating
 popups.forEach((popup) => {
 
     popup.addEventListener('click', (evt) => {
@@ -72,14 +95,21 @@ popupAddOpenBtn.addEventListener('click', () => {
     openPopup(popupAdd);
 });
 
+<<<<<<< HEAD
+=======
+// Добавление карточки через форму
+>>>>>>> refactoring/classes-creating
 profileFormAdd.addEventListener('submit', evt => {
     evt.preventDefault();
-    const cardName = inputName.value;
-    const cardImage = inputPictureLink.value;
-    const addNewCard = createCardDomNode({ name: cardName, link: cardImage });
-    cardsContainer.prepend(addNewCard);
+    cardsContainer.prepend(new Card(inputName.value, inputPictureLink.value).generateCard());
     closePopup(popupAdd);
     profileFormAdd.reset();
 });
 
+<<<<<<< HEAD
 renderClassList();
+=======
+// Запуск валидации
+const formValidation = new FormValidator(validationObject);
+formValidation.enableValidation(validationObject);
+>>>>>>> refactoring/classes-creating
