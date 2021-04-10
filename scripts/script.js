@@ -48,24 +48,35 @@ function closeByEscape(evt) {
     }
 };
 
-// // Слушатель для открытия попапа Edit
-// popupEditOpenBtn.addEventListener('click', () => {
-//     openPopup(popupEdit);
-//     fieldName.value = profileName.textContent;
-//     fieldDescr.value = profileDescription.textContent;
-// });
+// Слушатель для открытия попапа Edit
+popupEditOpenBtn.addEventListener('click', () => {
+    openPopup(popupEdit);
+    fieldName.value = profileName.textContent;
+    fieldDescr.value = profileDescription.textContent;
+});
 
-// // Добавление данных из полей edit-profile в профиль
-// profileFormEdit.addEventListener('submit', evt => {
-//     evt.preventDefault();
-//     profileName.textContent = fieldName.value;
-//     profileDescription.textContent = fieldDescr.value;
-//     closePopup(popupEdit);
-// });
+// Добавление данных из полей edit-profile в профиль
+profileFormEdit.addEventListener('submit', evt => {
+    evt.preventDefault();
+    profileName.textContent = fieldName.value;
+    profileDescription.textContent = fieldDescr.value;
+    closePopup(popupEdit);
+});
 
-// popupAddOpenBtn.addEventListener('click', () => {
-//     openPopup(popupAdd);
-// });
+popupAddOpenBtn.addEventListener('click', () => {
+    openPopup(popupAdd);
+});
+
+// Добавление карточки через форму
+profileFormAdd.addEventListener('submit', evt => {
+    evt.preventDefault();
+    const cardName = inputName.value;
+    const cardImage = inputPictureLink.value;
+    const addNewCard = createCardDomNode({ name: cardName, link: cardImage });
+    cardsContainer.prepend(addNewCard);
+    closePopup(popupAdd);
+    profileFormAdd.reset();
+});
 
 // // Функция создания нового DOM узла
 // function createCardDomNode(card) {
@@ -92,16 +103,6 @@ function closeByEscape(evt) {
 //     //Отрисуем
 //     cardsContainer.prepend(...result);
 // };
-
-// profileFormAdd.addEventListener('submit', evt => {
-//     evt.preventDefault();
-//     const cardName = inputName.value;
-//     const cardImage = inputPictureLink.value;
-//     const addNewCard = createCardDomNode({ name: cardName, link: cardImage });
-//     cardsContainer.prepend(addNewCard);
-//     closePopup(popupAdd);
-//     profileFormAdd.reset();
-// });
 
 // function deleteCardHandler(evt) {
 //     const currentCard = evt.target.closest('.elements__card');

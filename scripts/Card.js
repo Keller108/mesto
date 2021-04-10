@@ -1,4 +1,5 @@
 import { openPopup } from './script.js';
+
 export default class Card {
     constructor(name, link, openPopup) {
         this._name = name;
@@ -6,6 +7,7 @@ export default class Card {
         this._openPopup = openPopup;
     }
 
+    // Берем шаблон
     _getTemplate() {
         const newItem = templateCard
             .content
@@ -14,6 +16,7 @@ export default class Card {
         return newItem;
     }
 
+    // Навешиваем обработчики
     _setEventListeners() {
         // Добавление обработчика на кнопку удаления
         this._element.querySelector('.elements__delete-btn')
@@ -25,7 +28,6 @@ export default class Card {
         this._element.querySelector('.elements__like-btn')
             .addEventListener('click', () => {
                 this._likeCardHandler();
-                this.stoppropaganation
             });
 
         // Добавление обработчика на картинку
@@ -39,15 +41,18 @@ export default class Card {
             });
     }
 
+    // Удаление карточки
     _deleteCardHandler() {
         this._element.remove();
     };
 
+    // Лайк карточки
     _likeCardHandler() {
         this._element.querySelector('.elements__like-btn')
             .classList.toggle('elements__like-btn_is_active');
     };
 
+    // Заполнение карточек контентом
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
