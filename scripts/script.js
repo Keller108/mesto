@@ -5,48 +5,48 @@ initialCards.forEach((item) => {
     cardsContainer.prepend(new Card(item.name, item.link).generateCard());
 });
 
-// // Открытие попапов
-// function openPopup(popup) {
-//     popup.classList.add('popup_opened');
-//     document.addEventListener('keydown', closeByEscape);
-// }
+// Открытие попапов
+export function openPopup(popup) {
+    popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closeByEscape);
+}
 
-// // Закрытие попапов
-// function closePopup(popup) {
-//     popup.classList.remove('popup_opened');
-//     document.removeEventListener('keydown', closeByEscape);
-// }
+// Закрытие попапов
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeByEscape);
+}
 
-// // Выбираю все кноки "закрыть попап"
-// const popupCloseButtons = document.querySelectorAll('.popup__close-btn');
+// Выбираю все кноки "закрыть попап"
+const popupCloseButtons = document.querySelectorAll('.popup__close-btn');
 
-// popupCloseButtons.forEach(function(item) {
-//     item.addEventListener('click', evt => {
-//         const popupToClose = evt.target.closest('.popup_opened');
-//         closePopup(popupToClose);
-//     });
-// });
+popupCloseButtons.forEach(function(item) {
+    item.addEventListener('click', evt => {
+        const popupToClose = evt.target.closest('.popup_opened');
+        closePopup(popupToClose);
+    });
+});
 
-// popups.forEach((popup) => {
+popups.forEach((popup) => {
 
-//     popup.addEventListener('click', (evt) => {
-//         if (evt.target.classList.contains('popup_opened')) {
-//             closePopup(popup)
-//         };
+    popup.addEventListener('click', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup)
+        };
 
-//         if (evt.target.classList.contains('popup__close')) {
-//             closePopup(popup)
-//         };
-//     });
-// });
+        if (evt.target.classList.contains('popup__close')) {
+            closePopup(popup)
+        };
+    });
+});
 
-// // Ф-ция закрытия попапа по нажатию ESC
-// function closeByEscape(evt) {
-//     if (evt.key === 'Escape') {
-//         const openedPopup = document.querySelector('.popup_opened')
-//         closePopup(openedPopup);
-//     }
-// };
+// Ф-ция закрытия попапа по нажатию ESC
+function closeByEscape(evt) {
+    if (evt.key === 'Escape') {
+        const openedPopup = document.querySelector('.popup_opened')
+        closePopup(openedPopup);
+    }
+};
 
 // // Слушатель для открытия попапа Edit
 // popupEditOpenBtn.addEventListener('click', () => {

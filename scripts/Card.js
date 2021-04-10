@@ -1,7 +1,9 @@
+import { openPopup } from './script.js';
 export default class Card {
-    constructor(name, link) {
+    constructor(name, link, openPopup) {
         this._name = name;
         this._link = link;
+        this._openPopup = openPopup;
     }
 
     _getTemplate() {
@@ -13,12 +15,42 @@ export default class Card {
     }
 
     _setEventListeners() {
+        // Добавление обработчика на кнопку удаления
+        this._element.querySelector('.elements__delete-btn')
+            .addEventListener('click', () => {
+                this._deleteCardHandler();
+            });
 
+        // Добавление обработчика на кнопку like
+        this._element.querySelector('.elements__like-btn')
+            .addEventListener('click', () => {
+                this._likeCardHandler();
+                this.stoppropaganation
+            });
+
+        // Добавление обработчика на картинку
+        this._element.querySelector('.elements__card-image')
+            .addEventListener('click', () => {
+                openPopup(lightBox);
+
+                lightBoxImg.src = this._link;
+                lightBoxImg.alt = this._element.closest('.elements__card').querySelector('.elements__place-name').textContent;
+                lightBoxTitle.textContent = this._element.closest('.elements__card').querySelector('.elements__place-name').textContent;
+            });
     }
+
+    _deleteCardHandler() {
+        this._element.remove();
+    };
+
+    _likeCardHandler() {
+        this._element.querySelector('.elements__like-btn')
+            .classList.toggle('elements__like-btn_is_active');
+    };
 
     generateCard() {
         this._element = this._getTemplate();
-
+        this._setEventListeners();
         this._element.querySelector('.elements__place-name').textContent = this._name;
         this._element.querySelector('.elements__card-image').alt = this._name;
         this._element.querySelector('.elements__card-image').src = this._link;
