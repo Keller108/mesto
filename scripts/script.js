@@ -6,11 +6,16 @@ initialCards.forEach((item) => {
 });
 
 // Открытие попапов
-export function openPopup(popup) {
+function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEscape);
-    addBtn.classList.add(validationObject.inactiveButtonClass);
-    addBtn.setAttribute('disabled', 'disabled');
+    disableBtnBeforePopup(addBtn);
+}
+
+//Дизейбл кнопки при отрытии формы "Добавить карточку"
+function disableBtnBeforePopup(btn) {
+    btn.classList.add(validationObject.inactiveButtonClass);
+    btn.setAttribute('disabled', 'disabled');
 }
 
 // Закрытие попапов
@@ -72,7 +77,7 @@ popupAddOpenBtn.addEventListener('click', () => {
 // Добавление карточки через форму
 profileFormAdd.addEventListener('submit', evt => {
     evt.preventDefault();
-    cardsContainer.prepend(new Card(inputName.value, inputPictureLink.value).generateCard());
+    cardsContainer.prepend(new Card(inputName.value, inputPictureLink.value, openPopup).generateCard());
     closePopup(popupAdd);
     profileFormAdd.reset();
 });
