@@ -1,9 +1,21 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 
-initialCards.forEach((item) => {
-    cardsContainer.prepend(new Card(item.name, item.link, openPopup).generateCard());
-});
+const cardList = new Section({
+    items: initialCards,
+    renderer: (item) => {
+        const newCard = new Card(item.name, item.link, openPopup);
+        const cardElement = newCard.generateCard();
+        cardList.addItem(cardElement);
+    }
+}, '.elements__cards');
+
+cardList.renderItems();
+
+// initialCards.forEach((item) => {
+//     cardsContainer.prepend(new Card(item.name, item.link, openPopup).generateCard());
+// });
 
 // Открытие попапов
 function openPopup(popup) {
