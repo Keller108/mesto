@@ -1,11 +1,12 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
+import Popup from './Popup.js';
 
 const cardList = new Section({
     items: initialCards,
     renderer: (item) => {
-        const newCard = new Card(item.name, item.link, openPopup);
+        const newCard = new Card(item.name, item.link);
         const cardElement = newCard.generateCard();
         cardList.addItem(cardElement);
     }
@@ -18,33 +19,33 @@ cardList.renderItems();
 // });
 
 // Открытие попапов
-function openPopup(popup) {
-    popup.classList.add('popup_opened');
-    document.addEventListener('keydown', closeByEscape);
-    disableBtnBeforePopup(addBtn);
-}
+// function openPopup(popup) {
+//     popup.classList.add('popup_opened');
+//     document.addEventListener('keydown', closeByEscape);
+//     disableBtnBeforePopup(addBtn);
+// }
 
 //Дизейбл кнопки при отрытии формы "Добавить карточку"
-function disableBtnBeforePopup(btn) {
-    btn.classList.add(validationObject.inactiveButtonClass);
-    btn.setAttribute('disabled', 'disabled');
-}
+// function disableBtnBeforePopup(btn) {
+//     btn.classList.add(validationObject.inactiveButtonClass);
+//     btn.setAttribute('disabled', 'disabled');
+// }
 
 // Закрытие попапов
-function closePopup(popup) {
-    popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closeByEscape);
-}
+// function closePopup(popup) {
+//     popup.classList.remove('popup_opened');
+//     document.removeEventListener('keydown', closeByEscape);
+// }
 
 // Выбираю все кноки "закрыть попап"
-const popupCloseButtons = document.querySelectorAll('.popup__close-btn');
+// const popupCloseButtons = document.querySelectorAll('.popup__close-btn');
 
-popupCloseButtons.forEach(function(item) {
-    item.addEventListener('click', evt => {
-        const popupToClose = evt.target.closest('.popup_opened');
-        closePopup(popupToClose);
-    });
-});
+// popupCloseButtons.forEach(function(item) {
+//     item.addEventListener('click', evt => {
+//         const popupToClose = evt.target.closest('.popup_opened');
+//         closePopup(popupToClose);
+//     });
+// });
 
 popups.forEach((popup) => {
 
