@@ -14,6 +14,11 @@ const cardList = new Section({
 
 cardList.renderItems();
 
+const popupLightbox = new PopupWithImage(lightBoxSelector);
+const popupForm = new Popup()
+
+popupLightbox.setEventListener();
+
 // initialCards.forEach((item) => {
 //     cardsContainer.prepend(new Card(item.name, item.link, openPopup).generateCard());
 // });
