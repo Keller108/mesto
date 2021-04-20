@@ -6,22 +6,53 @@ import PopupWithImage from './PopupWithImage.js';
 const cardList = new Section({
     items: initialCards,
     renderer: (item) => {
-        const newCard = new Card(item.name, item.link);
+        const newCard = new Card(item.link, item.name, openLightbox);
         const cardElement = newCard.generateCard();
         cardList.addItem(cardElement);
     }
 }, '.elements__cards');
 
 cardList.renderItems();
+export const popupLightbox = new PopupWithImage(lightBoxSelector);
 
-export function parseContent() {
-    const popupLightbox = new PopupWithImage(lightBoxSelector).open();
-    popupLightbox.setEventListeners();
-
-    lightBoxImg.src = this._link;
-    lightBoxImg.alt = this._element.closest('.elements__card').querySelector('.elements__place-name').textContent;
-    lightBoxTitle.textContent = this._element.closest('.elements__card').querySelector('.elements__place-name').textContent;
+function openLightbox(link, name) {
+    popupLightbox.open(link, name)
 }
+
+// Слушатель для открытия попапа Edit
+popupEditOpenBtn.addEventListener('click', () => {
+    PopupWithForm.open();
+    fieldName.value = profileName.textContent;
+    fieldDescr.value = profileDescription.textContent;
+});
+
+// Добавление данных из полей edit-profile в профиль
+profileFormEdit.addEventListener('submit', evt => {
+    evt.preventDefault();
+    profileName.textContent = fieldName.value;
+    profileDescription.textContent = fieldDescr.value;
+    closePopup(popupEdit);
+});
+
+popupAddOpenBtn.addEventListener('click', () => {
+    openPopup(popupAdd);
+});
+
+// Добавление карточки через форму
+profileFormAdd.addEventListener('submit', evt => {
+    evt.preventDefault();
+    cardsContainer.prepend(new Card(inputName.value, inputPictureLink.value).generateCard());
+    closePopup(popupAdd);
+    profileFormAdd.reset();
+});
+
+// Запуск валидации
+const formValidation = new FormValidator(validationObject);
+formValidation.enableValidation(validationObject);
+
+// lightBoxImg.src = this._link;
+// lightBoxImg.alt = this._element.closest('.elements__card').querySelector('.elements__place-name').textContent;
+// lightBoxTitle.textContent = this._element.closest('.elements__card').querySelector('.elements__place-name').textContent;
 
 
 
@@ -80,38 +111,6 @@ export function parseContent() {
 //         closePopup(openedPopup);
 //     }
 // };
-
-// Слушатель для открытия попапа Edit
-popupEditOpenBtn.addEventListener('click', () => {
-    PopupWithForm.open();
-    fieldName.value = profileName.textContent;
-    fieldDescr.value = profileDescription.textContent;
-});
-
-// Добавление данных из полей edit-profile в профиль
-profileFormEdit.addEventListener('submit', evt => {
-    evt.preventDefault();
-    profileName.textContent = fieldName.value;
-    profileDescription.textContent = fieldDescr.value;
-    closePopup(popupEdit);
-});
-
-popupAddOpenBtn.addEventListener('click', () => {
-    openPopup(popupAdd);
-});
-
-// Добавление карточки через форму
-profileFormAdd.addEventListener('submit', evt => {
-    evt.preventDefault();
-    cardsContainer.prepend(new Card(inputName.value, inputPictureLink.value).generateCard());
-    closePopup(popupAdd);
-    profileFormAdd.reset();
-});
-
-// Запуск валидации
-const formValidation = new FormValidator(validationObject);
-formValidation.enableValidation(validationObject);
-
 
 // open(popupSelector) {
 //     popupSelector.classList.add('popup_opened');

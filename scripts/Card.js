@@ -1,9 +1,8 @@
-import { parseContent } from '/script.js';
-
 export default class Card {
-    constructor(name, link) {
-        this._name = name;
+    constructor(link, name, openLightbox) {
         this._link = link;
+        this._name = name;
+        this._openLightbox = openLightbox;
     }
 
     // Берем шаблон
@@ -32,7 +31,7 @@ export default class Card {
         // Добавление обработчика на картинку
         this._element.querySelector('.elements__card-image')
             .addEventListener('click', () => {
-
+                this._openLightbox(this._link, this._name);
             });
     }
 
