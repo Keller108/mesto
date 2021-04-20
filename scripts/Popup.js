@@ -5,15 +5,15 @@ export default class Popup {
     }
 
     setEventListeners() {
-        this._btnClose.addEventListener('click', () => this.close());
-        this._popup.addEventListener('click', () => this._closeByClickOnOverlay());
-        document.addEventListener('keydown', () => this._closeByEscape());
+        this._btnClose.addEventListener('click', (evt) => this.close(evt));
+        this._popup.addEventListener('click', (evt) => this._closeByClickOnOverlay(evt));
+        document.addEventListener('keydown', (evt) => this._closeByEscape(evt));
     }
 
     deleteEventListeners() {
-        this._btnClose.removeEventListener('click', () => this.close());
-        this._popup.removeEventListener('click', () => this._closeByClickOnOverlay());
-        document.removeEventListener('keydown', () => this._closeByEscape());
+        this._btnClose.removeEventListener('click', (evt) => this.close());
+        this._popup.removeEventListener('click', (evt) => this._closeByClickOnOverlay());
+        document.removeEventListener('keydown', (evt) => this._closeByEscape());
     }
 
     open() {
@@ -26,13 +26,13 @@ export default class Popup {
         this.deleteEventListeners();
     }
 
-    _closeByEscape = (evt) => {
+    _closeByEscape(evt) {
         if (evt.key === 'Escape') {
             this.close();
         }
     }
 
-    _closeByClickOnOverlay = (evt) => {
+    _closeByClickOnOverlay(evt) {
         if (evt.target.classList.contains('popup_opened')) {
             this.close();
         }
