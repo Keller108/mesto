@@ -1,7 +1,7 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
-import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
 
 const cardList = new Section({
     items: initialCards,
@@ -14,12 +14,18 @@ const cardList = new Section({
 
 cardList.renderItems();
 
-const popupLightbox = new PopupWithImage(lightBoxSelector);
-const popupForm = new Popup()
+export function parseContent() {
+    const popupLightbox = new PopupWithImage(lightBoxSelector).open();
+    popupLightbox.setEventListeners();
 
-popupLightbox.setEventListener();
+    lightBoxImg.src = this._link;
+    lightBoxImg.alt = this._element.closest('.elements__card').querySelector('.elements__place-name').textContent;
+    lightBoxTitle.textContent = this._element.closest('.elements__card').querySelector('.elements__place-name').textContent;
+}
 
 
+
+// popupLightbox.setEventListeners();
 
 // initialCards.forEach((item) => {
 //     cardsContainer.prepend(new Card(item.name, item.link, openPopup).generateCard());
@@ -54,30 +60,30 @@ popupLightbox.setEventListener();
 //     });
 // });
 
-popups.forEach((popup) => {
+// popups.forEach((popup) => {
 
-    popup.addEventListener('click', (evt) => {
-        if (evt.target.classList.contains('popup_opened')) {
-            closePopup(popup)
-        };
+//     popup.addEventListener('click', (evt) => {
+//         if (evt.target.classList.contains('popup_opened')) {
+//             closePopup(popup)
+//         };
 
-        if (evt.target.classList.contains('popup__close')) {
-            closePopup(popup)
-        };
-    });
-});
+//         if (evt.target.classList.contains('popup__close')) {
+//             closePopup(popup)
+//         };
+//     });
+// });
 
 // Ф-ция закрытия попапа по нажатию ESC
-function closeByEscape(evt) {
-    if (evt.key === 'Escape') {
-        const openedPopup = document.querySelector('.popup_opened')
-        closePopup(openedPopup);
-    }
-};
+// function closeByEscape(evt) {
+//     if (evt.key === 'Escape') {
+//         const openedPopup = document.querySelector('.popup_opened')
+//         closePopup(openedPopup);
+//     }
+// };
 
 // Слушатель для открытия попапа Edit
 popupEditOpenBtn.addEventListener('click', () => {
-    openPopup(popupEdit);
+    PopupWithForm.open();
     fieldName.value = profileName.textContent;
     fieldDescr.value = profileDescription.textContent;
 });
@@ -97,7 +103,7 @@ popupAddOpenBtn.addEventListener('click', () => {
 // Добавление карточки через форму
 profileFormAdd.addEventListener('submit', evt => {
     evt.preventDefault();
-    cardsContainer.prepend(new Card(inputName.value, inputPictureLink.value, openPopup).generateCard());
+    cardsContainer.prepend(new Card(inputName.value, inputPictureLink.value).generateCard());
     closePopup(popupAdd);
     profileFormAdd.reset();
 });
@@ -105,3 +111,38 @@ profileFormAdd.addEventListener('submit', evt => {
 // Запуск валидации
 const formValidation = new FormValidator(validationObject);
 formValidation.enableValidation(validationObject);
+
+
+// open(popupSelector) {
+//     popupSelector.classList.add('popup_opened');
+//     document.addEventListener('keydown', closeByEscape);
+//     _disableBtnBeforePopup(addBtn);
+// }
+
+// close(popupSelector) {
+//     popupSelector.classList.remove('popup_opened');
+//     document.removeEventListener('keydown', closeByEscape);
+// }
+
+// _handleEscClose(evt) {
+//     if (evt.key === 'Escape') {
+//         const openedPopup = document.querySelector('.popup_opened')
+//         closePopup(openedPopup);
+//     }
+// }
+
+// setEventListener() {
+//     const popupCloseButtons = document.querySelectorAll('.popup__close-btn');
+
+//     popupCloseButtons.forEach(function(item) {
+//         btn.addEventListener('click', evt => {
+//             const popupToClose = evt.target.closest('.popup_opened');
+//             closePopup(popupToClose);
+//         });
+//     });
+// }
+
+// _disableBtnBeforePopup(btn) {
+//     btn.classList.add(validationObject.inactiveButtonClass);
+//     btn.setAttribute('disabled', 'disabled');
+// }
