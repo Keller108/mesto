@@ -38,7 +38,8 @@ const lightBoxImg = document.querySelector('.popup__image');
 const lightBoxTitle = document.querySelector('.popup__caption');
 const lightBox = document.querySelector('.popup_type_lightbox');
 const lightBoxSelector = '.popup_type_lightbox';
-const popupFormSelector = '.popup_type_form';
+const popupFormSelector = '.popup_type_card-add';
+const popupUserFormSelector = '.popup_type_profile';
 const popupAdd = document.querySelector('.popup_type_card-add');
 const popupEdit = document.querySelector('.popup_type_profile');
 const addBtn = document.querySelector('.form__submit-btn_type_add').closest('.form__submit-btn');
@@ -62,4 +63,4 @@ const templateCard = document.querySelector('.template');
 const cardsContainer = document.querySelector('.elements__cards');
 
 // Закрытие попапов по клику на overlay && крестик
-const popups = document.querySelectorAll('.popup')
+// const popups = document.querySelectorAll('.popup')

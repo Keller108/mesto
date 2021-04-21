@@ -11,9 +11,9 @@ export default class Popup {
     }
 
     deleteEventListeners() {
-        this._btnClose.removeEventListener('click', (evt) => this.close());
-        this._popup.removeEventListener('click', (evt) => this._closeByClickOnOverlay());
-        document.removeEventListener('keydown', (evt) => this._closeByEscape());
+        this._btnClose.removeEventListener('click', () => this.close());
+        this._popup.removeEventListener('click', () => this._closeByClickOnOverlay());
+        document.removeEventListener('keydown', () => this._closeByEscape());
     }
 
     open() {

@@ -2,7 +2,9 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
 
+// Создание экземпляра класса Section
 const cardList = new Section({
     items: initialCards,
     renderer: (item) => {
@@ -12,43 +14,78 @@ const cardList = new Section({
     }
 }, '.elements__cards');
 
+// Рендер "карточек из коробки"
 cardList.renderItems();
+
+
+// Создание экземпляра класса лайтбокса
 export const popupLightbox = new PopupWithImage(lightBoxSelector);
 
+// Коллбэк функция открытия лайтбокса
 function openLightbox(link, name) {
     popupLightbox.open(link, name)
 }
 
-// Слушатель для открытия попапа Edit
-popupEditOpenBtn.addEventListener('click', () => {
-    PopupWithForm.open();
-    fieldName.value = profileName.textContent;
-    fieldDescr.value = profileDescription.textContent;
-});
+// Добавление слушателя кнопке "Добавить карточку"
+popupAddOpenBtn.addEventListener('click', handleOpenPopupTypeAdd);
 
-// Добавление данных из полей edit-profile в профиль
-profileFormEdit.addEventListener('submit', evt => {
-    evt.preventDefault();
-    profileName.textContent = fieldName.value;
-    profileDescription.textContent = fieldDescr.value;
-    closePopup(popupEdit);
-});
+// Коллбэк функция создания нового экземпляра попапа добавления карточки
+function handleOpenPopupTypeAdd() {
+    const popupTypeAddCard = new PopupWithForm(popupFormSelector);
+    popupTypeAddCard.open()
+}
 
-popupAddOpenBtn.addEventListener('click', () => {
-    openPopup(popupAdd);
-});
+// Добавление слушателя кнопке "редактировать профиль"
+popupEditOpenBtn.addEventListener('click', handleOpenPopupTypeEdit)
 
-// Добавление карточки через форму
-profileFormAdd.addEventListener('submit', evt => {
-    evt.preventDefault();
-    cardsContainer.prepend(new Card(inputName.value, inputPictureLink.value).generateCard());
-    closePopup(popupAdd);
-    profileFormAdd.reset();
-});
+// Коллбэк функция создания нового экземпляра попапа редактирования профиля
+function handleOpenPopupTypeEdit() {
+    const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector);
+    popupTypeEditProfile.open();
+}
+
+// Сабмит форм 
+function handleFormSubmit(data, evt) {
+    cardList.prepend(new Card(data).generateCard());
+    evt.preventDefault(evt);
+}
 
 // Запуск валидации
 const formValidation = new FormValidator(validationObject);
 formValidation.enableValidation(validationObject);
+
+// Слушатель для открытия попапа Edit
+// popupEditOpenBtn.addEventListener('click', () => {
+//     PopupWithForm.open();
+//     fieldName.value = profileName.textContent;
+//     fieldDescr.value = profileDescription.textContent;
+// });
+
+// Добавление данных из полей edit-profile в профиль
+// profileFormEdit.addEventListener('submit', evt => {
+//     evt.preventDefault();
+//     profileName.textContent = fieldName.value;
+//     profileDescription.textContent = fieldDescr.value;
+//     closePopup(popupEdit);
+// });
+
+// popupAddOpenBtn.addEventListener('click', () => {
+//     openPopup(popupAdd);
+// });
+
+// Добавление карточки через форму
+// profileFormAdd.addEventListener('submit', evt => {
+//     evt.preventDefault();
+//     cardsContainer.prepend(new Card(inputName.value, inputPictureLink.value).generateCard());
+//     closePopup(popupAdd);
+//     profileFormAdd.reset();
+// });
+
+// Добавления слушателя 
+// popupLightbox.addEventListener('click', (evt) => {
+//     popupLightbox.closeByClickOnOverlay()
+
+// });
 
 // lightBoxImg.src = this._link;
 // lightBoxImg.alt = this._element.closest('.elements__card').querySelector('.elements__place-name').textContent;
