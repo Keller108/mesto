@@ -45,8 +45,8 @@ function handleOpenPopupTypeEdit() {
 }
 
 // Сабмит форм 
-function handleFormSubmit(data, evt) {
-    cardList.prepend(new Card(data).generateCard());
+export function handleFormSubmit() {
+    cardList.prepend(new Card().generateCard());
     evt.preventDefault(evt);
 }
 
