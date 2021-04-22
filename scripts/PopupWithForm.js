@@ -3,7 +3,7 @@ import Popup from './Popup.js';
 export default class PopupWithForm extends Popup {
     constructor(popupSelector, handleFormSubmit) {
         super(popupSelector);
-        this._handleSubmitForm = handleFormSubmit;
+        this._handleFormSubmit = handleFormSubmit;
         this._form = this._popup.querySelector('.form');
     }
 
@@ -21,14 +21,15 @@ export default class PopupWithForm extends Popup {
         super.setEventListeners();
 
         // Помимо добавления обработчика закрытия на крестик добавляет обработчик сабмита формы
-        this._btnSubmit.addEventListener('submit', () => {
-            this._form = this.handleFormSubmit();
-            this.close();
+        this._form.addEventListener('submit', (evt) => {
+            this._handleFormSubmit();
+            evt.preventDefault(evt);
         })
     }
 
     close(evt) {
         super.close();
         // Сбрасывает форму при закрытии
+        this._form.reset(evt);
     }
 }

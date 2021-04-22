@@ -17,7 +17,6 @@ const cardList = new Section({
 // Рендер "карточек из коробки"
 cardList.renderItems();
 
-
 // Создание экземпляра класса лайтбокса
 export const popupLightbox = new PopupWithImage(lightBoxSelector);
 
@@ -31,8 +30,15 @@ popupAddOpenBtn.addEventListener('click', handleOpenPopupTypeAdd);
 
 // Коллбэк функция создания нового экземпляра попапа добавления карточки
 function handleOpenPopupTypeAdd() {
-    const popupTypeAddCard = new PopupWithForm(popupFormSelector);
+    const popupTypeAddCard = new PopupWithForm(popupFormSelector, handleFormSubmit);
     popupTypeAddCard.open()
+}
+
+// Сабмит форм 
+function handleFormSubmit(link, name) {
+    const newCard = new Card(link, name, openLightbox)
+        .generateCard();
+    cardList.addItem(newCard);
 }
 
 // Добавление слушателя кнопке "редактировать профиль"
@@ -40,15 +46,17 @@ popupEditOpenBtn.addEventListener('click', handleOpenPopupTypeEdit)
 
 // Коллбэк функция создания нового экземпляра попапа редактирования профиля
 function handleOpenPopupTypeEdit() {
-    const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector);
+    const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, handleFormSubmit);
     popupTypeEditProfile.open();
 }
 
-// Сабмит форм 
-export function handleFormSubmit() {
-    cardList.prepend(new Card().generateCard());
-    evt.preventDefault(evt);
-}
+// const formPopupImage = new PopupWithForm(popupImage, submithFormHandler);
+
+//     const submithFormHandler = (items) => {
+//         const newCard = new Card(items.link, items.name, popupOnlyImage).createElementCard();
+//         formPopupImage.close();
+//         cardList.addItem(newCard);
+//     }
 
 // Запуск валидации
 const formValidation = new FormValidator(validationObject);
