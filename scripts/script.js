@@ -39,6 +39,7 @@ function handleFormSubmit(link, name) {
     const newCard = new Card(link, name, openLightbox)
         .generateCard();
     cardList.addItem(newCard);
+
 }
 
 // Добавление слушателя кнопке "редактировать профиль"
@@ -46,7 +47,7 @@ popupEditOpenBtn.addEventListener('click', handleOpenPopupTypeEdit)
 
 // Коллбэк функция создания нового экземпляра попапа редактирования профиля
 function handleOpenPopupTypeEdit() {
-    const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, handleFormSubmit);
+    const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector);
     popupTypeEditProfile.open();
 }
 

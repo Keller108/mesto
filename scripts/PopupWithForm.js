@@ -27,9 +27,9 @@ export default class PopupWithForm extends Popup {
         })
     }
 
-    close(evt) {
+    close() {
         super.close();
         // Сбрасывает форму при закрытии
-        this._form.reset(evt);
+        this._form.reset();
     }
 }
