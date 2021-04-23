@@ -36,8 +36,8 @@ function handleOpenPopupTypeAdd() {
 
 // Сабмит форм
 
-function handleFormSubmit(link, name) {
-    const newCard = new Card(link, name, openLightbox)
+function handleFormSubmit(inputsValue) {
+    const newCard = new Card(inputsValue.link, inputsValue.name, openLightbox)
         .generateCard();
     cardList.addItem(newCard);
 }
