@@ -18,7 +18,7 @@ const cardList = new Section({
 cardList.renderItems();
 
 // Создание экземпляра класса лайтбокса
-export const popupLightbox = new PopupWithImage(lightBoxSelector);
+const popupLightbox = new PopupWithImage(lightBoxSelector);
 
 // Коллбэк функция открытия лайтбокса
 function openLightbox(link, name) {
@@ -36,8 +36,8 @@ function handleOpenPopupTypeAdd() {
 
 // Сабмит форм
 
-function handleFormSubmit(item) {
-    const newCard = new Card(item.link, item.name, openLightbox)
+function handleFormSubmit(link, name) {
+    const newCard = new Card(link, name, openLightbox)
         .generateCard();
     cardList.addItem(newCard);
 }
