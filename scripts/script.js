@@ -30,16 +30,13 @@ popupAddOpenBtn.addEventListener('click', handleOpenPopupTypeAdd);
 
 // Коллбэк функция создания нового экземпляра попапа добавления карточки
 function handleOpenPopupTypeAdd() {
-    const popupTypeAddCard = new PopupWithForm(popupFormSelector, handleFormSubmit);
+    const popupTypeAddCard = new PopupWithForm(popupFormSelector, inputsValue => {
+        const newCard = new Card(inputsValue.link, inputsValue.name, openLightbox)
+            .generateCard();
+        cardList.addItem(newCard);
+        popupTypeAddCard.close();
+    });
     popupTypeAddCard.open()
-}
-
-// Сабмит форм
-
-function handleFormSubmit(inputsValue) {
-    const newCard = new Card(inputsValue.link, inputsValue.name, openLightbox)
-        .generateCard();
-    cardList.addItem(newCard);
 }
 
 // Добавление слушателя кнопке "редактировать профиль"
@@ -56,19 +53,26 @@ const formValidation = new FormValidator(validationObject);
 formValidation.enableValidation(validationObject);
 
 // Слушатель для открытия попапа Edit
-// popupEditOpenBtn.addEventListener('click', () => {
-//     PopupWithForm.open();
-//     fieldName.value = profileName.textContent;
-//     fieldDescr.value = profileDescription.textContent;
-// });
+popupEditOpenBtn.addEventListener('click', () => {
+    PopupWithForm.open();
+    fieldName.value = profileName.textContent;
+    fieldDescr.value = profileDescription.textContent;
+});
 
 // Добавление данных из полей edit-profile в профиль
-// profileFormEdit.addEventListener('submit', evt => {
-//     evt.preventDefault();
-//     profileName.textContent = fieldName.value;
-//     profileDescription.textContent = fieldDescr.value;
-//     closePopup(popupEdit);
-// });
+profileFormEdit.addEventListener('submit', evt => {
+    evt.preventDefault();
+    profileName.textContent = fieldName.value;
+    profileDescription.textContent = fieldDescr.value;
+    closePopup(popupEdit);
+});
+
+// Сабмит форм
+// function handleFormSubmit(inputsValue) {
+//     const newCard = new Card(inputsValue.link, inputsValue.name, openLightbox)
+//         .generateCard();
+//     cardList.addItem(newCard);
+// }
 
 // popupAddOpenBtn.addEventListener('click', () => {
 //     openPopup(popupAdd);

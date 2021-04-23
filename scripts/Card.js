@@ -11,6 +11,7 @@ export default class Card {
             .content
             .querySelector('.elements__card')
             .cloneNode('true');
+        я
         return newItem;
     }
 
