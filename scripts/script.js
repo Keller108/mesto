@@ -3,6 +3,7 @@ import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
+// import UserInfo from './UserInfo.js';
 
 // Создание экземпляра класса Section
 const cardList = new Section({
@@ -14,7 +15,6 @@ const cardList = new Section({
     }
 }, '.elements__cards');
 
-// Рендер "карточек из коробки"
 cardList.renderItems();
 
 // Создание экземпляра класса лайтбокса
@@ -34,12 +34,12 @@ function handleOpenPopupTypeAdd() {
     popupTypeAddCard.open()
 }
 
-// Сабмит форм 
-function handleFormSubmit(link, name) {
-    const newCard = new Card(link, name, openLightbox)
+// Сабмит форм
+
+function handleFormSubmit(item) {
+    const newCard = new Card(item.link, item.name, openLightbox)
         .generateCard();
     cardList.addItem(newCard);
-
 }
 
 // Добавление слушателя кнопке "редактировать профиль"
@@ -50,14 +50,6 @@ function handleOpenPopupTypeEdit() {
     const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector);
     popupTypeEditProfile.open();
 }
-
-// const formPopupImage = new PopupWithForm(popupImage, submithFormHandler);
-
-//     const submithFormHandler = (items) => {
-//         const newCard = new Card(items.link, items.name, popupOnlyImage).createElementCard();
-//         formPopupImage.close();
-//         cardList.addItem(newCard);
-//     }
 
 // Запуск валидации
 const formValidation = new FormValidator(validationObject);
@@ -99,8 +91,6 @@ formValidation.enableValidation(validationObject);
 // lightBoxImg.src = this._link;
 // lightBoxImg.alt = this._element.closest('.elements__card').querySelector('.elements__place-name').textContent;
 // lightBoxTitle.textContent = this._element.closest('.elements__card').querySelector('.elements__place-name').textContent;
-
-
 
 // popupLightbox.setEventListeners();
 

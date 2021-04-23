@@ -19,11 +19,9 @@ export default class PopupWithForm extends Popup {
 
     setEventListeners() {
         super.setEventListeners();
-
-        // Помимо добавления обработчика закрытия на крестик добавляет обработчик сабмита формы
         this._form.addEventListener('submit', (evt) => {
             this._handleFormSubmit();
-            evt.preventDefault(evt);
+            evt.preventDefault();
         })
     }
 
@@ -31,5 +29,6 @@ export default class PopupWithForm extends Popup {
         super.close();
         // Сбрасывает форму при закрытии
         this._form.reset();
+        this._form.removeEventListener('submit', this.__submitHandler)
     }
 }

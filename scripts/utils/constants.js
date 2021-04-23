@@ -62,5 +62,7 @@ const profileDescription = document.querySelector('.profile__description');
 const templateCard = document.querySelector('.template');
 const cardsContainer = document.querySelector('.elements__cards');
 
+const submitButton = document.querySelector('.form__submit-btn');
+
 // Закрытие попапов по клику на overlay && крестик
 // const popups = document.querySelectorAll('.popup')
