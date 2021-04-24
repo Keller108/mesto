@@ -42,19 +42,6 @@ popupEditOpenBtn.addEventListener('click', () => {
     fieldDescr.value = userMetaData.job;
 });
 
-// Вызов класса UserInfo
-// const userInfo = new UserInfo({ name: '.profile__name', job: '.profile__description' });
-
-// Коллбэк функция создания нового экземпляра попапа редактирования профиля
-// function handleOpenPopupTypeEdit() {
-//     const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, items => {
-//         userInfo.setUserInfo(items);
-//         popupTypeEditProfile.close();
-//     });
-//     popupTypeEditProfile.open();
-// }
-
-
 // ДОБАВЛЕНИЯ КАРТОЧКИ
 
 // Коллбэк функция создания нового экземпляра попапа добавления карточки
@@ -72,7 +59,6 @@ function handleOpenPopupTypeAdd() {
 const formValidation = new FormValidator(validationObject);
 formValidation.enableValidation(validationObject);
 
-
 // СЛУШАТЕЛИ
 
 // Добавление слушателя кнопке "Добавить карточку"
@@ -81,8 +67,17 @@ popupAddOpenBtn.addEventListener('click', handleOpenPopupTypeAdd);
 // Слушатель для открытия попапа Edit
 // popupEditOpenBtn.addEventListener('click', handleOpenPopupTypeEdit);
 
+// Вызов класса UserInfo
+// const userInfo = new UserInfo({ name: '.profile__name', job: '.profile__description' });
 
-
+// Коллбэк функция создания нового экземпляра попапа редактирования профиля
+// function handleOpenPopupTypeEdit() {
+//     const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, items => {
+//         userInfo.setUserInfo(items);
+//         popupTypeEditProfile.close();
+//     });
+//     popupTypeEditProfile.open();
+// }
 
 // Слушатель для открытия попапа Edit
 // popupEditOpenBtn.addEventListener('click', () => {
