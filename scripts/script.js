@@ -32,6 +32,7 @@ const userInfo = new UserInfo({ name: '.profile__name', job: '.profile__descript
 
 const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, inputsValue => {
     userInfo.setUserInfo(inputsValue);
+    popupTypeEditProfile.close();
 })
 
 popupEditOpenBtn.addEventListener('click', () => {

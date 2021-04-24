@@ -13,11 +13,8 @@ export default class UserInfo {
     }
 
     // Метод принимает данные юзера и добавляет их на страницу
-    setUserInfo(newData) {
-        this._personName.textContent = newData.name;
-        this._personJob.textContent = newData.job;
-
-        //         profileName.textContent = fieldName.value;
-        // profileDescription.textContent = fieldDescr.value;
+    setUserInfo(data) {
+        this._personName.textContent = data.profileName;
+        this._personJob.textContent = data.profileJob;
     }
 }
