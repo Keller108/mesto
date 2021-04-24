@@ -1,8 +1,8 @@
 export default class Card {
-    constructor(link, name, openLightbox) {
+    constructor(link, name, handleCardClick) {
         this._link = link;
         this._name = name;
-        this._openLightbox = openLightbox;
+        this._handleCardClick = handleCardClick;
     }
 
     // Берем шаблон
@@ -11,7 +11,6 @@ export default class Card {
             .content
             .querySelector('.elements__card')
             .cloneNode('true');
-        я
         return newItem;
     }
 
@@ -32,7 +31,7 @@ export default class Card {
         // Добавление обработчика на картинку
         this._element.querySelector('.elements__card-image')
             .addEventListener('click', () => {
-                this._openLightbox(this._link, this._name);
+                this._handleCardClick(this._link, this._name);
             });
     }
 

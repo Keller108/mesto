@@ -3,35 +3,63 @@ import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
-// import UserInfo from './UserInfo.js';
+import UserInfo from './UserInfo.js';
 
-// Создание экземпляра класса Section
-const cardList = new Section({
-    items: initialCards,
-    renderer: (item) => {
-        const newCard = new Card(item.link, item.name, openLightbox);
-        const cardElement = newCard.generateCard();
-        cardList.addItem(cardElement);
-    }
-}, '.elements__cards');
-
-cardList.renderItems();
+// ЛАЙТБОКС
 
 // Создание экземпляра класса лайтбокса
 const popupLightbox = new PopupWithImage(lightBoxSelector);
 
 // Коллбэк функция открытия лайтбокса
-function openLightbox(link, name) {
+function handleCardClick(link, name) {
     popupLightbox.open(link, name)
 }
 
-// Добавление слушателя кнопке "Добавить карточку"
-popupAddOpenBtn.addEventListener('click', handleOpenPopupTypeAdd);
+// Создание экземпляра класса Section
+const cardList = new Section({
+    items: initialCards,
+    renderer: (item) => {
+        const newCard = new Card(item.link, item.name, handleCardClick);
+        const cardElement = newCard.generateCard();
+        cardList.addItem(cardElement);
+    }
+}, '.elements__cards');
+cardList.renderItems();
+
+/// РЕДАКТ. ПРОФИЛЯ
+
+const userInfo = new UserInfo({ name: '.profile__name', job: '.profile__description' });
+
+const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, inputsValue => {
+    userInfo.setUserInfo(inputsValue);
+})
+
+popupEditOpenBtn.addEventListener('click', () => {
+    popupTypeEditProfile.open()
+    const userMetaData = userInfo.getUserInfo()
+    fieldName.value = userMetaData.name;
+    fieldDescr.value = userMetaData.job;
+});
+
+// Вызов класса UserInfo
+// const userInfo = new UserInfo({ name: '.profile__name', job: '.profile__description' });
+
+// Коллбэк функция создания нового экземпляра попапа редактирования профиля
+// function handleOpenPopupTypeEdit() {
+//     const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, items => {
+//         userInfo.setUserInfo(items);
+//         popupTypeEditProfile.close();
+//     });
+//     popupTypeEditProfile.open();
+// }
+
+
+// ДОБАВЛЕНИЯ КАРТОЧКИ
 
 // Коллбэк функция создания нового экземпляра попапа добавления карточки
 function handleOpenPopupTypeAdd() {
     const popupTypeAddCard = new PopupWithForm(popupFormSelector, inputsValue => {
-        const newCard = new Card(inputsValue.link, inputsValue.name, openLightbox)
+        const newCard = new Card(inputsValue.link, inputsValue.name, handleCardClick)
             .generateCard();
         cardList.addItem(newCard);
         popupTypeAddCard.close();
@@ -39,33 +67,36 @@ function handleOpenPopupTypeAdd() {
     popupTypeAddCard.open()
 }
 
-// Добавление слушателя кнопке "редактировать профиль"
-popupEditOpenBtn.addEventListener('click', handleOpenPopupTypeEdit)
-
-// Коллбэк функция создания нового экземпляра попапа редактирования профиля
-function handleOpenPopupTypeEdit() {
-    const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector);
-    popupTypeEditProfile.open();
-}
-
-// Запуск валидации
+// ВАЛИДАЦИЯ
 const formValidation = new FormValidator(validationObject);
 formValidation.enableValidation(validationObject);
 
+
+// СЛУШАТЕЛИ
+
+// Добавление слушателя кнопке "Добавить карточку"
+popupAddOpenBtn.addEventListener('click', handleOpenPopupTypeAdd);
+
 // Слушатель для открытия попапа Edit
-popupEditOpenBtn.addEventListener('click', () => {
-    PopupWithForm.open();
-    fieldName.value = profileName.textContent;
-    fieldDescr.value = profileDescription.textContent;
-});
+// popupEditOpenBtn.addEventListener('click', handleOpenPopupTypeEdit);
+
+
+
+
+// Слушатель для открытия попапа Edit
+// popupEditOpenBtn.addEventListener('click', () => {
+//     PopupWithForm.open();
+// fieldName.value = profileName.textContent;
+// fieldDescr.value = profileDescription.textContent;
+// });
 
 // Добавление данных из полей edit-profile в профиль
-profileFormEdit.addEventListener('submit', evt => {
-    evt.preventDefault();
-    profileName.textContent = fieldName.value;
-    profileDescription.textContent = fieldDescr.value;
-    closePopup(popupEdit);
-});
+// profileFormEdit.addEventListener('submit', evt => {
+//     evt.preventDefault();
+//     profileName.textContent = fieldName.value;
+//     profileDescription.textContent = fieldDescr.value;
+//     closePopup(popupEdit);
+// });
 
 // Сабмит форм
 // function handleFormSubmit(inputsValue) {
