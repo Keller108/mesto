@@ -1,3 +1,4 @@
+import { templateCard } from '../utils/utilities.js';
 export default class Card {
     constructor(link, name, handleCardClick) {
         this._link = link;
