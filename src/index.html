@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/pages/index.css">
     <link rel="icon" href="/src/images/favicon.ico" type="image/x-icon">
     <title>Место</title>
 </head>
@@ -13,12 +12,12 @@
 <body class="body">
     <div class="page">
         <header class="header">
-            <a href="#" target="_blank"><img src="/src/images/logo_clr_white.svg" alt="Логотип Mesto" class="logo"></a>
+            <a href="#" target="_blank"><img src="<%=require('/src/images/logo_clr_white.svg')%>" alt="Логотип Mesto" class="logo"></a>
         </header>
         <main>
             <section class="profile">
                 <div class="profile__content-wrapper">
-                    <img src="/src/images/elon-musk.jpg" alt="На фото – Илон Маск" class="profile__avatar ">
+                    <img src="<%=require('/src/images/elon-musk.jpg')%>" alt="На фото – Илон Маск" class="profile__avatar ">
                     <div class="profile__info ">
                         <div class="profile__info-top-container ">
                             <h1 class="profile__name">Илон Маск</h1>
@@ -82,7 +81,6 @@
             </div>
         </li>    
     </template>
-    <script src="/src/pages/index.js" type="module"></script>
 </body>
 
 </html>
