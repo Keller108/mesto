@@ -2,7 +2,7 @@
     "name": "mesto",
     "version": "0.0.1",
     "description": "* VS Code\r * GitHub\r * Figma\r * WEBPACK",
-    "main": "/pages/index.js",
+    "main": "index.js",
     "scripts": {
         "build": "webpack --mode production",
         "dev": "webpack serve"
