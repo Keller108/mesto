@@ -1,6 +1,7 @@
 export default class FormValidator {
-    constructor(object) {
+    constructor(object, popupForm) {
         this._object = object;
+        this._popupForm = popupForm;
     }
 
     // Ф-ция, проверяющая все ли инпуты пустые
@@ -83,4 +84,18 @@ export default class FormValidator {
             this._setInputListeners(formElement);
         });
     };
+
+    // Удаление ошибок
+    removeErrors() {
+        const inputList = Array.from(document.querySelectorAll(this._object.inputSelector));
+        inputList.forEach((inputElement) => {
+            inputElement.classList.remove('form__input_type_error');
+        });
+
+        const errorList = Array.from(document.querySelectorAll('.input-error'));
+        errorList.forEach((errorElement) => {
+            errorElement.classList.remove('form__input-error_active');
+            errorElement.textContent = '';
+        });
+    }
 }

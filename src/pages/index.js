@@ -1,11 +1,14 @@
 import '/src/pages/index.css';
-import { containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
+import { formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
+
+const validFormEdit = new FormValidator(validationObject, formProfile);
+const validFormAdd = new FormValidator(validationObject, formCard);
 
 // ЛАЙТБОКС
 
@@ -56,7 +59,8 @@ function disableButton() {
 // ВАЛИДАЦИЯ
 
 const formValidation = new FormValidator(validationObject);
-formValidation.enableValidation(validationObject);
+validFormEdit.enableValidation(validationObject);
+validFormAdd.enableValidation(validationObject);
 
 // СЛУШАТЕЛИ
 
@@ -64,6 +68,7 @@ formValidation.enableValidation(validationObject);
 popupAddOpenBtn.addEventListener('click', () => {
     popupTypeAddCard.open()
     disableButton();
+    validFormAdd.removeErrors();
 });
 
 // Добавление слушателя кнопке "Редактировать профиль"
@@ -73,6 +78,7 @@ popupEditOpenBtn.addEventListener('click', () => {
     fieldName.value = userMetaData.name;
     fieldDescr.value = userMetaData.job;
     disableButton();
+    validFormEdit.removeErrors();
 });
 
 popupLightbox.setEventListeners();

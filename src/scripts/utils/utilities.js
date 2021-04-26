@@ -33,6 +33,8 @@ export const validationObject = {
     errorClass: 'form__input-error_active'
 };
 
+export const formCard = document.querySelector('#form__place');
+export const formProfile = document.querySelector('#form__name');
 export const containerSelector = '.elements__cards';
 export const lightBoxSelector = '.popup_type_lightbox';
 export const fieldName = document.querySelector('#form__name');
