@@ -33,6 +33,7 @@ export const validationObject = {
     errorClass: 'form__input-error_active'
 };
 
+export const containerSelector = '.elements__cards';
 export const lightBoxSelector = '.popup_type_lightbox';
 export const fieldName = document.querySelector('#form__name');
 export const fieldDescr = document.querySelector('#form__job');
@@ -42,3 +43,5 @@ export const templateCard = document.querySelector('.template');
 export const cardsContainer = document.querySelector('.elements__cards');
 export const popupUserFormSelector = '.popup_type_profile';
 export const popupFormSelector = '.popup_type_card-add';
+export const submitBtn = document.querySelectorAll('.form__submit-btn');
+export const forms = document.querySelectorAll('.form');

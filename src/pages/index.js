@@ -1,5 +1,5 @@
 import '/src/pages/index.css';
-import { initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector } from '../scripts/utils/utilities.js';
+import { containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
@@ -25,7 +25,7 @@ const cardList = new Section({
         const cardElement = newCard.generateCard();
         cardList.addItem(cardElement);
     }
-}, '.elements__cards');
+}, containerSelector);
 cardList.renderItems();
 
 /// РЕДАКТ. ПРОФИЛЯ
@@ -34,34 +34,47 @@ const userInfo = new UserInfo({ name: '.profile__name', job: '.profile__descript
 
 const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, inputsValue => {
     userInfo.setUserInfo(inputsValue);
-    popupTypeEditProfile.close();
 })
-
-popupEditOpenBtn.addEventListener('click', () => {
-    popupTypeEditProfile.open()
-    const userMetaData = userInfo.getUserInfo()
-    fieldName.value = userMetaData.name;
-    fieldDescr.value = userMetaData.job;
-});
 
 // ДОБАВЛЕНИЯ КАРТОЧКИ
 
-// Коллбэк функция создания нового экземпляра попапа добавления карточки
-function handleOpenPopupTypeAdd() {
-    const popupTypeAddCard = new PopupWithForm(popupFormSelector, inputsValue => {
-        const newCard = new Card(inputsValue.link, inputsValue.name, handleCardClick)
-            .generateCard();
-        cardList.addItem(newCard);
-        popupTypeAddCard.close();
+const popupTypeAddCard = new PopupWithForm(popupFormSelector, inputsValue => {
+    const newCard = new Card(inputsValue.link, inputsValue.name, handleCardClick)
+        .generateCard();
+    cardList.addItem(newCard);
+});
+
+// Функция отключения кнопки Submit
+
+function disableButton() {
+    submitBtn.forEach((button) => {
+        button.classList.add(validationObject.inactiveButtonClass);
+        button.setAttribute('disabled', 'disabled')
     });
-    popupTypeAddCard.open()
 }
 
 // ВАЛИДАЦИЯ
+
 const formValidation = new FormValidator(validationObject);
 formValidation.enableValidation(validationObject);
 
 // СЛУШАТЕЛИ
 
 // Добавление слушателя кнопке "Добавить карточку"
-popupAddOpenBtn.addEventListener('click', handleOpenPopupTypeAdd);
+popupAddOpenBtn.addEventListener('click', () => {
+    popupTypeAddCard.open()
+    disableButton();
+});
+
+// Добавление слушателя кнопке "Редактировать профиль"
+popupEditOpenBtn.addEventListener('click', () => {
+    popupTypeEditProfile.open()
+    const userMetaData = userInfo.getUserInfo()
+    fieldName.value = userMetaData.name;
+    fieldDescr.value = userMetaData.job;
+    disableButton();
+});
+
+popupLightbox.setEventListeners();
+popupTypeEditProfile.setEventListeners();
+popupTypeAddCard.setEventListeners();
