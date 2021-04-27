@@ -16,16 +16,25 @@ const validFormAdd = new FormValidator(validationObject, formCard);
 const popupLightbox = new PopupWithImage(lightBoxSelector);
 
 // Коллбэк функция открытия лайтбокса
-function handleCardClick(link, name) {
-    popupLightbox.open(link, name)
+// function handleCardClick(link, name) {
+//     popupLightbox.open(link, name)
+// }
+
+
+
+
+function createCard(link, name) {
+    const card = new Card(link, name, cardSelector, () => {
+        popupLightbox.open(link, name);
+    });
+    return card.generateCard();
 }
 
 // Создание экземпляра класса Section
 const cardList = new Section({
     items: initialCards,
     renderer: (item) => {
-        const newCard = new Card(item.link, item.name, cardSelector, handleCardClick);
-        const cardElement = newCard.generateCard();
+        const cardElement = createCard(item.link, item.name)
         cardList.addItem(cardElement);
     }
 }, containerSelector);
@@ -42,9 +51,8 @@ const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, inputsValu
 // ДОБАВЛЕНИЯ КАРТОЧКИ
 
 const popupTypeAddCard = new PopupWithForm(popupFormSelector, inputsValue => {
-    const newCard = new Card(inputsValue.link, inputsValue.name, cardSelector, handleCardClick)
-        .generateCard();
-    cardList.addItem(newCard);
+    const cardElement = createCard(inputsValue.link, inputsValue.name)
+    cardList.addItem(cardElement);
 });
 
 // Функция отключения кнопки Submit
