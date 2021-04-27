@@ -1,5 +1,5 @@
 import '/src/pages/index.css';
-import { formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
+import { cardSelector, formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
@@ -24,7 +24,7 @@ function handleCardClick(link, name) {
 const cardList = new Section({
     items: initialCards,
     renderer: (item) => {
-        const newCard = new Card(item.link, item.name, handleCardClick);
+        const newCard = new Card(item.link, item.name, cardSelector, handleCardClick);
         const cardElement = newCard.generateCard();
         cardList.addItem(cardElement);
     }
@@ -42,7 +42,7 @@ const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, inputsValu
 // ДОБАВЛЕНИЯ КАРТОЧКИ
 
 const popupTypeAddCard = new PopupWithForm(popupFormSelector, inputsValue => {
-    const newCard = new Card(inputsValue.link, inputsValue.name, handleCardClick)
+    const newCard = new Card(inputsValue.link, inputsValue.name, cardSelector, handleCardClick)
         .generateCard();
     cardList.addItem(newCard);
 });

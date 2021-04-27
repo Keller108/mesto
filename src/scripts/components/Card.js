@@ -1,8 +1,9 @@
 import { templateCard } from '../utils/utilities.js';
 export default class Card {
-    constructor(link, name, handleCardClick) {
+    constructor(link, name, cardSelector, handleCardClick) {
         this._link = link;
         this._name = name;
+        this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
     }
 
@@ -10,8 +11,8 @@ export default class Card {
     _getTemplate() {
         const newItem = templateCard
             .content
-            .querySelector('.elements__card')
-            .cloneNode('true');
+            .querySelector(this._cardSelector)
+            .cloneNode(true);
         return newItem;
     }
 
