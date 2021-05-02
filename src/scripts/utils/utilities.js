@@ -24,6 +24,12 @@ export const initialCards = [{
     }
 ];
 
+export const userDataElements = {
+    name: document.querySelector('.profile__name'),
+    about: document.querySelector('.profile__description'),
+    avatar: document.querySelector('.profile__avatar-edit-btn')
+}
+
 export const validationObject = {
     formSelector: '.form',
     inputSelector: '.form__input',

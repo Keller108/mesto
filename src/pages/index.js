@@ -1,14 +1,32 @@
 import '/src/pages/index.css';
-import { cardSelector, formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
+import { cardSelector, formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
+import Api from '../scripts/components/Api.js';
 
 const validFormEdit = new FormValidator(validationObject, formProfile);
 const validFormAdd = new FormValidator(validationObject, formCard);
+
+const userInfo = new UserInfo(userDataElements);
+
+const api = new Api({
+    url: `https://mesto.nomoreparties.co/v1/cohort-23`,
+    headers: {
+        authorization: 'd5de609a-b67a-44fe-8387-d8a318d2487b',
+        'content-type': 'application/json'
+    }
+})
+
+// Апдейтим профиль юзера на странице
+api.getUserInfo()
+    .then(({ name, about, avatar }) => {
+        userInfo.setUserInfo({ name, about })
+        userDataElements.avatar.setAttribute('style', `background-image: url("${avatar}")`)
+    })
 
 // ЛАЙТБОКС
 
@@ -34,7 +52,7 @@ cardList.renderItems();
 
 /// РЕДАКТ. ПРОФИЛЯ
 
-const userInfo = new UserInfo({ name: '.profile__name', job: '.profile__description' });
+// const userInfo = new UserInfo({ name: '.profile__name', job: '.profile__description' });
 
 const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, inputsValue => {
     userInfo.setUserInfo(inputsValue);
@@ -72,14 +90,14 @@ popupAddOpenBtn.addEventListener('click', () => {
 });
 
 // Добавление слушателя кнопке "Редактировать профиль"
-popupEditOpenBtn.addEventListener('click', () => {
-    popupTypeEditProfile.open()
-    const userMetaData = userInfo.getUserInfo()
-    fieldName.value = userMetaData.name;
-    fieldDescr.value = userMetaData.job;
-    disableButton();
-    validFormEdit.removeErrors();
-});
+// popupEditOpenBtn.addEventListener('click', () => {
+//     popupTypeEditProfile.open()
+//     const userMetaData = userInfo.getUserInfo()
+//     fieldName.value = userMetaData.name;
+//     fieldDescr.value = userMetaData.job;
+//     disableButton();
+//     validFormEdit.removeErrors();
+// });
 
 popupLightbox.setEventListeners();
 popupTypeEditProfile.setEventListeners();
