@@ -33,7 +33,8 @@
 
 @import url("../blocks/profile/profile.css");
 @import url("../blocks/profile/__content-wrapper/profile__content-wrapper.css");
-@import url("../blocks/profile/__avatar/profile__avatar.css");
+@import url("../blocks/profile/__avatar-edit-btn/profile__avatar-edit-btn.css");
+@import url("../blocks/profile/__avatar-overlay/profile__avatar-overlay.css");
 @import url("../blocks/profile/__info/profile__info.css");
 @import url("../blocks/profile/__info-top-container/profile__info-top-container.css");
 @import url("../blocks/profile/__name/profile__name.css");

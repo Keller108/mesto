@@ -16,9 +16,11 @@
         <main>
             <section class="profile">
                 <div class="profile__content-wrapper">
-                    <img src="<%=require('/src/images/elon-musk.jpg')%>" alt="На фото – Илон Маск" class="profile__avatar ">
+                    <button class="profile__avatar-edit-btn" type="button" aria-label="Avatar Edit Button">
+                        <div class="profile__avatar-overlay"></div>
+                    </button>
                     <div class="profile__info ">
-                        <div class="profile__info-top-container ">
+                        <div class="profile__info-top-container">
                             <h1 class="profile__name">Илон Маск</h1>
                             <button class="profile__edit-button hover-transparency" type="button" aria-label="OpenPopup"></button>
                         </div>

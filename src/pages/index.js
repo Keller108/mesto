@@ -15,14 +15,6 @@ const validFormAdd = new FormValidator(validationObject, formCard);
 // Создание экземпляра класса лайтбокса
 const popupLightbox = new PopupWithImage(lightBoxSelector);
 
-// Коллбэк функция открытия лайтбокса
-// function handleCardClick(link, name) {
-//     popupLightbox.open(link, name)
-// }
-
-
-
-
 function createCard(link, name) {
     const card = new Card(link, name, cardSelector, () => {
         popupLightbox.open(link, name);
