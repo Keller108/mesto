@@ -1,12 +1,14 @@
 import '/src/pages/index.css';
-import { cardSelector, formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
+import Api from '../scripts/components/Api.js';
+import { cardSelector, cardsContainer, formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
-import Api from '../scripts/components/Api.js';
+
+const cardList = new Section(cardsContainer);
 
 const validFormEdit = new FormValidator(validationObject, formProfile);
 const validFormAdd = new FormValidator(validationObject, formCard);
@@ -14,18 +16,30 @@ const validFormAdd = new FormValidator(validationObject, formCard);
 const userInfo = new UserInfo(userDataElements);
 
 const api = new Api({
-    url: `https://mesto.nomoreparties.co/v1/cohort-23`,
+    url: 'https://mesto.nomoreparties.co/v1/cohort-23',
     headers: {
-        authorization: 'd5de609a-b67a-44fe-8387-d8a318d2487b',
-        'content-type': 'application/json'
+        Authorization: 'd5de609a-b67a-44fe-8387-d8a318d2487b',
+        'Content-Type': 'application/json'
     }
 })
 
 // Апдейтим профиль юзера на странице
-api.getUserInfo()
+api.getAllCards()
+    .then((data) => {
+        cardList.getAllCards({
+            items: data.reverse(),
+            renderer: (item) => {
+                const cardElement = createCard(item.link, item.name)
+                cardList.addItem(cardElement);
+            }
+        })
+    })
+
+// Рендерим карточки с сервера на странице
+api.getInfo()
     .then(({ name, about, avatar }) => {
         userInfo.setUserInfo({ name, about })
-        userDataElements.avatar.setAttribute('style', `background-image: url("${avatar}")`)
+        userDataElements.avatar.setAttribute('style', `background-image: url("${avatar}")`);
     })
 
 // ЛАЙТБОКС
@@ -41,18 +55,16 @@ function createCard(link, name) {
 }
 
 // Создание экземпляра класса Section
-const cardList = new Section({
-    items: initialCards,
-    renderer: (item) => {
-        const cardElement = createCard(item.link, item.name)
-        cardList.addItem(cardElement);
-    }
-}, containerSelector);
-cardList.renderItems();
+// const cardList = new Section({
+//     items: initialCards,
+//     renderer: (item) => {
+//         const cardElement = createCard(item.link, item.name)
+//         cardList.addItem(cardElement);
+//     }
+// }, containerSelector);
+// cardList.renderItems();
 
 /// РЕДАКТ. ПРОФИЛЯ
-
-// const userInfo = new UserInfo({ name: '.profile__name', job: '.profile__description' });
 
 const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, inputsValue => {
     userInfo.setUserInfo(inputsValue);
@@ -66,7 +78,6 @@ const popupTypeAddCard = new PopupWithForm(popupFormSelector, inputsValue => {
 });
 
 // Функция отключения кнопки Submit
-
 function disableButton() {
     submitBtn.forEach((button) => {
         button.classList.add(validationObject.inactiveButtonClass);
@@ -90,14 +101,14 @@ popupAddOpenBtn.addEventListener('click', () => {
 });
 
 // Добавление слушателя кнопке "Редактировать профиль"
-// popupEditOpenBtn.addEventListener('click', () => {
-//     popupTypeEditProfile.open()
-//     const userMetaData = userInfo.getUserInfo()
-//     fieldName.value = userMetaData.name;
-//     fieldDescr.value = userMetaData.job;
-//     disableButton();
-//     validFormEdit.removeErrors();
-// });
+popupEditOpenBtn.addEventListener('click', () => {
+    popupTypeEditProfile.open()
+    const userMetaData = userInfo.getUserInfo()
+    fieldName.value = userMetaData.name;
+    fieldDescr.value = userMetaData.job;
+    disableButton();
+    validFormEdit.removeErrors();
+});
 
 popupLightbox.setEventListeners();
 popupTypeEditProfile.setEventListeners();
