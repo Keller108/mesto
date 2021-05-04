@@ -1,6 +1,6 @@
 import '/src/pages/index.css';
 import Api from '../scripts/components/Api.js';
-import { cardSelector, cardsContainer, formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
+import { lightbox, lightboxImage, lightboxCaption, cardSelector, cardsContainer, formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
@@ -9,10 +9,8 @@ import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 
 const cardList = new Section(cardsContainer);
-
 const validFormEdit = new FormValidator(validationObject, formProfile);
 const validFormAdd = new FormValidator(validationObject, formCard);
-
 const userInfo = new UserInfo(userDataElements);
 
 const api = new Api({
@@ -23,23 +21,23 @@ const api = new Api({
     }
 })
 
-// Апдейтим профиль юзера на странице
-api.getAllCards()
-    .then((data) => {
-        cardList.getAllCards({
-            items: data.reverse(),
-            renderer: (item) => {
-                const cardElement = createCard(item.link, item.name)
-                cardList.addItem(cardElement);
-            }
-        })
-    })
-
 // Рендерим карточки с сервера на странице
 api.getInfo()
     .then(({ name, about, avatar }) => {
         userInfo.setUserInfo({ name, about })
         userDataElements.avatar.setAttribute('style', `background-image: url("${avatar}")`);
+    })
+
+// Апдейтим профиль юзера на странице
+api.getAllCards()
+    .then((data) => {
+        cardList.renderItems({
+            items: data.reverse(),
+            renderer: (item) => {
+                const card = createCard(item)
+                cardList.addItem(card);
+            }
+        })
     })
 
 // ЛАЙТБОКС

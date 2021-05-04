@@ -54,3 +54,6 @@ export const popupUserFormSelector = '.popup_type_profile';
 export const popupFormSelector = '.popup_type_card-add';
 export const submitBtn = document.querySelectorAll('.form__submit-btn');
 export const forms = document.querySelectorAll('.form');
+export const lightbox = document.querySelector('.popup_type_lightbox');
+export const lightboxImage = document.querySelector('.popup__image');
+export const lightboxCaption = document.querySelector('.popup__caption');
