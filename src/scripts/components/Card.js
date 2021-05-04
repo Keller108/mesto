@@ -1,6 +1,6 @@
 import { templateCard } from '../utils/utilities.js';
 export default class Card {
-    constructor(link, name, cardSelector, handleCardClick) {
+    constructor(cardSelector, { link, name }, handleCardClick) {
         this._link = link;
         this._name = name;
         this._cardSelector = cardSelector;

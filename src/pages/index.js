@@ -12,6 +12,7 @@ const cardList = new Section(cardsContainer);
 const validFormEdit = new FormValidator(validationObject, formProfile);
 const validFormAdd = new FormValidator(validationObject, formCard);
 const userInfo = new UserInfo(userDataElements);
+const popupLightbox = new PopupWithImage(lightBoxSelector);
 
 const api = new Api({
     url: 'https://mesto.nomoreparties.co/v1/cohort-23',
@@ -21,14 +22,15 @@ const api = new Api({
     }
 })
 
-// Рендерим карточки с сервера на странице
+// Апдейтим профиль юзера на странице
 api.getInfo()
-    .then(({ name, about, avatar }) => {
+    .then(({ name, about, avatar, _id }) => {
+        const myId = _id
         userInfo.setUserInfo({ name, about })
         userDataElements.avatar.setAttribute('style', `background-image: url("${avatar}")`);
     })
 
-// Апдейтим профиль юзера на странице
+// Рендерим карточки с сервера на странице
 api.getAllCards()
     .then((data) => {
         cardList.renderItems({
@@ -40,15 +42,11 @@ api.getAllCards()
         })
     })
 
-// ЛАЙТБОКС
-
-// Создание экземпляра класса лайтбокса
-const popupLightbox = new PopupWithImage(lightBoxSelector);
-
-function createCard(link, name) {
-    const card = new Card(link, name, cardSelector, () => {
-        popupLightbox.open(link, name);
-    });
+const createCard = (element) => {
+    const card = new Card(
+        cardSelector, {...element },
+        popupLightbox
+    )
     return card.generateCard();
 }
 
