@@ -35,6 +35,7 @@ export default class Card {
             .addEventListener('click', () => {
                 this._handleCardClick(this._link, this._name);
             });
+
     }
 
     // Удаление карточки

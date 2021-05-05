@@ -45,10 +45,11 @@ api.getAllCards()
 const createCard = (element) => {
     const card = new Card(
         cardSelector, {...element },
-        popupLightbox
     )
     return card.generateCard();
 }
+
+//popupLightbox.open(element.link, element.name)
 
 // Создание экземпляра класса Section
 // const cardList = new Section({
