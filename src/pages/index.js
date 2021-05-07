@@ -28,86 +28,153 @@ api.getInfo()
         const myId = _id
         userInfo.setUserInfo({ name, about })
         userDataElements.avatar.setAttribute('style', `background-image: url("${avatar}")`);
+
+        const createCard = (element) => {
+            const card = new Card(
+                cardSelector, {...element },
+                () => {
+                    popupLightbox.open(element)
+                }
+            )
+            return card.generateCard();
+        }
+
+        api.getAllCards()
+            .then((data) => {
+                cardList.renderItems({
+                    items: data.reverse(),
+                    renderer: (item) => {
+                        const card = createCard(item)
+                        cardList.addItem(card);
+                    }
+                })
+            })
+
+        const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, inputsValue => {
+            const buttonText = popupEdit.querySelector('.form__submit-btn')
+            buttonText.textContent = 'Сохранение...'
+
+            api.sendInfo(inputsValue)
+                .then(data => {
+                    buttonText.textContent = 'Сохранить'
+                    userInfo.setUserInfo(data)
+                    popupTypeEditProfile.close()
+                    console.log(data)
+                })
+                .catch(err => console.log(err))
+        })
+
+        popupEditOpenBtn.addEventListener('click', () => {
+            popupTypeEditProfile.open()
+            const { name, about } = userInfo.getUserInfo()
+            fieldName.value = name;
+            fieldDescr.value = about;
+            disableButton();
+            validFormEdit.removeErrors();
+        });
+
+        // ВАЛИДАЦИЯ
+
+        const formValidation = new FormValidator(validationObject);
+        validFormEdit.enableValidation(validationObject);
+        validFormAdd.enableValidation(validationObject);
+
+        // СЛУШАТЕЛИ
+
+        // Добавление слушателя кнопке "Добавить карточку"
+        popupAddOpenBtn.addEventListener('click', () => {
+            popupTypeAddCard.open()
+            disableButton();
+            validFormAdd.removeErrors();
+        });
+
+        const popupTypeAddCard = new PopupWithForm(popupFormSelector, inputsValue => {
+            const cardElement = createCard(inputsValue.link, inputsValue.name)
+            cardList.addItem(cardElement);
+        });
+
+        // Функция отключения кнопки Submit
+        function disableButton() {
+            submitBtn.forEach((button) => {
+                button.classList.add(validationObject.inactiveButtonClass);
+                button.setAttribute('disabled', 'disabled')
+            });
+        }
+
+        popupLightbox.setEventListeners();
+        popupTypeEditProfile.setEventListeners();
+        popupTypeAddCard.setEventListeners();
     })
 
 // Рендерим карточки с сервера на странице
-api.getAllCards()
-    .then((data) => {
-        cardList.renderItems({
-            items: data.reverse(),
-            renderer: (item) => {
-                const card = createCard(item)
-                cardList.addItem(card);
-            }
-        })
-    })
-
-const createCard = (element) => {
-    const card = new Card(
-        cardSelector, {...element },
-        () => {
-            popupLightbox.open(element)
-        }
-    )
-    return card.generateCard();
-}
+// api.getAllCards()
+//     .then((data) => {
+//         cardList.renderItems({
+//             items: data.reverse(),
+//             renderer: (item) => {
+//                 const card = createCard(item)
+//                 cardList.addItem(card);
+//             }
+//         })
+//     })
 
 /// РЕДАКТ. ПРОФИЛЯ
 
-const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, inputsValue => {
-    const buttonText = popupEdit.querySelector('.form__submit-btn')
-    buttonText.textContent = 'Сохранение...'
+// const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, inputsValue => {
+//     const buttonText = popupEdit.querySelector('.form__submit-btn')
+//     buttonText.textContent = 'Сохранение...'
 
-    api.updateProfile(inputsValue)
-        .then(data => {
-            buttonText.textContent = 'Сохранить'
-            userInfo.setUserInfo(data)
-            popupTypeEditProfile.close()
-        })
-        .catch(err => console.log(err))
-})
+//     api.sendInfo(inputsValue)
+//         .then(data => {
+//             buttonText.textContent = 'Сохранить'
+//             userInfo.setUserInfo(data)
+//             popupTypeEditProfile.close()
+//             console.log(data)
+//         })
+//         .catch(err => console.log(err))
+// })
 
 // ДОБАВЛЕНИЯ КАРТОЧКИ
 
-const popupTypeAddCard = new PopupWithForm(popupFormSelector, inputsValue => {
-    const cardElement = createCard(inputsValue.link, inputsValue.name)
-    cardList.addItem(cardElement);
-});
+// const popupTypeAddCard = new PopupWithForm(popupFormSelector, inputsValue => {
+//     const cardElement = createCard(inputsValue.link, inputsValue.name)
+//     cardList.addItem(cardElement);
+// });
 
-// Функция отключения кнопки Submit
-function disableButton() {
-    submitBtn.forEach((button) => {
-        button.classList.add(validationObject.inactiveButtonClass);
-        button.setAttribute('disabled', 'disabled')
-    });
-}
+// // Функция отключения кнопки Submit
+// function disableButton() {
+//     submitBtn.forEach((button) => {
+//         button.classList.add(validationObject.inactiveButtonClass);
+//         button.setAttribute('disabled', 'disabled')
+//     });
+// }
 
-// ВАЛИДАЦИЯ
+// // ВАЛИДАЦИЯ
 
-const formValidation = new FormValidator(validationObject);
-validFormEdit.enableValidation(validationObject);
-validFormAdd.enableValidation(validationObject);
+// const formValidation = new FormValidator(validationObject);
+// validFormEdit.enableValidation(validationObject);
+// validFormAdd.enableValidation(validationObject);
 
-// СЛУШАТЕЛИ
+// // СЛУШАТЕЛИ
 
-// Добавление слушателя кнопке "Добавить карточку"
-popupAddOpenBtn.addEventListener('click', () => {
-    popupTypeAddCard.open()
-    disableButton();
-    validFormAdd.removeErrors();
-});
+// // Добавление слушателя кнопке "Добавить карточку"
+// popupAddOpenBtn.addEventListener('click', () => {
+//     popupTypeAddCard.open()
+//     disableButton();
+//     validFormAdd.removeErrors();
+// });
 
 
 // Добавление слушателя кнопке "Редактировать профиль"
-popupEditOpenBtn.addEventListener('click', () => {
-    popupTypeEditProfile.open()
-    const { name, about } = userInfo.getUserInfo()
-    fieldName.value = name;
-    fieldDescr.value = about;
-    disableButton();
-    validFormEdit.removeErrors();
-});
+// popupEditOpenBtn.addEventListener('click', () => {
+//     popupTypeEditProfile.open()
+//     const { name, about } = userInfo.getUserInfo()
+//     fieldName.value = name;
+//     fieldDescr.value = about;
+//     disableButton();
+//     validFormEdit.removeErrors();
+// });
 
-popupLightbox.setEventListeners();
-popupTypeEditProfile.setEventListeners();
-popupTypeAddCard.setEventListeners();
+// popupLightbox.setEventListeners();
+// popupTypeEditProfile.setEventListeners();
+// popupTypeAddCard.setEventListeners();

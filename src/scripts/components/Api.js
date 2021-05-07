@@ -22,11 +22,11 @@ export default class Api {
     }
 
     // Отправка информации профиля
-    updateProfile(inputsValue) {
+    sendInfo(inputsValue) {
         const newData = {
             ...this._config,
             body: JSON.stringify(inputsValue),
-            method: 'PATCH'
+            method: 'PATCH',
         }
         return fetch('https://mesto.nomoreparties.co/v1/cohort-23/users/me', newData)
             .then(res => res.ok ?
