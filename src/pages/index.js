@@ -1,6 +1,6 @@
 import '/src/pages/index.css';
 import Api from '../scripts/components/Api.js';
-import { lightbox, lightboxImage, lightboxCaption, cardSelector, cardsContainer, formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
+import { popupEdit, lightbox, lightboxImage, lightboxCaption, cardSelector, cardsContainer, formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
@@ -12,7 +12,7 @@ const cardList = new Section(cardsContainer);
 const validFormEdit = new FormValidator(validationObject, formProfile);
 const validFormAdd = new FormValidator(validationObject, formCard);
 const userInfo = new UserInfo(userDataElements);
-const popupLightbox = new PopupWithImage(lightBoxSelector);
+const popupLightbox = new PopupWithImage(lightBoxSelector, lightboxImage, lightboxCaption);
 
 const api = new Api({
     url: 'https://mesto.nomoreparties.co/v1/cohort-23',
@@ -45,26 +45,26 @@ api.getAllCards()
 const createCard = (element) => {
     const card = new Card(
         cardSelector, {...element },
+        () => {
+            popupLightbox.open(element)
+        }
     )
     return card.generateCard();
 }
 
-//popupLightbox.open(element.link, element.name)
-
-// Создание экземпляра класса Section
-// const cardList = new Section({
-//     items: initialCards,
-//     renderer: (item) => {
-//         const cardElement = createCard(item.link, item.name)
-//         cardList.addItem(cardElement);
-//     }
-// }, containerSelector);
-// cardList.renderItems();
-
 /// РЕДАКТ. ПРОФИЛЯ
 
 const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, inputsValue => {
-    userInfo.setUserInfo(inputsValue);
+    const buttonText = popupEdit.querySelector('.form__submit-btn')
+    buttonText.textContent = 'Сохранение...'
+
+    api.updateProfile(inputsValue)
+        .then(data => {
+            buttonText.textContent = 'Сохранить'
+            userInfo.setUserInfo(data)
+            popupTypeEditProfile.close()
+        })
+        .catch(err => console.log(err))
 })
 
 // ДОБАВЛЕНИЯ КАРТОЧКИ
@@ -97,12 +97,13 @@ popupAddOpenBtn.addEventListener('click', () => {
     validFormAdd.removeErrors();
 });
 
+
 // Добавление слушателя кнопке "Редактировать профиль"
 popupEditOpenBtn.addEventListener('click', () => {
     popupTypeEditProfile.open()
-    const userMetaData = userInfo.getUserInfo()
-    fieldName.value = userMetaData.name;
-    fieldDescr.value = userMetaData.job;
+    const { name, about } = userInfo.getUserInfo()
+    fieldName.value = name;
+    fieldDescr.value = about;
     disableButton();
     validFormEdit.removeErrors();
 });
