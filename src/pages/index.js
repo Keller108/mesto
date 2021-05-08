@@ -31,7 +31,9 @@ api.getInfo()
 
         const createCard = (element) => {
             const card = new Card(
-                cardSelector, {...element },
+                cardSelector, {
+                    ...element
+                },
                 () => {
                     popupLightbox.open(element)
                 }
