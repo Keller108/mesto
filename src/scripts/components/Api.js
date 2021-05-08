@@ -35,5 +35,57 @@ export default class Api {
             )
     }
 
+    // Добавление карточек на сервак
+    uploadCard(inputsValue) {
+        const newCard = {
+            method: 'POST',
+            ...this._config,
+            body: JSON.stringify(inputsValue),
+        }
+        return fetch('https://mesto.nomoreparties.co/v1/cohort-23/cards', newCard)
+            .then(res => res.ok ?
+                res.json() :
+                Promise.reject(`Ошибка: ${res.status}`)
+            )
+    }
+
+    // Удаление карточки
+    deleteCard(cardId) {
+        const newData = {
+            method: 'DELETE',
+            ...this._config,
+        }
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/${cardId}`, newData)
+            .then(res => res.ok ?
+                res.json() :
+                Promise.reject(`Ошибка: ${res.status}`)
+            )
+    }
+
+    //Ставим лайк
+    putLike(cardId) {
+        const newData = {
+            method: 'PUT',
+            ...this._config
+        }
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/likes/${cardId}`, newData)
+            .then(res => res.ok ?
+                res.json() :
+                Promise.reject(`Ошибка: ${res.status}`)
+            )
+    }
+
+    //Удаляем лайк
+    removeLike(cardId) {
+        const newData = {
+            method: 'DELETE',
+            ...this._config
+        }
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/likes/${cardId}`, newData)
+            .then(res => res.ok ?
+                res.json() :
+                Promise.reject(`Ошибка: ${res.status}`)
+            )
+    }
 
 }

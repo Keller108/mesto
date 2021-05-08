@@ -1,13 +1,16 @@
 import '/src/pages/index.css';
 import Api from '../scripts/components/Api.js';
-import { popupEdit, lightbox, lightboxImage, lightboxCaption, cardSelector, cardsContainer, formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
+import { popupEdit, popupAdd, lightbox, lightboxImage, lightboxCaption, popupConfirmSelector, cardSelector, cardsContainer, formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import UserInfo from '../scripts/components/UserInfo.js';
+import PopupConfirm from '../scripts/components/PopupConfirm.js';
 
+
+const popupConfirm = new PopupConfirm(popupConfirmSelector);
 const cardList = new Section(cardsContainer);
 const validFormEdit = new FormValidator(validationObject, formProfile);
 const validFormAdd = new FormValidator(validationObject, formCard);
@@ -32,10 +35,36 @@ api.getInfo()
         const createCard = (element) => {
             const card = new Card(
                 cardSelector, {
+                    myId,
                     ...element
                 },
                 () => {
                     popupLightbox.open(element)
+                },
+                function deleteCard(cardId) {
+                    popupConfirm.open();
+                    popupConfirm.setSubmitAction(() => {
+                        api.deleteCard(cardId)
+                            .then(() => popupConfirm.close())
+                            .then(() => card.remove())
+                            .catch(err => console.log(err))
+                    })
+                },
+                function putLike(cardId) {
+                    api.putLike(cardId)
+                        .then((res) => {
+                            card.querySelector('.elements__likes-counter').textContent = res.likes.length;
+                            card.querySelector('.elements__like-btn').classList.toggle('elements__like-btn_is_active');
+                        })
+                        .catch(err => console.log(err))
+                },
+                function removeLike(cardId) {
+                    api.removeLike(cardId)
+                        .then((res) => {
+                            card.querySelector('.elements__likes-counter').textContent = res.likes.length;
+                            card.querySelector('.elements__like-btn').classList.toggle('elements__like-btn_is_active');
+                        })
+                        .catch(err => console.log(err))
                 }
             )
             return card.generateCard();
@@ -51,6 +80,9 @@ api.getInfo()
                     }
                 })
             })
+
+
+        // ОБНОВЛЕНИЕ ПРОФИЛЯ //
 
         const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, inputsValue => {
             const buttonText = popupEdit.querySelector('.form__submit-btn')
@@ -75,13 +107,8 @@ api.getInfo()
             validFormEdit.removeErrors();
         });
 
-        // ВАЛИДАЦИЯ
 
-        const formValidation = new FormValidator(validationObject);
-        validFormEdit.enableValidation(validationObject);
-        validFormAdd.enableValidation(validationObject);
-
-        // СЛУШАТЕЛИ
+        // ДОБАВЛЕНИЕ КАРТОЧКИ //
 
         // Добавление слушателя кнопке "Добавить карточку"
         popupAddOpenBtn.addEventListener('click', () => {
@@ -91,9 +118,29 @@ api.getInfo()
         });
 
         const popupTypeAddCard = new PopupWithForm(popupFormSelector, inputsValue => {
-            const cardElement = createCard(inputsValue.link, inputsValue.name)
-            cardList.addItem(cardElement);
+            const buttonText = popupAdd.querySelector('.form__submit-btn');
+            buttonText.textContent = 'Создание...';
+
+            api.uploadCard(inputsValue)
+                .then((data) => {
+                    buttonText.textContent = 'Создать';
+                    const cardElement = createCard(data);
+                    cardList.addItem(cardElement);
+                })
+                .catch(err => console.log(err))
+
         });
+
+        // ВАЛИДАЦИЯ
+
+        const formValidation = new FormValidator(validationObject);
+        validFormEdit.enableValidation(validationObject);
+        validFormAdd.enableValidation(validationObject);
+
+
+        // СЛУШАТЕЛИ
+
+
 
         // Функция отключения кнопки Submit
         function disableButton() {
@@ -102,7 +149,7 @@ api.getInfo()
                 button.setAttribute('disabled', 'disabled')
             });
         }
-
+        // popupConfirm.setEventListeners();
         popupLightbox.setEventListeners();
         popupTypeEditProfile.setEventListeners();
         popupTypeAddCard.setEventListeners();

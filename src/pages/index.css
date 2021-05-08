@@ -49,10 +49,13 @@
 @import url("../blocks/elements/__cards/elements__cards.css");
 @import url("../blocks/elements/__card/elements__card.css");
 @import url("../blocks/elements/__delete-btn/elements__delete-btn.css");
+@import url("../blocks/elements/__delete-btn/_visible/elements__delete-btn_visible.css");
 @import url("../blocks/elements/__card-image/elements__card-image.css");
 @import url("../blocks/elements/__place-name-wrapper/elements__place-name-wrapper.css");
 @import url("../blocks/elements/__place-name/elements__place-name.css");
+@import url("../blocks/elements/__btn-like-wrapper/elements__btn-like-wrapper.css");
 @import url("../blocks/elements/__like-btn/elements__like-btn.css");
+@import url("../blocks/elements/__likes-counter/elements__likes-counter.css");
 @import url("../blocks/elements/__like-btn/_is_active/elements__like-btn_is_active.css");
 
 /*Стили Footer*/

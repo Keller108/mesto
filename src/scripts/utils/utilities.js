@@ -39,7 +39,8 @@ export const validationObject = {
     errorClass: 'form__input-error_active'
 };
 
-export const popupEdit = document.querySelector('.popup_type_profile')
+export const popupEdit = document.querySelector('.popup_type_profile');
+export const popupAdd = document.querySelector('.popup_type_card-add');
 export const cardSelector = ".elements__card";
 export const formCard = document.querySelector('#form__place');
 export const formProfile = document.querySelector('#form__name');
@@ -51,6 +52,7 @@ export const popupEditOpenBtn = document.querySelector('.profile__edit-button');
 export const popupAddOpenBtn = document.querySelector('.profile__add-button');
 export const templateCard = document.querySelector('.template');
 export const cardsContainer = document.querySelector('.elements__cards');
+export const popupConfirmSelector = '.popup_type_confirm';
 export const popupUserFormSelector = '.popup_type_profile';
 export const popupFormSelector = '.popup_type_card-add';
 export const submitBtn = document.querySelectorAll('.form__submit-btn');
