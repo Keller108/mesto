@@ -37,14 +37,13 @@ export default class Card {
                 this._handleCardClick(this._link, this._name);
             });
 
+        // Добавление слушателя лаков   
         const like = this._element.querySelector('.elements__like-btn');
         like.addEventListener('click', () => {
             !like.classList.contains('elements__like-btn_is_active') ?
                 this._putLike(this._cardId) :
                 this._removeLike(this._cardId)
         })
-
-        this._element.querySelector('.elements__likes-counter').textContent = this._likes.length
 
     }
 
@@ -58,6 +57,8 @@ export default class Card {
         this._element.querySelector('.elements__place-name').textContent = this._name;
         thisImage.alt = this._name;
         thisImage.src = this._link;
+
+        this._element.querySelector('.elements__likes-counter').textContent = this._likes.length
 
         if (this._myId === this._ownCardId) {
             this._element.querySelector('.elements__delete-btn').classList.add('elements__delete-btn_visible')

@@ -53,7 +53,7 @@ export default class Api {
     deleteCard(cardId) {
         const newData = {
             method: 'DELETE',
-            ...this._config,
+            ...this._config
         }
         return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/${cardId}`, newData)
             .then(res => res.ok ?
@@ -82,6 +82,20 @@ export default class Api {
             ...this._config
         }
         return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/likes/${cardId}`, newData)
+            .then(res => res.ok ?
+                res.json() :
+                Promise.reject(`Ошибка: ${res.status}`)
+            )
+    }
+
+
+    updateAvatar(inputsValue) {
+        const newData = {
+            method: 'PATCH',
+            ...this._config,
+            body: JSON.stringify(inputsValue)
+        }
+        return fetch('https://mesto.nomoreparties.co/v1/cohort-23/users/me/avatar', newData)
             .then(res => res.ok ?
                 res.json() :
                 Promise.reject(`Ошибка: ${res.status}`)

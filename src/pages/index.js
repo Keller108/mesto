@@ -1,6 +1,6 @@
 import '/src/pages/index.css';
 import Api from '../scripts/components/Api.js';
-import { popupEdit, popupAdd, lightbox, lightboxImage, lightboxCaption, popupConfirmSelector, cardSelector, cardsContainer, formCard, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
+import { popupEdit, popupAdd, lightbox, btnEditAvatar, popupEditAvatarSelector, lightboxImage, lightboxCaption, popupConfirmSelector, cardSelector, cardsContainer, formCard, formUpdateAvatar, formProfile, containerSelector, initialCards, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
@@ -10,10 +10,11 @@ import UserInfo from '../scripts/components/UserInfo.js';
 import PopupConfirm from '../scripts/components/PopupConfirm.js';
 
 
-const popupConfirm = new PopupConfirm(popupConfirmSelector);
+
 const cardList = new Section(cardsContainer);
 const validFormEdit = new FormValidator(validationObject, formProfile);
 const validFormAdd = new FormValidator(validationObject, formCard);
+const validFormUpdateAvatar = new FormValidator(validationObject, formUpdateAvatar);
 const userInfo = new UserInfo(userDataElements);
 const popupLightbox = new PopupWithImage(lightBoxSelector, lightboxImage, lightboxCaption);
 
@@ -30,7 +31,7 @@ api.getInfo()
     .then(({ name, about, avatar, _id }) => {
         const myId = _id
         userInfo.setUserInfo({ name, about })
-        userDataElements.avatar.setAttribute('style', `background-image: url("${avatar}")`);
+        userDataElements.avatar.setAttribute('style', `background-image: url("${avatar}")`)
 
         const createCard = (element) => {
             const card = new Card(
@@ -41,7 +42,8 @@ api.getInfo()
                 () => {
                     popupLightbox.open(element)
                 },
-                function deleteCard(cardId) {
+                (cardId) => {
+                    const popupConfirm = new PopupConfirm(popupConfirmSelector);
                     popupConfirm.open();
                     popupConfirm.setSubmitAction(() => {
                         api.deleteCard(cardId)
@@ -50,7 +52,7 @@ api.getInfo()
                             .catch(err => console.log(err))
                     })
                 },
-                function putLike(cardId) {
+                (cardId) => {
                     api.putLike(cardId)
                         .then((res) => {
                             card.querySelector('.elements__likes-counter').textContent = res.likes.length;
@@ -58,7 +60,7 @@ api.getInfo()
                         })
                         .catch(err => console.log(err))
                 },
-                function removeLike(cardId) {
+                (cardId) => {
                     api.removeLike(cardId)
                         .then((res) => {
                             card.querySelector('.elements__likes-counter').textContent = res.likes.length;
@@ -66,8 +68,8 @@ api.getInfo()
                         })
                         .catch(err => console.log(err))
                 }
-            )
-            return card.generateCard();
+            ).generateCard()
+            return card;
         }
 
         api.getAllCards()
@@ -107,6 +109,24 @@ api.getInfo()
             validFormEdit.removeErrors();
         });
 
+        const popupTypeSetAvatar = new PopupWithForm(popupEditAvatarSelector, inputsValue => {
+            const buttonText = popupEditAvatarSelector.querySelector('.form__submit-btn');
+            buttonText.textContent = 'Сохранение...'
+            api.updateAvatar(inputsValue)
+                .then((data) => {
+                    buttonText.textContent = 'Сохранить';
+                    userDataElements.avatar.setAttribute('style', `background-image: url("${data.avatar}")`);
+                    popupTypeSetAvatar.close();
+                })
+                .catch(err => console.log(err));
+        })
+
+        btnEditAvatar.addEventListener('click', () => {
+            popupTypeSetAvatar.open();
+            disableButton();
+            validFormUpdateAvatar.removeErrors();
+        })
+
 
         // ДОБАВЛЕНИЕ КАРТОЧКИ //
 
@@ -133,14 +153,13 @@ api.getInfo()
 
         // ВАЛИДАЦИЯ
 
-        const formValidation = new FormValidator(validationObject);
+        // const formValidation = new FormValidator(validationObject);
         validFormEdit.enableValidation(validationObject);
         validFormAdd.enableValidation(validationObject);
+        validFormUpdateAvatar.enableValidation(validationObject);
 
 
         // СЛУШАТЕЛИ
-
-
 
         // Функция отключения кнопки Submit
         function disableButton() {
@@ -150,6 +169,7 @@ api.getInfo()
             });
         }
         // popupConfirm.setEventListeners();
+        popupTypeSetAvatar.setEventListeners();
         popupLightbox.setEventListeners();
         popupTypeEditProfile.setEventListeners();
         popupTypeAddCard.setEventListeners();

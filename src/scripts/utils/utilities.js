@@ -39,9 +39,13 @@ export const validationObject = {
     errorClass: 'form__input-error_active'
 };
 
+
+export const btnEditAvatar = document.querySelector('.profile__avatar-edit-btn');
+export const popupEditAvatarSelector = '.popup_type_update-avatar';
 export const popupEdit = document.querySelector('.popup_type_profile');
 export const popupAdd = document.querySelector('.popup_type_card-add');
 export const cardSelector = ".elements__card";
+export const formUpdateAvatar = document.querySelector('#form__avatar');
 export const formCard = document.querySelector('#form__place');
 export const formProfile = document.querySelector('#form__name');
 export const containerSelector = '.elements__cards';
