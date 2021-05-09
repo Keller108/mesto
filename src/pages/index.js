@@ -32,23 +32,27 @@ api.getInfo()
         userInfo.setUserInfo({ name, about })
         userDataElements.avatar.setAttribute('style', `background-image: url("${avatar}")`)
 
+        // Функция создания карточки
         const createCard = (element) => {
             const card = new Card(
                 cardSelector, {
                     myId,
                     ...element
                 },
+                // Коллбек открытия попапа с картинкой
                 () => {
                     popupLightbox.open(element)
                 },
+                // Коллбек удаления карточки
                 cardId => {
-                    popupConfirm.open();
+                    popupConfirm.open()
                     api.removeCard(cardId)
                         .then(() => popupConfirm.close())
                         .then(() => card.remove())
                         .catch(err => console.log(err))
 
                 },
+                // Коллбек лайка карточки
                 cardId => {
                     api.putLike(cardId)
                         .then((res) => {
@@ -57,6 +61,7 @@ api.getInfo()
                         })
                         .catch(err => console.log(err))
                 },
+                // Коллбек удаления лайка
                 cardId => {
                     api.removeLike(cardId)
                         .then((res) => {
@@ -69,6 +74,7 @@ api.getInfo()
             return card;
         }
 
+        // Рендерим карточки с сервера
         api.getAllCards()
             .then((data) => {
                 cardList.renderItems({
@@ -96,6 +102,7 @@ api.getInfo()
                 .catch(err => console.log(err))
         })
 
+        // Слушатель на кнопку редактирования профиля
         popupEditOpenBtn.addEventListener('click', () => {
             popupTypeEditProfile.open()
             const { name, about } = userInfo.getUserInfo()
@@ -105,6 +112,7 @@ api.getInfo()
             validFormEdit.removeErrors();
         });
 
+        // Редактирование аватара
         const popupTypeSetAvatar = new PopupWithForm(popupEditAvatarSelector, inputsValue => {
             const buttonText = popupEditAvatar.querySelector('.form__submit-btn')
             buttonText.textContent = 'Сохранение...'
@@ -117,17 +125,13 @@ api.getInfo()
                 })
                 .catch(err => console.log(err))
         })
-
         btnEditAvatar.addEventListener('click', () => {
             popupTypeSetAvatar.open();
             disableButton();
             validFormUpdateAvatar.removeErrors();
         })
 
-
-        // ДОБАВЛЕНИЕ КАРТОЧКИ //
-
-        // Добавление слушателя кнопке "Добавить карточку"
+        // Добавить карточку
         popupAddOpenBtn.addEventListener('click', () => {
             popupTypeAddCard.open()
             disableButton();
@@ -148,8 +152,15 @@ api.getInfo()
 
         });
 
-        // ВАЛИДАЦИЯ
+        // Функция отключения кнопки Submit
+        function disableButton() {
+            submitBtn.forEach((button) => {
+                button.classList.add(validationObject.inactiveButtonClass);
+                button.setAttribute('disabled', 'disabled')
+            });
+        }
 
+        // ВАЛИДАЦИЯ
 
         validFormEdit.enableValidation(validationObject);
         validFormAdd.enableValidation(validationObject);
@@ -158,13 +169,6 @@ api.getInfo()
 
         // СЛУШАТЕЛИ
 
-        // Функция отключения кнопки Submit
-        function disableButton() {
-            submitBtn.forEach((button) => {
-                button.classList.add(validationObject.inactiveButtonClass);
-                button.setAttribute('disabled', 'disabled')
-            });
-        }
         popupConfirm.setEventListeners();
         popupTypeSetAvatar.setEventListeners();
         popupLightbox.setEventListeners();

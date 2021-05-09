@@ -23,12 +23,12 @@ export default class Api {
 
     // Отправка информации профиля
     sendInfo(inputsValue) {
-        const newData = {
+        const dataObject = {
             method: 'PATCH',
             ...this._config,
             body: JSON.stringify(inputsValue),
         }
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-23/users/me', newData)
+        return fetch('https://mesto.nomoreparties.co/v1/cohort-23/users/me', dataObject)
             .then(res => res.ok ?
                 res.json() :
                 Promise.reject(`Ошибка: ${res.status}`)
@@ -37,12 +37,12 @@ export default class Api {
 
     // Добавление карточек на сервак
     uploadCard(inputsValue) {
-        const newCard = {
+        const dataObject = {
             method: 'POST',
             ...this._config,
             body: JSON.stringify(inputsValue),
         }
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-23/cards', newCard)
+        return fetch('https://mesto.nomoreparties.co/v1/cohort-23/cards', dataObject)
             .then(res => res.ok ?
                 res.json() :
                 Promise.reject(`Ошибка: ${res.status}`)
@@ -51,11 +51,11 @@ export default class Api {
 
     // Удаление карточки
     removeCard(cardId) {
-        const newData = {
+        const dataObject = {
             method: 'DELETE',
             ...this._config
         }
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/${cardId}`, newData)
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/${cardId}`, dataObject)
             .then(res => res.ok ?
                 res.json() :
                 Promise.reject(`Ошибка: ${res.status}`)
@@ -64,11 +64,11 @@ export default class Api {
 
     //Ставим лайк
     putLike(cardId) {
-        const newData = {
+        const dataObject = {
             method: 'PUT',
             ...this._config
         }
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/likes/${cardId}`, newData)
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/likes/${cardId}`, dataObject)
             .then(res => res.ok ?
                 res.json() :
                 Promise.reject(`Ошибка: ${res.status}`)
@@ -77,11 +77,11 @@ export default class Api {
 
     //Удаляем лайк
     removeLike(cardId) {
-        const newData = {
+        const dataObject = {
             method: 'DELETE',
             ...this._config
         }
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/likes/${cardId}`, newData)
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/likes/${cardId}`, dataObject)
             .then(res => res.ok ?
                 res.json() :
                 Promise.reject(`Ошибка: ${res.status}`)
