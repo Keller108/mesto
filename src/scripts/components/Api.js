@@ -88,18 +88,18 @@ export default class Api {
             )
     }
 
-
-    updateAvatar(inputsValue) {
-        const newData = {
+    updateAvatar(data) {
+        const dataObject = {
             method: 'PATCH',
             ...this._config,
-            body: JSON.stringify(inputsValue)
+            body: JSON.stringify(data)
         }
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-23/users/me/avatar', newData)
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/users/me/avatar`, dataObject)
             .then(res => res.ok ?
                 res.json() :
                 Promise.reject(`Ошибка: ${res.status}`)
             )
     }
+
 
 }

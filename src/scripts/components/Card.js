@@ -8,7 +8,7 @@ export default class Card {
         this._likes = likes;
         this._ownCardId = owner._id;
         this._handleCardClick = handleCardClick;
-        this.removeCard = removeCard;
+        this._removeCard = removeCard;
         this._cardId = _id;
         this._putLike = putLike;
         this._removeLike = removeLike;

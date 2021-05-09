@@ -28,6 +28,10 @@ export default class PopupWithForm extends Popup {
         this._form.addEventListener('submit', this._submitHandler);
     }
 
+    setSubmitAction(action) {
+        this._submitHandler = action
+    }
+
     close() {
         super.close();
         // Сбрасывает форму при закрытии
