@@ -10,7 +10,7 @@ import UserInfo from '../scripts/components/UserInfo.js';
 import PopupConfirm from '../scripts/components/PopupConfirm.js';
 
 
-
+const popupConfirm = new PopupConfirm(popupConfirmSelector);
 const cardList = new Section(cardsContainer);
 const validFormEdit = new FormValidator(validationObject, formProfile);
 const validFormAdd = new FormValidator(validationObject, formCard);
@@ -43,10 +43,9 @@ api.getInfo()
                     popupLightbox.open(element)
                 },
                 (cardId) => {
-                    const popupConfirm = new PopupConfirm(popupConfirmSelector);
                     popupConfirm.open();
                     popupConfirm.setSubmitAction(() => {
-                        api.deleteCard(cardId)
+                        api.removeCard(cardId)
                             .then(() => popupConfirm.close())
                             .then(() => card.remove())
                             .catch(err => console.log(err))
@@ -111,7 +110,8 @@ api.getInfo()
 
         const popupTypeSetAvatar = new PopupWithForm(popupEditAvatarSelector, inputsValue => {
             const buttonText = popupEditAvatarSelector.querySelector('.form__submit-btn');
-            buttonText.textContent = 'Сохранение...'
+            buttonText.textContent = 'Сохранение...';
+
             api.updateAvatar(inputsValue)
                 .then((data) => {
                     buttonText.textContent = 'Сохранить';

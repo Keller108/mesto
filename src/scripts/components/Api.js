@@ -50,7 +50,7 @@ export default class Api {
     }
 
     // Удаление карточки
-    deleteCard(cardId) {
+    removeCard(cardId) {
         const newData = {
             method: 'DELETE',
             ...this._config

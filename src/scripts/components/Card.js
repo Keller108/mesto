@@ -1,6 +1,6 @@
 import { templateCard } from '../utils/utilities.js';
 export default class Card {
-    constructor(cardSelector, { myId, link, name, likes, owner, _id }, handleCardClick, deleteCard, putLike, removeLike) {
+    constructor(cardSelector, { myId, link, name, likes, owner, _id }, handleCardClick, removeCard, putLike, removeLike) {
         this._cardSelector = cardSelector;
         this._myId = myId;
         this._link = link;
@@ -8,7 +8,7 @@ export default class Card {
         this._likes = likes;
         this._ownCardId = owner._id;
         this._handleCardClick = handleCardClick;
-        this._deleteCard = deleteCard;
+        this.removeCard = removeCard;
         this._cardId = _id;
         this._putLike = putLike;
         this._removeLike = removeLike;
@@ -28,7 +28,7 @@ export default class Card {
 
         const deleteCardBtn = this._element.querySelector('.elements__delete-btn');
         deleteCardBtn.addEventListener('click', () => {
-            this._deleteCard(this._cardId);
+            this._removeCard(this._cardId);
         })
 
         // Добавление обработчика на картинку
