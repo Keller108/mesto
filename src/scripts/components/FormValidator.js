@@ -83,6 +83,7 @@ export default class FormValidator {
             });
             this._setInputListeners(formElement);
         });
+
     };
 
     // Удаление ошибок

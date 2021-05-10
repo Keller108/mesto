@@ -1,15 +1,16 @@
 import '/src/pages/index.css';
 import Api from '../scripts/components/Api.js';
-import { popupEdit, popupAdd, btnEditAvatar, popupEditAvatar, popupEditAvatarSelector, lightboxImage, lightboxCaption, popupConfirmSelector, cardSelector, cardsContainer, formCard, formUpdateAvatar, formProfile, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
+import { formConfirm, popupEdit, popupAdd, btnEditAvatar, popupEditAvatar, popupEditAvatarSelector, lightboxImage, lightboxCaption, popupConfirmSelector, cardSelector, cardsContainer, formCard, formUpdateAvatar, formProfile, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import PopupConfirm from '../scripts/components/PopupConfirm';
 import UserInfo from '../scripts/components/UserInfo.js';
 
 
-const popupConfirm = new PopupWithForm(popupConfirmSelector);
+const popupConfirm = new PopupConfirm(popupConfirmSelector);
 const cardList = new Section(cardsContainer);
 const validFormEdit = new FormValidator(validationObject, formProfile);
 const validFormAdd = new FormValidator(validationObject, formCard);
@@ -46,10 +47,21 @@ api.getInfo()
                 // Коллбек удаления карточки
                 cardId => {
                     popupConfirm.open()
-                    api.removeCard(cardId)
-                        .then(() => popupConfirm.close())
-                        .then(() => card.remove())
-                        .catch(err => console.log(err))
+                    popupConfirm.enableButton(validationObject.inactiveButtonClass)
+                    popupConfirm.setSubmitAction(() => {
+                            api.removeCard(cardId)
+                                .then(() => popupConfirm.close())
+                                .then(() => card.remove())
+                                .catch(err => console.log(err))
+                        })
+                        // formConfirm.addEventListener('submit', formConfirmRemove)
+
+                    // const formConfirmRemove = (cardId) => {
+                    //     api.removeCard(cardId)
+                    //         .then(() => popupConfirm.close())
+                    //         .then(() => card.remove())
+                    //         .catch(err => console.log(err))
+                    // }
 
                 },
                 // Коллбек лайка карточки
