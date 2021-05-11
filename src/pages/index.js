@@ -10,7 +10,7 @@ import PopupConfirm from '../scripts/components/PopupConfirm';
 import UserInfo from '../scripts/components/UserInfo.js';
 
 
-const popupConfirm = new PopupConfirm(popupConfirmSelector);
+const popupConfirm = new PopupWithForm(popupConfirmSelector);
 const cardList = new Section(cardsContainer);
 const validFormEdit = new FormValidator(validationObject, formProfile);
 const validFormAdd = new FormValidator(validationObject, formCard);
@@ -48,21 +48,10 @@ api.getInfo()
                 cardId => {
                     popupConfirm.open()
                     popupConfirm.enableButton(validationObject.inactiveButtonClass)
-                    popupConfirm.setSubmitAction(() => {
-                            api.removeCard(cardId)
-                                .then(() => popupConfirm.close())
-                                .then(() => card.remove())
-                                .catch(err => console.log(err))
-                        })
-                        // formConfirm.addEventListener('submit', formConfirmRemove)
-
-                    // const formConfirmRemove = (cardId) => {
-                    //     api.removeCard(cardId)
-                    //         .then(() => popupConfirm.close())
-                    //         .then(() => card.remove())
-                    //         .catch(err => console.log(err))
-                    // }
-
+                    api.removeCard(cardId)
+                        .then(() => popupConfirm.close())
+                        .then(() => card.remove())
+                        .catch(err => console.log(err))
                 },
                 // Коллбек лайка карточки
                 cardId => {
