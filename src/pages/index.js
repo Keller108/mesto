@@ -1,6 +1,6 @@
 import '/src/pages/index.css';
 import Api from '../scripts/components/Api.js';
-import { popupEdit, popupAdd, btnEditAvatar, popupEditAvatar, popupEditAvatarSelector, lightboxImage, lightboxCaption, popupConfirmSelector, cardSelector, cardsContainer, formCard, formUpdateAvatar, formProfile, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtn } from '../scripts/utils/utilities.js';
+import { popupEdit, popupAdd, btnEditAvatar, popupEditAvatar, popupEditAvatarSelector, lightboxImage, lightboxCaption, popupConfirmSelector, cardSelector, cardsContainer, formCard, formUpdateAvatar, formProfile, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtns } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
@@ -47,7 +47,6 @@ api.getInfo()
                 // Коллбек удаления карточки
                 function removeCard(cardId) {
                     popupConfirm.open()
-                    popupConfirm.enableButton(validationObject.inactiveButtonClass)
                     popupConfirm.setSubmitAction(() => {
                         api.removeCard(cardId)
                             .then(() => popupConfirm.close())
@@ -157,7 +156,7 @@ api.getInfo()
 
         // Функция отключения кнопки Submit
         function disableButton() {
-            submitBtn.forEach((button) => {
+            submitBtns.forEach((button) => {
                 button.classList.add(validationObject.inactiveButtonClass);
                 button.setAttribute('disabled', 'disabled')
             });
