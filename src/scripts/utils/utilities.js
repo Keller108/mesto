@@ -24,7 +24,6 @@ export const btnDelCard = document.querySelector('#delete-card-btn');
 export const formUpdateAvatar = document.querySelector('#form__avatar');
 export const formCard = document.querySelector('#form__place');
 export const formProfile = document.querySelector('#form__name');
-export const formConfirm = document.querySelector('#delete-form');
 export const lightBoxSelector = '.popup_type_lightbox';
 export const fieldName = document.querySelector('#form__name');
 export const fieldDescr = document.querySelector('#form__job');

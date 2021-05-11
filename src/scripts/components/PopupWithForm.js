@@ -29,16 +29,6 @@ export default class PopupWithForm extends Popup {
         this._form.addEventListener('submit', this._submitHandler);
     }
 
-    enableButton(object) {
-        this._button.classList.remove(object);
-        this._button.setAttribute('enabled', 'enabled')
-    }
-
-    // setSubmitAction(action) {
-    //     this._submitHandler = action
-    //     console.log(this._submitHandler)
-    // }
-
     close() {
         super.close();
         // Сбрасывает форму при закрытии

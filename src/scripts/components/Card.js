@@ -26,10 +26,10 @@ export default class Card {
     // Навешиваем обработчики
     _setEventListeners() {
 
-        const deleteCardBtn = this._element.querySelector('.elements__delete-btn');
-        deleteCardBtn.addEventListener('click', () => {
-            this._removeCard(this._cardId);
-        })
+        this._element.querySelector('.elements__delete-btn')
+            .addEventListener('click', () => {
+                this._removeCard(this._cardId);
+            })
 
         // Добавление обработчика на картинку
         this._element.querySelector('.elements__card-image')
