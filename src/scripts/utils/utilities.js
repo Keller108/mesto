@@ -13,13 +13,11 @@ export const validationObject = {
     errorClass: 'form__input-error_active'
 };
 
-
-export const btnEditAvatar = document.querySelector('.profile__avatar-edit-btn');
 export const popupEditAvatarSelector = '.popup_type_update-avatar';
 export const popupEditAvatar = document.querySelector('.popup_type_update-avatar');
 export const popupEdit = document.querySelector('.popup_type_profile');
 export const popupAdd = document.querySelector('.popup_type_card-add');
-export const cardSelector = ".elements__card";
+export const cardSelector = '.elements__card';
 export const formUpdateAvatar = document.querySelector('#form__avatar');
 export const formCard = document.querySelector('#form__place');
 export const formProfile = document.querySelector('#form__name');
@@ -37,4 +35,7 @@ export const submitBtns = document.querySelectorAll('.form__submit-btn');
 export const forms = document.querySelectorAll('.form');
 export const lightboxImage = document.querySelector('.popup__image');
 export const lightboxCaption = document.querySelector('.popup__caption');
-export const avatarSelector = document.querySelector('.popup__caption');
+export const btnEditAvatar = document.querySelector('.profile__avatar-edit-btn');
+export const buttonEdit = popupEdit.querySelector('.form__submit-btn');
+export const buttonAdd = popupAdd.querySelector('.form__submit-btn');
+export const buttonEditAvatar = popupEditAvatar.querySelector('.form__submit-btn');

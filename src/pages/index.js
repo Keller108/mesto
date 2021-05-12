@@ -1,6 +1,6 @@
 import '/src/pages/index.css';
 import Api from '../scripts/components/Api.js';
-import { popupEdit, popupAdd, btnEditAvatar, popupEditAvatar, popupEditAvatarSelector, lightboxImage, lightboxCaption, popupConfirmSelector, cardSelector, cardsContainer, formCard, formUpdateAvatar, formProfile, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtns } from '../scripts/utils/utilities.js';
+import { btnEditAvatar, popupEditAvatarSelector, lightboxImage, lightboxCaption, popupConfirmSelector, cardSelector, cardsContainer, formCard, formUpdateAvatar, formProfile, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtns, buttonEdit, buttonAdd, buttonEditAvatar } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
@@ -31,7 +31,7 @@ api.getInfo()
     .then(({ name, about, avatar, _id }) => {
         const myId = _id
         userInfo.setUserInfo({ name, about })
-        userDataElements.avatar.setAttribute('style', `background-image: url("${avatar}")`)
+        userInfo.setAvatar(avatar)
 
         // Функция создания карточки
         const createCard = (element) => {
@@ -46,10 +46,15 @@ api.getInfo()
                 },
                 // Коллбек удаления карточки
                 function removeCard(cardId) {
+                    const buttonText = document.querySelector('.submit-btn')
+                    buttonText.textContent = 'Удалить'
                     popupConfirm.open()
                     popupConfirm.setSubmitAction(() => {
                         api.removeCard(cardId)
-                            .then(() => popupConfirm.close())
+                            .then(() => {
+                                buttonText.textContent = 'Удаление...'
+                                popupConfirm.close()
+                            })
                             .then(() => card.remove())
                             .catch(err => console.log(err))
                     })
@@ -58,8 +63,7 @@ api.getInfo()
                 cardId => {
                     api.putLike(cardId)
                         .then((res) => {
-                            card.querySelector('.elements__likes-counter').textContent = res.likes.length;
-                            card.querySelector('.elements__like-btn').classList.toggle('elements__like-btn_is_active');
+                            card.updateLikes(res.likes.length)
                         })
                         .catch(err => console.log(err))
                 },
@@ -67,8 +71,7 @@ api.getInfo()
                 cardId => {
                     api.removeLike(cardId)
                         .then((res) => {
-                            card.querySelector('.elements__likes-counter').textContent = res.likes.length;
-                            card.querySelector('.elements__like-btn').classList.toggle('elements__like-btn_is_active');
+                            card.updateLikes(res.likes.length)
                         })
                         .catch(err => console.log(err))
                 }
@@ -92,12 +95,11 @@ api.getInfo()
         // ОБНОВЛЕНИЕ ПРОФИЛЯ //
 
         const popupTypeEditProfile = new PopupWithForm(popupUserFormSelector, inputsValue => {
-            const buttonText = popupEdit.querySelector('.form__submit-btn')
-            buttonText.textContent = 'Сохранение...'
+            buttonEdit.textContent = 'Сохранение...'
 
             api.sendInfo(inputsValue)
                 .then(data => {
-                    buttonText.textContent = 'Сохранить'
+                    buttonEdit.textContent = 'Сохранить'
                     userInfo.setUserInfo(data)
                     popupTypeEditProfile.close()
                 })
@@ -110,43 +112,41 @@ api.getInfo()
             const { name, about } = userInfo.getUserInfo()
             fieldName.value = name;
             fieldDescr.value = about;
-            disableButton();
+            validFormEdit.disableSubmitBtn(buttonEdit)
             validFormEdit.removeErrors();
         });
 
         // Редактирование аватара
         const popupTypeSetAvatar = new PopupWithForm(popupEditAvatarSelector, inputsValue => {
-            const buttonText = popupEditAvatar.querySelector('.form__submit-btn')
-            buttonText.textContent = 'Сохранение...'
+            buttonEditAvatar.textContent = 'Сохранение...'
 
             api.updateAvatar(inputsValue)
                 .then(data => {
-                    buttonText.textContent = 'Сохранить'
-                    userDataElements.avatar.setAttribute('style', `background-image: url("${data.avatar}")`)
+                    buttonEditAvatar.textContent = 'Сохранить'
+                    userInfo.setAvatar(data.avatar)
                     popupTypeSetAvatar.close()
                 })
                 .catch(err => console.log(err))
         })
         btnEditAvatar.addEventListener('click', () => {
             popupTypeSetAvatar.open();
-            disableButton();
+            validFormUpdateAvatar.disableSubmitBtn(buttonEditAvatar);
             validFormUpdateAvatar.removeErrors();
         })
 
         // Добавить карточку
-        popupAddOpenBtn.addEventListener('click', () => {
-            popupTypeAddCard.open()
-            disableButton();
+        popupAddOpenBtn.addEventListener('click', (element) => {
+            popupTypeAddCard.open();
+            validFormAdd.disableSubmitBtn(buttonAdd)
             validFormAdd.removeErrors();
         });
 
         const popupTypeAddCard = new PopupWithForm(popupFormSelector, inputsValue => {
-            const buttonText = popupAdd.querySelector('.form__submit-btn');
-            buttonText.textContent = 'Создание...';
+            buttonAdd.textContent = 'Создание...';
 
             api.uploadCard(inputsValue)
                 .then((data) => {
-                    buttonText.textContent = 'Создать';
+                    buttonAdd.textContent = 'Создать';
                     const cardElement = createCard(data);
                     cardList.addItem(cardElement);
                 })
@@ -154,19 +154,11 @@ api.getInfo()
 
         });
 
-        // Функция отключения кнопки Submit
-        function disableButton() {
-            submitBtns.forEach((button) => {
-                button.classList.add(validationObject.inactiveButtonClass);
-                button.setAttribute('disabled', 'disabled')
-            });
-        }
-
         // ВАЛИДАЦИЯ
 
-        validFormEdit.enableValidation(validationObject);
-        validFormAdd.enableValidation(validationObject);
-        validFormUpdateAvatar.enableValidation(validationObject);
+        validFormEdit.enableValidation();
+        validFormAdd.enableValidation();
+        validFormUpdateAvatar.enableValidation();
 
 
         // СЛУШАТЕЛИ

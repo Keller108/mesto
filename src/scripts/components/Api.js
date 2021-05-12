@@ -6,19 +6,13 @@ export default class Api {
     // Получение карточек с сервера
     getAllCards() {
         return fetch('https://mesto.nomoreparties.co/v1/cohort-23/cards', this._config)
-            .then(res => res.ok ?
-                res.json() :
-                Promise.reject(`Ошибка: ${res.status}`)
-            )
+            .then(this._checkResponse)
     }
 
     // Получение информации о профиле с сервера
     getInfo() {
         return fetch('https://mesto.nomoreparties.co/v1/cohort-23/users/me', this._config)
-            .then(res => res.ok ?
-                res.json() :
-                Promise.reject(`Ошибка: ${res.status}`)
-            )
+            .then(this._checkResponse)
     }
 
     // Отправка информации профиля
@@ -29,10 +23,7 @@ export default class Api {
             body: JSON.stringify(inputsValue),
         }
         return fetch('https://mesto.nomoreparties.co/v1/cohort-23/users/me', dataObject)
-            .then(res => res.ok ?
-                res.json() :
-                Promise.reject(`Ошибка: ${res.status}`)
-            )
+            .then(this._checkResponse)
     }
 
     // Добавление карточек на сервак
@@ -43,10 +34,7 @@ export default class Api {
             body: JSON.stringify(inputsValue),
         }
         return fetch('https://mesto.nomoreparties.co/v1/cohort-23/cards', dataObject)
-            .then(res => res.ok ?
-                res.json() :
-                Promise.reject(`Ошибка: ${res.status}`)
-            )
+            .then(this._checkResponse)
     }
 
     // Удаление карточки
@@ -56,10 +44,7 @@ export default class Api {
             ...this._config
         }
         return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/${cardId}`, dataObject)
-            .then(res => res.ok ?
-                res.json() :
-                Promise.reject(`Ошибка: ${res.status}`)
-            )
+            .then(this._checkResponse)
     }
 
     //Ставим лайк
@@ -69,10 +54,7 @@ export default class Api {
             ...this._config
         }
         return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/likes/${cardId}`, dataObject)
-            .then(res => res.ok ?
-                res.json() :
-                Promise.reject(`Ошибка: ${res.status}`)
-            )
+            .then(this._checkResponse)
     }
 
     //Удаляем лайк
@@ -82,10 +64,7 @@ export default class Api {
             ...this._config
         }
         return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/likes/${cardId}`, dataObject)
-            .then(res => res.ok ?
-                res.json() :
-                Promise.reject(`Ошибка: ${res.status}`)
-            )
+            .then(this._checkResponse)
     }
 
     updateAvatar(data) {
@@ -95,10 +74,14 @@ export default class Api {
             body: JSON.stringify(data)
         }
         return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/users/me/avatar`, dataObject)
-            .then(res => res.ok ?
-                res.json() :
-                Promise.reject(`Ошибка: ${res.status}`)
-            )
+            .then(this._checkResponse)
+    }
+
+    _checkResponse(res) {
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(`Ошибка ${res.status}`);
     }
 
 

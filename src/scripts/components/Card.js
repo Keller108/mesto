@@ -47,6 +47,11 @@ export default class Card {
 
     }
 
+    updateLikes(amount) {
+        this._cardSelector.querySelector('.elements__likes-counter').textContent = amount;
+        this._cardSelector.querySelector('.elements__like-btn').classList.toggle('elements__like-btn_is_active');
+    }
+
     // Заполнение карточек контентом
     generateCard() {
         this._element = this._getTemplate();

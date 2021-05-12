@@ -15,8 +15,9 @@ export default class FormValidator {
     };
 
     // Функция отключения кнопки submit 
-    _disableSubmitBtn(btn) {
+    disableSubmitBtn(btn) {
         btn.classList.add(this._object.inactiveButtonClass);
+        btn.setAttribute('disabled', 'disabled');
     };
 
     // Функция включения кнопки submit 
@@ -49,7 +50,7 @@ export default class FormValidator {
     // Ф-йия переключения состояния кнопки
     toggleButtonState(inputList, buttonElement) {
         if (this._hasInvalidInput(inputList) || this._allInputsEmpty(inputList)) {
-            this._disableSubmitBtn(buttonElement);
+            this.disableSubmitBtn(buttonElement);
             buttonElement.setAttribute('disabled', true);
         } else {
             this._enableSubmitBtn(buttonElement);
