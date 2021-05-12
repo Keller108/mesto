@@ -1,17 +1,18 @@
 export default class Api {
     constructor(config) {
+        this._baseUrl = config.baseUrl;
         this._config = config;
     }
 
     // Получение карточек с сервера
     getAllCards() {
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-23/cards', this._config)
+        return fetch(`${this._baseUrl}/cards`, this._config)
             .then(this._checkResponse)
     }
 
     // Получение информации о профиле с сервера
     getInfo() {
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-23/users/me', this._config)
+        return fetch(`${this._baseUrl}/users/me`, this._config)
             .then(this._checkResponse)
     }
 
@@ -22,7 +23,7 @@ export default class Api {
             ...this._config,
             body: JSON.stringify(inputsValue),
         }
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-23/users/me', dataObject)
+        return fetch(`${this._baseUrl}/users/me`, dataObject)
             .then(this._checkResponse)
     }
 
@@ -33,7 +34,7 @@ export default class Api {
             ...this._config,
             body: JSON.stringify(inputsValue),
         }
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-23/cards', dataObject)
+        return fetch(`${this._baseUrl}/cards`, dataObject)
             .then(this._checkResponse)
     }
 
@@ -43,7 +44,7 @@ export default class Api {
             method: 'DELETE',
             ...this._config
         }
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/${cardId}`, dataObject)
+        return fetch(`${this._baseUrl}/cards/${cardId}`, dataObject)
             .then(this._checkResponse)
     }
 
@@ -53,7 +54,7 @@ export default class Api {
             method: 'PUT',
             ...this._config
         }
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/likes/${cardId}`, dataObject)
+        return fetch(`${this._baseUrl}/cards/likes/${cardId}`, dataObject)
             .then(this._checkResponse)
     }
 
@@ -63,7 +64,7 @@ export default class Api {
             method: 'DELETE',
             ...this._config
         }
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/cards/likes/${cardId}`, dataObject)
+        return fetch(`${this._baseUrl}/cards/likes/${cardId}`, dataObject)
             .then(this._checkResponse)
     }
 
@@ -73,7 +74,7 @@ export default class Api {
             ...this._config,
             body: JSON.stringify(data)
         }
-        return fetch(`https://mesto.nomoreparties.co/v1/cohort-23/users/me/avatar`, dataObject)
+        return fetch(`${this._baseUrl}/users/me/avatar`, dataObject)
             .then(this._checkResponse)
     }
 

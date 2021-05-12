@@ -17,12 +17,13 @@ export default class FormValidator {
     // Функция отключения кнопки submit 
     disableSubmitBtn(btn) {
         btn.classList.add(this._object.inactiveButtonClass);
-        btn.setAttribute('disabled', 'disabled');
+        btn.setAttribute('disabled', true);
     };
 
     // Функция включения кнопки submit 
     _enableSubmitBtn(btn) {
         btn.classList.remove(this._object.inactiveButtonClass);
+        btn.removeAttribute('disabled');
     };
 
     _checkInput(formElement, inputElement) {
@@ -51,10 +52,8 @@ export default class FormValidator {
     toggleButtonState(inputList, buttonElement) {
         if (this._hasInvalidInput(inputList) || this._allInputsEmpty(inputList)) {
             this.disableSubmitBtn(buttonElement);
-            buttonElement.setAttribute('disabled', true);
         } else {
             this._enableSubmitBtn(buttonElement);
-            buttonElement.removeAttribute('disabled');
         }
     };
 
@@ -76,25 +75,22 @@ export default class FormValidator {
 
     // Опишем функцию включения валидации
     enableValidation() {
-        const formList = Array.from(document.querySelectorAll(this._object.formSelector));
-
-        formList.forEach((formElement) => {
-            formElement.addEventListener('submit', (evt) => {
-                evt.preventDefault();
-            });
-            this._setInputListeners(formElement);
+        this._popupForm.addEventListener('submit', (evt) => {
+            evt.preventDefault();
         });
+
+        this._setInputListeners(this._popupForm);
 
     };
 
     // Удаление ошибок
     removeErrors() {
-        const inputList = Array.from(document.querySelectorAll(this._object.inputSelector));
+        const inputList = Array.from(this._popupForm.querySelectorAll(this._object.inputSelector));
         inputList.forEach((inputElement) => {
             inputElement.classList.remove('form__input_type_error');
         });
 
-        const errorList = Array.from(document.querySelectorAll('.input-error'));
+        const errorList = Array.from(this._popupForm.querySelectorAll('.input-error'));
         errorList.forEach((errorElement) => {
             errorElement.classList.remove('form__input-error_active');
             errorElement.textContent = '';

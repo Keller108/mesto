@@ -1,6 +1,6 @@
 import '/src/pages/index.css';
 import Api from '../scripts/components/Api.js';
-import { btnEditAvatar, popupEditAvatarSelector, lightboxImage, lightboxCaption, popupConfirmSelector, cardSelector, cardsContainer, formCard, formUpdateAvatar, formProfile, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtns, buttonEdit, buttonAdd, buttonEditAvatar } from '../scripts/utils/utilities.js';
+import { templateCard, btnEditAvatar, popupEditAvatarSelector, lightboxImage, lightboxCaption, popupConfirmSelector, cardSelector, cardsContainer, formCard, formUpdateAvatar, formProfile, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtns, buttonEdit, buttonAdd, buttonEditAvatar } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
@@ -19,7 +19,7 @@ const userInfo = new UserInfo(userDataElements);
 const popupLightbox = new PopupWithImage(lightBoxSelector, lightboxImage, lightboxCaption);
 
 const api = new Api({
-    url: 'https://mesto.nomoreparties.co/v1/cohort-23',
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-23',
     headers: {
         Authorization: 'd5de609a-b67a-44fe-8387-d8a318d2487b',
         'Content-Type': 'application/json'
@@ -36,6 +36,7 @@ api.getInfo()
         // Функция создания карточки
         const createCard = (element) => {
             const card = new Card(
+                templateCard,
                 cardSelector, {
                     myId,
                     ...element
@@ -60,16 +61,16 @@ api.getInfo()
                     })
                 },
                 // Коллбек лайка карточки
-                cardId => {
-                    api.putLike(cardId)
+                (cardId, cardElement) => {
+                    api.putLike(cardId, cardElement)
                         .then((res) => {
                             card.updateLikes(res.likes.length)
                         })
                         .catch(err => console.log(err))
                 },
                 // Коллбек удаления лайка
-                cardId => {
-                    api.removeLike(cardId)
+                (cardId, cardElement) => {
+                    api.removeLike(cardId, cardElement)
                         .then((res) => {
                             card.updateLikes(res.likes.length)
                         })

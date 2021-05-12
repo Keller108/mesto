@@ -1,6 +1,6 @@
-import { templateCard } from '../utils/utilities.js';
 export default class Card {
-    constructor(cardSelector, { myId, link, name, likes, owner, _id }, handleCardClick, removeCard, putLike, removeLike) {
+    constructor(templateCard, cardSelector, { myId, link, name, likes, owner, _id }, handleCardClick, removeCard, putLike, removeLike) {
+        this._templateCard = templateCard;
         this._cardSelector = cardSelector;
         this._myId = myId;
         this._link = link;
@@ -16,7 +16,7 @@ export default class Card {
 
     // Берем шаблон
     _getTemplate() {
-        const newItem = templateCard
+        const newItem = this._templateCard
             .content
             .querySelector(this._cardSelector)
             .cloneNode(true);
@@ -41,8 +41,8 @@ export default class Card {
         const like = this._element.querySelector('.elements__like-btn');
         like.addEventListener('click', () => {
             !like.classList.contains('elements__like-btn_is_active') ?
-                this._putLike(this._cardId) :
-                this._removeLike(this._cardId)
+                this._putLike(this._cardId, this) :
+                this._removeLike(this._cardId, this)
         })
 
     }
