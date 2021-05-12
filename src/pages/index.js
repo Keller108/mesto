@@ -11,7 +11,6 @@ import UserInfo from '../scripts/components/UserInfo.js';
 
 const popupConfirm = new PopupConfirm(popupConfirmSelector);
 popupConfirm.setEventListeners();
-const cardList = new Section(cardsContainer);
 const validFormEdit = new FormValidator(validationObject, formProfile);
 const validFormAdd = new FormValidator(validationObject, formCard);
 const validFormUpdateAvatar = new FormValidator(validationObject, formUpdateAvatar);
@@ -61,16 +60,16 @@ api.getInfo()
                     })
                 },
                 // Коллбек лайка карточки
-                (cardId, cardElement) => {
-                    api.putLike(cardId, cardElement)
+                (cardId, card) => {
+                    api.putLike(cardId)
                         .then((res) => {
                             card.updateLikes(res.likes.length)
                         })
                         .catch(err => console.log(err))
                 },
                 // Коллбек удаления лайка
-                (cardId, cardElement) => {
-                    api.removeLike(cardId, cardElement)
+                (cardId, card) => {
+                    api.removeLike(cardId)
                         .then((res) => {
                             card.updateLikes(res.likes.length)
                         })
@@ -80,16 +79,17 @@ api.getInfo()
             return card;
         }
 
+        function cardsRenderer(item) {
+            const card = createCard(item)
+            cardList.addItem(card);
+        }
+
+        const cardList = new Section(cardsRenderer, cardsContainer);
+
         // Рендерим карточки с сервера
         api.getAllCards()
-            .then((data) => {
-                cardList.renderItems({
-                    items: data.reverse(),
-                    renderer: (item) => {
-                        const card = createCard(item)
-                        cardList.addItem(card);
-                    }
-                })
+            .then((items) => {
+                cardList.renderItems(items)
             })
 
 
@@ -150,6 +150,7 @@ api.getInfo()
                     buttonAdd.textContent = 'Создать';
                     const cardElement = createCard(data);
                     cardList.addItem(cardElement);
+                    popupTypeAddCard.close();
                 })
                 .catch(err => console.log(err))
 

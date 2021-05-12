@@ -39,18 +39,21 @@ export default class Card {
 
         // Добавление слушателя лаков   
         const like = this._element.querySelector('.elements__like-btn');
+
         like.addEventListener('click', () => {
-            !like.classList.contains('elements__like-btn_is_active') ?
-                this._putLike(this._cardId, this) :
+            if (!like.classList.contains('elements__like-btn_is_active')) {
+                this._putLike(this._cardId, this)
+            } else {
                 this._removeLike(this._cardId, this)
+            }
         })
 
     }
 
     updateLikes(amount) {
-        this._cardSelector.querySelector('.elements__likes-counter').textContent = amount;
-        this._cardSelector.querySelector('.elements__like-btn').classList.toggle('elements__like-btn_is_active');
-    }
+        this._element.querySelector('.elements__likes-counter').textContent = amount;
+        this._element.querySelector('.elements__like-btn').classList.toggle('elements__like-btn_is_active');
+    };
 
     // Заполнение карточек контентом
     generateCard() {

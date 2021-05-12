@@ -87,12 +87,12 @@ export default class FormValidator {
     removeErrors() {
         const inputList = Array.from(this._popupForm.querySelectorAll(this._object.inputSelector));
         inputList.forEach((inputElement) => {
-            inputElement.classList.remove('form__input_type_error');
+            inputElement.classList.remove(this._object.inputErrorClass);
         });
 
         const errorList = Array.from(this._popupForm.querySelectorAll('.input-error'));
         errorList.forEach((errorElement) => {
-            errorElement.classList.remove('form__input-error_active');
+            errorElement.classList.remove(this._object.errorClass);
             errorElement.textContent = '';
         });
     }
