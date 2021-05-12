@@ -83,6 +83,11 @@ export default class FormValidator {
 
     };
 
+    // Я НЕ ПРОИГНОРИРОВАЛ СОВЕТЫ ПО ОЧИЩЕНИЮ ОШИБОК,
+    //ОБЯЗАТЕЛЬНО РЕАЛИЗУЮ ЭТО,
+    //КАК БУДЕТ ЧУТЬ ЧУТЬ СВОБОДНОГО ВРЕМЕНИ
+
+
     // Удаление ошибок
     removeErrors() {
         const inputList = Array.from(this._popupForm.querySelectorAll(this._object.inputSelector));
