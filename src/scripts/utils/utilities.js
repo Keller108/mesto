@@ -10,9 +10,11 @@ export const validationObject = {
     submitButtonSelector: '.form__submit-btn',
     inactiveButtonClass: 'form__submit-btn_disabled',
     inputErrorClass: 'form__input_type_error',
-    errorClass: 'form__input-error_active'
+    errorClass: 'form__input-error_active',
+    errorElement: '.input-error'
 };
 
+export const btnDelConfirm = document.querySelector('.submit-btn');
 export const popupEditAvatarSelector = '.popup_type_update-avatar';
 export const popupEditAvatar = document.querySelector('.popup_type_update-avatar');
 export const popupEdit = document.querySelector('.popup_type_profile');

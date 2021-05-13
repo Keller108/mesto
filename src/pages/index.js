@@ -1,6 +1,6 @@
 import '/src/pages/index.css';
 import Api from '../scripts/components/Api.js';
-import { templateCard, btnEditAvatar, popupEditAvatarSelector, lightboxImage, lightboxCaption, popupConfirmSelector, cardSelector, cardsContainer, formCard, formUpdateAvatar, formProfile, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, submitBtns, buttonEdit, buttonAdd, buttonEditAvatar } from '../scripts/utils/utilities.js';
+import { templateCard, btnEditAvatar, popupEditAvatarSelector, lightboxImage, lightboxCaption, popupConfirmSelector, cardSelector, cardsContainer, formCard, formUpdateAvatar, formProfile, validationObject, fieldName, fieldDescr, popupEditOpenBtn, userDataElements, popupAddOpenBtn, lightBoxSelector, popupUserFormSelector, popupFormSelector, buttonEdit, buttonAdd, buttonEditAvatar, btnDelConfirm } from '../scripts/utils/utilities.js';
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
@@ -46,16 +46,17 @@ api.getInfo()
                 },
                 // Коллбек удаления карточки
                 function removeCard(cardId) {
-                    const buttonText = document.querySelector('.submit-btn')
-                    buttonText.textContent = 'Удалить'
                     popupConfirm.open()
                     popupConfirm.setSubmitAction(() => {
+                        btnDelConfirm.textContent = 'Удаление...'
                         api.removeCard(cardId)
                             .then(() => {
-                                buttonText.textContent = 'Удаление...'
+                                btnDelConfirm.textContent = 'Да'
                                 popupConfirm.close()
                             })
-                            .then(() => card.remove())
+                            .then(() => {
+                                card.remove()
+                            })
                             .catch(err => console.log(err))
                     })
                 },
@@ -91,6 +92,7 @@ api.getInfo()
             .then((items) => {
                 cardList.renderItems(items)
             })
+            .catch(err => console.log(err))
 
 
         // ОБНОВЛЕНИЕ ПРОФИЛЯ //
@@ -113,8 +115,7 @@ api.getInfo()
             const { name, about } = userInfo.getUserInfo()
             fieldName.value = name;
             fieldDescr.value = about;
-            validFormEdit.disableSubmitBtn(buttonEdit)
-            validFormEdit.removeErrors();
+            validFormEdit.disableSubmitBtn()
         });
 
         // Редактирование аватара
@@ -131,15 +132,13 @@ api.getInfo()
         })
         btnEditAvatar.addEventListener('click', () => {
             popupTypeSetAvatar.open();
-            validFormUpdateAvatar.disableSubmitBtn(buttonEditAvatar);
-            validFormUpdateAvatar.removeErrors();
+            validFormUpdateAvatar.disableSubmitBtn();
         })
 
         // Добавить карточку
         popupAddOpenBtn.addEventListener('click', (element) => {
             popupTypeAddCard.open();
-            validFormAdd.disableSubmitBtn(buttonAdd)
-            validFormAdd.removeErrors();
+            validFormAdd.disableSubmitBtn()
         });
 
         const popupTypeAddCard = new PopupWithForm(popupFormSelector, inputsValue => {
@@ -170,3 +169,4 @@ api.getInfo()
         popupTypeEditProfile.setEventListeners();
         popupTypeAddCard.setEventListeners();
     })
+    .catch(err => console.log(err))
