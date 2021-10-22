@@ -1,4 +1,6 @@
-# Проект 9: Место
+# Веб-приложение : Место
+
+![Uploading image.png…]()
 
 ### Инструменты использованы
 
@@ -11,7 +13,7 @@
 
 * HTML
 * CSS
-* Java Script
+* JavaScript
 * BEM
 * BEM Nested (file order)
 * ООП
@@ -20,7 +22,7 @@
 https://keller108.github.io/mesto/
 
 **Описание проекта**
-Основная задача проектной работы №9 заключается во взаимодействии нашего кода с сервером. 
+Проект, предоставляющий инструменты небольшой соц. сети.
 
 [Ссылка на актуальный макет в Figma] (https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript-9-sprint?node-id=0%3A1).
 
