@@ -1,6 +1,6 @@
 # Веб-приложение : Место
 
-![Uploading image.png…]()
+![Превью проекта](https://user-images.githubusercontent.com/34595724/138419531-e6aa1a31-e1f4-4431-a838-eb573918c1b4.png)
 
 ### Инструменты использованы
 
